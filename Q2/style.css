@@ -1,0 +1,81 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+main {
+  padding: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.post-preview {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: calc(33% - 1rem);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.post-preview:hover {
+  transform: scale(1.05);
+}
+
+.post-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.post-preview h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.post-preview p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #333;
+  color: #fff;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .post-preview {
+    width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .post-preview {
+    width: 100%;
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Título do Post 1",
+    "description": "Descrição breve do post 1.",
+    "image": "https://via.placeholder.com/300",
+    "url": "/posts/2025/jan/1/post1.html"
+  },
+  {
+    "title": "Título do Post 2",
+    "description": "Descrição breve do post 2.",
+    "image": "https://via.placeholder.com/300",
+    "url": "/posts/2025/jan/2/post2.html"
+  }
+]

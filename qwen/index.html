@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Mundo - Posts Recolhíveis</title>
+    <style>
+        /* Estilo básico para o layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Alterado para coluna inicialmente */
+        }
+
+        /* Cabeçalho */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Coluna da esquerda (posts) */
+        .left-column {
+            flex: 2;
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Post individual */
+        .post {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .post-title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .post-description {
+            color: #555;
+        }
+
+        .post-image, .post-video {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .post-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .post-button {
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .post-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Coluna da direita */
+        .right-column {
+            flex: 1;
+            padding: 20px;
+            background-color: #e9ecef;
+        }
+
+        /* Layout principal */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .right-column {
+                display: none; /* Oculta a coluna direita em dispositivos móveis */
+            }
+
+            .left-column {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <div class="header">
+        <img src="https://via.placeholder.com/40" alt="Logo TV Mundo" class="header-logo">
+        <div class="header-title">TV Mundo</div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="main-container">
+        <!-- Coluna da esquerda -->
+             <!-- Coluna post -->
+    <div class="left-column">
+        <div class="post">
+            <div class="post-header">
+                <div class="post-title">Título do Post 1</div>
+                <div class="post-description">Descrição curta do post 1.</div>
+                <img src="https://via.placeholder.com/300" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <p>Conteúdo completo do post 1. Aqui pode ser um texto longo ou informações adicionais.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iquoKIaEjR0?si=QqO4ffOCr9IpGfj-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <div class="post-title">Título do Post 2</div>
+                <div class="post-description">Descrição curta do post 2.</div>
+                <img src="https://via.placeholder.com/300" alt="Imagem do Post 2" class="post-image">
+            </div>
+            <div class="post-content">
+                <p>Conteúdo completo do post 2. Aqui pode ser um texto longo ou informações adicionais.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iquoKIaEjR0?si=QqO4ffOCr9IpGfj-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>				
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+            </div>
+        </div>
+
+        <!-- Coluna da direita -->
+        <div class="right-column">
+            <h2>Coluna Direita</h2>
+            <p>Esta é a coluna direita. Ela permanece visível apenas em telas maiores.</p>
+        </div>
+    </div>
+
+    <script>
+        // Função para expandir/recolher os posts
+        document.querySelectorAll('.post-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.previousElementSibling; // Encontra o conteúdo do post
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    button.textContent = 'Continuar lendo...';
+                } else {
+                    content.style.display = 'block';
+                    button.textContent = 'Recolher';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

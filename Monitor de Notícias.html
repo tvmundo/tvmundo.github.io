@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Múltiplas Notícias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #topics {
+            margin-bottom: 10px;
+        }
+        #updates {
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .update {
+            margin-bottom: 15px;
+        }
+        .topic-title {
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Monitor de Múltiplas Notícias</h1>
+    <div id="topics">
+        <input type="text" id="topicInput" placeholder="Digite um assunto (ex: tecnologia)">
+        <button onclick="addTopic()">Adicionar Assunto</button>
+        <button onclick="startMonitoring()">Iniciar Monitoramento</button>
+    </div>
+    <div id="topicList"></div>
+    <div id="updates"></div>
+
+    <script>
+        let topics = []; // Lista de assuntos a monitorar
+        let lastUpdates = {}; // Armazena a última atualização por tópico
+
+        // Função para adicionar um tópico à lista
+        function addTopic() {
+            const topicInput = document.getElementById('topicInput');
+            const topic = topicInput.value.trim();
+            if (topic && !topics.includes(topic)) {
+                topics.push(topic);
+                updateTopicList();
+                topicInput.value = ''; // Limpa o campo
+            } else if (!topic) {
+                alert('Por favor, insira um assunto!');
+            } else {
+                alert('Esse assunto já foi adicionado!');
+            }
+        }
+
+        // Atualiza a exibição da lista de tópicos
+        function updateTopicList() {
+            const topicList = document.getElementById('topicList');
+            topicList.innerHTML = '<h3>Assuntos Monitorados:</h3>' + 
+                topics.map(t => `<span>${t} <button onclick="removeTopic('${t}')">Remover</button></span>`).join('<br>');
+        }
+
+        // Remove um tópico da lista
+        function removeTopic(topic) {
+            topics = topics.filter(t => t !== topic);
+            delete lastUpdates[topic];
+            updateTopicList();
+        }
+
+        // Função para buscar notícias
+        async function fetchNews(topic) {
+            const apiKey = '053c68197bef447bb3bc3a54d7a92679'; // Substitua pela sua chave do NewsAPI
+            const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(topic)}&sortBy=publishedAt&apiKey=${apiKey}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data.articles;
+            } catch (error) {
+                console.error(`Erro ao buscar notícias para ${topic}:`, error);
+                return [];
+            }
+        }
+
+        // Função para exibir uma atualização
+        function displayUpdate(article, topic) {
+            const updatesDiv = document.getElementById('updates');
+            const updateElement = document.createElement('div');
+            updateElement.className = 'update';
+            updateElement.innerHTML = `
+                <div class="topic-title">[${topic}] ${article.title}</div>
+                <p>${article.description || 'Sem descrição disponível'}</p>
+                <a href="${article.url}" target="_blank">Leia mais</a>
+                <small>Publicado em: ${new Date(article.publishedAt).toLocaleString()}</small>
+                <hr>
+            `;
+            updatesDiv.insertBefore(updateElement, updatesDiv.firstChild); // Adiciona no topo
+        }
+
+        // Função principal de monitoramento
+        function startMonitoring() {
+            if (topics.length === 0) {
+                alert('Adicione pelo menos um assunto para monitorar!');
+                return;
+            }
+
+            document.getElementById('updates').innerHTML = 'Monitorando...';
+
+            // Verifica atualizações para cada tópico a cada 60 segundos
+            setInterval(async () => {
+                for (const topic of topics) {
+                    const articles = await fetchNews(topic);
+                    if (articles.length > 0) {
+                        const latestArticle = articles[0];
+                        const latestDate = new Date(latestArticle.publishedAt);
+
+                        if (!lastUpdates[topic] || latestDate > lastUpdates[topic]) {
+                            displayUpdate(latestArticle, topic);
+                            lastUpdates[topic] = latestDate;
+                        }
+                    }
+                }
+            }, 60000); // 60 segundos
+        }
+    </script>
+</body>
+</html>

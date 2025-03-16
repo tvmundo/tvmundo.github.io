@@ -261,7 +261,7 @@
 	<div class="post-title">MEU DNA É MARLEY</div>
 		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
                 <div class="post-description">MEU DNA É MARLEY</div>
-                <img src="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large"  id="minhaImagem"  alt="Imagem do Post 1" class="post-image">
+                <img src="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
             </div>
             <div class="post-content">
                 <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
@@ -280,7 +280,7 @@ MEU DNA É MARLEY
 	<div class="post-title">O messias já veio e habitou entre nós:</div>
 		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
                 <div class="post-description">Veio para o que era seu, e os seus não o receberam.</div>
-                <img src="https://pbs.twimg.com/media/GmGXoIwXIAELn7l?format=jpg&name=medium" id="minhaImagem"  alt="Imagem do Post 1" class="post-image">
+                <img src="https://pbs.twimg.com/media/GmGXoIwXIAELn7l?format=jpg&name=medium" alt="Imagem do Post 1" class="post-image">
             </div>
             <div class="post-content">
                 <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
@@ -779,67 +779,3 @@ TV Mundo – Sua janela para o mundo
     </script>
 </body>
 </html>
-<!--- -------------------------------------img abre full ao clicar------------------------------------------------- --->
-<style>
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.9);
-  }
-
-  .modal-content {
-    margin: auto;
-    display: block;
-    width: 100%;
-    max-width: 1000px;
-  }
-
-  .close {
-    position: absolute;
-    top: 15px;
-    leftt: 0px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-  }
-</style>
-<div id="meuModal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="imgModal">
-</div>
-
-<script>
-// Obtém o modal
-var modal = document.getElementById("meuModal");
-
-// Obtém a imagem e insere-a dentro do modal
-var img = document.getElementById("minhaImagem");
-var modalImg = document.getElementById("imgModal");
-img.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-}
-
-// Obtém o elemento <span> que fecha o modal
-var span = document.getElementsByClassName("close")[0];
-
-// Quando o usuário clica em <span> (x), fecha o modal
-span.onclick = function() { 
-  modal.style.display = "none";
-}
-</script>
-<!--- -------------------------------------img abre full ao clicar fim------------------------------------------------- --->

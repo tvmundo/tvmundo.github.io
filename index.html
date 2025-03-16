@@ -1,56 +1,44 @@
 <!--- -------------------------atualizar pagina ini---------------------------- --->
+      
     <style>
-        /* Estilização do botão */
-        .refresh-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #005ce6; /* Azul da imagem */
-            color: white;
-            border: none;
-            border-radius: 50px; /* Bordas arredondadas para um estilo moderno */
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
-            text-decoration: none;
-            width: 200px; /* Largura ajustada para caber o texto e ícone */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para efeito 3D */
-        }
-
-        /* Estilização do ícone (usando pseudo-elemento) */
-        .refresh-button::before {
-            content: "\21BB"; /* Código Unicode para seta circular (↻) */
-            font-size: 24px;
-            margin-right: 10px; /* Espaço entre ícone e texto */
-            transform: rotate(90deg); /* Ajuste para simular a rotação da seta */
+        /* Estilo do botão */
+        .reload-button {
+            position: fixed; /* Permite ajustar a posição fixa na tela */
+            top: 1%; /* Ajuste a altura inicial (50% da página) */
+            bottom: 20px; /* Distância do fundo da página */
+            right: 20px; /* Distância da direita da página */
+            background-color: #6200ea; /* Cor de fundo moderna */
+            color: white; /* Cor do texto */
+            border: none; /* Sem borda */
+            border-radius: 50%; /* Formato circular */
+            width: 50px; /* Largura do botão */
+            height: 50px; /* Altura do botão */
+            font-size: 24px; /* Tamanho do ícone */
+            cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efeito moderno */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave */
+            z-index: 1000; /* Garante que o botão fique acima de outros elementos */
         }
 
         /* Efeito ao passar o mouse */
-        .refresh-button:hover {
-            background-color: #004bb3; /* Azul mais escuro ao passar o mouse */
-            transform: scale(1.05); /* Efeito de escala */
+        .reload-button:hover {
+            transform: scale(1.1); /* Aumenta o tamanho levemente */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
         }
 
         /* Efeito ao clicar */
-        .refresh-button:active {
-            transform: scale(0.95); /* Efeito de clique */
+        .reload-button:active {
+            transform: scale(0.95); /* Diminui o tamanho levemente */
         }
     </style>
 </head>
 <body>
-    <h1>Exemplo de Botão de Atualização Moderno</h1>
-    
-    <!-- Botão que atualiza a página -->
-    <button class="refresh-button" onclick="location.reload()">Refresh Page</button>
-
-    <script>
-        // Função alternativa (opcional)
-        function atualizarPagina() {
-            window.location.reload();
-        }
-    </script>
+    <!-- Botão de Recarregar -->
+    <button class="reload-button" onclick="location.reload();">
+        &#x21bb; <!-- Ícone de recarregar (unicode) -->
+    </button>
+</body>
+</html> 
 <!--- -------------------------atualizar pagina FiM---------------------------- --->
 <!DOCTYPE html>
 <html lang="pt-BR">

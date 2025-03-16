@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column; /* Alterado para coluna inicialmente */
+            flex-direction: column;
         }
 
         /* Cabeçalho */
@@ -33,6 +33,13 @@
         .header-title {
             font-size: 1.5em;
             font-weight: bold;
+        }
+
+        /* Layout principal */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
         }
 
         /* Coluna da esquerda (posts) */
@@ -99,12 +106,84 @@
             flex: 1;
             padding: 20px;
             background-color: #e9ecef;
+            position: relative;
         }
 
-        /* Layout principal */
-        .main-container {
+        /* Post flutuante */
+        .floating-post {
+            position: fixed;
+            top: 20%;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10; /* Garante que o post flutuante fique acima do conteúdo */
+        }
+
+        .floating-post img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .footer-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            font-size: 1em;
+        }
+
+        /* Botão de rolagem */
+        .scroll-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 20; /* Garante que o botão fique acima do conteúdo */
+        }
+
+        .scroll-button:hover {
+            background-color: #0056b3;
         }
 
         /* Responsividade */
@@ -117,8 +196,8 @@
                 display: none; /* Oculta a coluna direita em dispositivos móveis */
             }
 
-            .left-column {
-                flex: 1;
+            .floating-post {
+                display: none; /* Oculta o post flutuante em dispositivos móveis */
             }
         }
     </style>
@@ -589,10 +668,26 @@ TV Mundo – Sua janela para o mundo
 
         <!-- Coluna da direita -->
         <div class="right-column">
-            <h2>Coluna Direita</h2>
-            <p>Esta é a coluna direita. Ela permanece visível apenas em telas maiores.</p>
+            <!-- Post flutuante -->
+            <div class="floating-post">
+                <img src="https://via.placeholder.com/300" alt="">
+                <div class="post-title">MEU DNA É MARLEY</div>
+                <div class="post-description"><img src="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large" alt="Imagem do Post 1" class="post-image"></div>
+            </div>
         </div>
     </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <div class="footer-nav">
+            <a href="#">&#9664;</a>
+            <a href="#">&#9654;</a>
+        </div>
+        <div class="footer-text">TV Mundo desde 2011</div>
+    </div>
+
+    <!-- Botão de rolagem -->
+    <button class="scroll-button" id="scrollButton">↑</button>
 
     <script>
         // Função para expandir/recolher os posts
@@ -607,6 +702,38 @@ TV Mundo – Sua janela para o mundo
                     button.textContent = 'Recolher';
                 }
             });
+        });
+
+        // Função para rolar a página
+        const scrollButton = document.getElementById('scrollButton');
+        let isAtTop = true;
+
+        scrollButton.addEventListener('click', () => {
+            if (isAtTop) {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↑'; // Altera o ícone para subir
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↓'; // Altera o ícone para descer
+            }
+            isAtTop = !isAtTop; // Alterna o estado
+        });
+
+        // Atualiza o ícone do botão com base na posição da página
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                scrollButton.textContent = '↓'; // Ícone para descer
+                isAtTop = true;
+            } else if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+                scrollButton.textContent = '↑'; // Ícone para subir
+                isAtTop = false;
+            }
         });
     </script>
 </body>

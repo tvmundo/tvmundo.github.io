@@ -1,3 +1,57 @@
+<!--- -------------------------atualizar pagina ini---------------------------- --->
+    <style>
+        /* Estilização do botão */
+        .refresh-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #005ce6; /* Azul da imagem */
+            color: white;
+            border: none;
+            border-radius: 50px; /* Bordas arredondadas para um estilo moderno */
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            text-decoration: none;
+            width: 200px; /* Largura ajustada para caber o texto e ícone */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para efeito 3D */
+        }
+
+        /* Estilização do ícone (usando pseudo-elemento) */
+        .refresh-button::before {
+            content: "\21BB"; /* Código Unicode para seta circular (↻) */
+            font-size: 24px;
+            margin-right: 10px; /* Espaço entre ícone e texto */
+            transform: rotate(90deg); /* Ajuste para simular a rotação da seta */
+        }
+
+        /* Efeito ao passar o mouse */
+        .refresh-button:hover {
+            background-color: #004bb3; /* Azul mais escuro ao passar o mouse */
+            transform: scale(1.05); /* Efeito de escala */
+        }
+
+        /* Efeito ao clicar */
+        .refresh-button:active {
+            transform: scale(0.95); /* Efeito de clique */
+        }
+    </style>
+</head>
+<body>
+    <h1>Exemplo de Botão de Atualização Moderno</h1>
+    
+    <!-- Botão que atualiza a página -->
+    <button class="refresh-button" onclick="location.reload()">Refresh Page</button>
+
+    <script>
+        // Função alternativa (opcional)
+        function atualizarPagina() {
+            window.location.reload();
+        }
+    </script>
+<!--- -------------------------atualizar pagina FiM---------------------------- --->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

@@ -1,0 +1,802 @@
+﻿<!--- -------------------------atualizar pagina ini---------------------------- --->
+    <style>
+        /* Estilo do botão */
+        .reload-button {
+            position: fixed; /* Permite ajustar a posição fixa na tela */
+            top: 1%; /* Ajuste a altura inicial (50% da página) */
+            bottom: 20px; /* Distância do fundo da página */
+            right: 5px; /* Distância da direita da página */
+            background-color: #6200ea; /* Cor de fundo moderna */
+            color: white; /* Cor do texto */
+            border: none; /* Sem borda */
+            border-radius: 50%; /* Formato circular */
+            width: 50px; /* Largura do botão */
+            height: 50px; /* Altura do botão */
+            font-size: 24px; /* Tamanho do ícone */
+            cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efeito moderno */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave */
+            z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+        }
+
+        /* Efeito ao passar o mouse */
+        .reload-button:hover {
+            transform: scale(1.1); /* Aumenta o tamanho levemente */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+        }
+
+        /* Efeito ao clicar */
+        .reload-button:active {
+            transform: scale(0.95); /* Diminui o tamanho levemente */
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão de Recarregar -->
+    <button class="reload-button" onclick="location.reload();">
+        &#x21bb; <!-- Ícone de recarregar (unicode) -->
+    </button>
+</body>
+</html> 
+<!--- -------------------------atualizar pagina FiM---------------------------- --->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Mundo</title>
+    <style>
+        /* Estilo básico para o layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabeçalho */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Layout principal */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+
+        /* Coluna da esquerda (posts) */
+        .left-column {
+            flex: 2;
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Post individual */
+        .post {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .post-title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .post-description {
+            color: #555;
+        }
+
+        .post-image, .post-video {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .post-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .post-button {
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .post-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Coluna da direita */
+        .right-column {
+            flex: 1;
+            padding: 20px;
+            background-color: #e9ecef;
+            position: relative;
+        }
+
+        /* Post flutuante */
+        .floating-post {
+            position: fixed;
+            top: 20%;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10; /* Garante que o post flutuante fique acima do conteúdo */
+        }
+
+        .floating-post img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .footer-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            font-size: 1em;
+        }
+
+        /* Botão de rolagem */
+        .scroll-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 20; /* Garante que o botão fique acima do conteúdo */
+        }
+
+        .scroll-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .right-column {
+                display: none; /* Oculta a coluna direita em dispositivos móveis */
+            }
+
+            .floating-post {
+                display: none; /* Oculta o post flutuante em dispositivos móveis */
+            }
+        }
+    </style>
+</head>
+<body>
+        <!-- Cabeçalho -->
+    <div class="header">
+        <a href="https://tvmundo.github.io/"><img src="https://pbs.twimg.com/media/GkvBOZJWsAAV-Uu?format=png&name=small" alt="Logo TV Mundo" class="header-logo"><a href="https://tvmundo.github.io/"></a>
+<div class="header-title">TV Mundo</div>
+</div>
+    <!-- Conteúdo principal -->
+    <div class="main-container">
+        <!-- Coluna da esquerda -->
+             <!-- Coluna post -->
+    <div class="left-column">
+         <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Netanyahu visitará a Hungria, e TPI exige que ele seja preso.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">A visita oficial do primeiro-ministro israelense Benjamin Netanyahu à Hungria está no centro de uma polêmica internacional, após a confirmação de que ele permanecerá no país entre os dias 2 e 6 de abril.</div>
+                <img src="https://pbs.twimg.com/media/GnaHxDEWMAAQj6h?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+TV Mundo - A visita oficial do primeiro-ministro israelense Benjamin Netanyahu à Hungria está no centro de uma polêmica internacional, após a confirmação de que ele permanecerá no país entre os dias 2 e 6 de abril. Apesar de um mandado de prisão emitido pelo Tribunal Penal Internacional (TPI) contra Netanyahu por supostos crimes cometidos durante a ofensiva militar israelense na Faixa de Gaza, o governo húngaro não demonstrou intenção de cumprir tal ordem.
+<br/><br/>
+A viagem foi confirmada tanto pelo gabinete de Netanyahu quanto pelas autoridades húngaras, lideradas pelo primeiro-ministro Viktor Orbán, conhecido por seu alinhamento político com líderes conservadores como Netanyahu. Orbán já havia estendido publicamente o convite ao líder israelense, mesmo diante das críticas internacionais sobre sua postura em relação ao TPI e às acusações contra Israel.
+<br/><br/>
+Nesse contexto, a Anistia Internacional (AI) alertou que, sob seus compromissos como signatária do Estatuto de Roma, a Hungria tem o dever legal de prender Netanyahu caso ele pise em território europeu. Erika Guevara-Rosas, diretora do Programa Global de Pesquisa, Advocacia e Política da AI, enfatizou que a não prisão do primeiro-ministro israelense seria vista como um incentivo para novos abusos por parte de Israel contra os palestinos.
+<br/><br/>
+"Netanyahu é acusado de usar a fome como arma de guerra, alvejar civis intencionalmente e cometer crimes contra a humanidade", afirmou Guevara-Rosas. Para a Anistia, permitir que Netanyahu circule livremente pela Europa não apenas mina a credibilidade do TPI, mas também representa um insulto às vítimas que buscam justiça no tribunal internacional.
+<br/><br/>
+O convite de Budapeste também foi interpretado como um desafio à União Europeia, especialmente considerando rumores sobre a possível transferência da Embaixada húngara de Tel Aviv para Jerusalém – uma medida que contraria as diretrizes da UE. Essa aproximação entre Orbán e Netanyahu levanta preocupações sobre o futuro dos direitos humanos na Europa e reforça a percepção de que líderes acusados de crimes de guerra podem encontrar refúgio em certos países.
+<br/><br/>
+"A visita de Netanyahu à Hungria não deve ser transformada em um precedente para o enfraquecimento dos princípios fundamentais do direito internacional", declarou Guevara-Rosas. "Líderes globais precisam romper seu silêncio e pressionar a Hungria para agir de acordo com suas obrigações legais."
+<br/><br/>
+Por fim, a Anistia Internacional ressaltou que continuará a exigir que o TPI investigue todos os crimes atribuídos a Israel, aplicando os princípios da jurisdição universal para garantir que figuras como Netanyahu não fiquem impunes.
+<br/><br/>
+TV Mundo - Este é o canal de notícias TV Mundo. Continuaremos acompanhando este caso e trazendo atualizações aos nossos leitores e espectadores. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+         <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Família Trump Assume Controle de Empresa de Criptomoedas e Arrecada Centenas de Milhões.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Hoje, mergulhamos na mais recente investida da família Trump no mundo das criptomoedas, um movimento que está gerando controvérsias e levantando questões sobre possíveis conflitos de interesse.</div>
+                <img src="https://pbs.twimg.com/media/GnZz6HVXMAEjBsO?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Somos a TV Mundo, trazendo a você os acontecimentos mais relevantes do cenário global. Hoje, mergulhamos na mais recente investida da família Trump no mundo das criptomoedas, um movimento que está gerando controvérsias e levantando questões sobre possíveis conflitos de interesse.
+<br/><br/>
+A World Liberty Financial, uma empresa de criptomoedas lançada no outono passado, anunciou recentemente que arrecadou US$ 550 milhões com a venda de tokens de governança. No entanto, a grande reviravolta veio com a revelação de que a família do presidente Donald Trump assumiu o controle do empreendimento, garantindo a maior parte dessas receitas. Agora, a família Trump detém 75% das receitas líquidas da empresa e 60% de sua operação.
+<br/><br/>
+O objetivo da World Liberty é permitir que as pessoas acessem serviços financeiros sem intermediários, um conceito conhecido como finanças descentralizadas (DeFi). Contudo, a empresa ainda não lançou uma plataforma pública e conta com uma equipe reduzida, levantando dúvidas sobre sua real funcionalidade. Além disso, especialistas apontam que as condições do projeto favorecem os insiders, deixando os investidores comuns em desvantagem.
+<br/><br/>
+A grande movimentação financeira ocorreu após a vitória de Trump nas eleições de novembro, impulsionando as vendas de tokens $WLFI. Esses tokens permitem aos detentores votar em mudanças no código da plataforma, mas sem a possibilidade de negociação, o que os torna diferentes das moedas digitais tradicionais. Os analistas sugerem que a estrutura do negócio praticamente exclui investidores públicos de qualquer participação financeira significativa.
+<br/><br/>
+A Casa Branca não comentou sobre o caso, encaminhando as perguntas para a Trump Organization, que, por sua vez, também não se pronunciou. Em uma tentativa de evitar conflitos de interesse, a organização afirmou que os negócios do presidente estão sob gestão de seus filhos e que um advogado foi contratado para garantir ética nas operações. No entanto, críticos alertam que o envolvimento de Trump com a World Liberty pode gerar conflitos regulatórios, especialmente por ele ser responsável por estabelecer regras para o setor.
+<br/><br/>
+A presença de grandes investidores na World Liberty também chama a atenção. Um dos principais apoiadores do projeto é Justin Sun, um empreendedor de criptomoedas de Hong Kong que investiu inicialmente US$ 30 milhões, aumentando posteriormente sua participação para US$ 75 milhões. Curiosamente, a Comissão de Valores Mobiliários dos Estados Unidos pausou um processo contra ele, o que levanta ainda mais suspeitas sobre a governança da empresa.
+<br/><br/>
+A estrutura da World Liberty contrasta com outras grandes plataformas DeFi, que geralmente distribuem seus tokens gratuitamente ou os vendem a investidores estratégicos. Além disso, enquanto outras plataformas permitem que seus detentores de tokens participem dos lucros, a World Liberty deixou claro que qualquer tentativa de alterar essa estrutura será considerada inválida.
+<br/><br/>
+A World Liberty ainda não lançou sua plataforma DeFi, e análises mostram que sua tecnologia está em desenvolvimento, com funcionalidades incompletas. Dois dos principais desenvolvedores da empresa, baseados na Romênia, trabalharam anteriormente em um projeto que sofreu um colapso após ser hackeado.
+<br/><br/>
+Diante de todas essas questões, a World Liberty se apresenta como uma peça central na expansão dos interesses financeiros da família Trump. Mas até que ponto essa estrutura beneficia realmente os investidores e o mercado de criptomoedas? O tempo dirá se a World Liberty se tornará um marco na revolução das finanças descentralizadas ou apenas mais um caso de promessas vazias no mundo das criptomoedas.
+<br/><br/>
+Fique ligado no TV Mundo para mais atualizações sobre este e outros temas que impactam o cenário global. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Huawei Mate 70 Pro+: O Primeiro Smartphone com Chip 100% Chinês.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">A Huawei acaba de lançar o Mate 70 Pro+, o primeiro smartphone com um chip totalmente desenvolvido e fabricado na China. Um avanço significativo para o país asiático e um revés para os Estados Unidos, que há anos impõem restrições à empresa chinesa...</div>
+                <img src="https://pbs.twimg.com/media/GnYLDDjWcAAKO6C?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Aqui é a TV Mundo, trazendo a você os detalhes de um marco histórico no mundo da tecnologia. A Huawei acaba de lançar o Mate 70 Pro+, o primeiro smartphone com um chip totalmente desenvolvido e fabricado na China. Um avanço significativo para o país asiático e um revés para os Estados Unidos, que há anos impõem restrições à empresa chinesa.
+<br/><br/>
+A guerra comercial entre China e Estados Unidos ganha um novo capítulo com o anúncio da Huawei. O Kirin 9020, o coração do novo Mate 70 Pro+, representa a conquista da autossuficiência tecnológica chinesa. Diferente de seus antecessores, este chip não depende de nenhuma tecnologia estrangeira — um golpe duro contra os vetos americanos que tentaram frear o avanço da Huawei.
+<br/><br/>
+A jornada não foi fácil. Com máquinas antigas e produção limitada, a Huawei, em parceria com a SMIC e a HiSilicon, conseguiu o que muitos consideravam impossível. O Kirin 9020 pode não rivalizar com os top de linha da Qualcomm ou MediaTek, mas já supera chips como o Tensor G4 do Google Pixel 9. E, para a Huawei, o mais importante não é competir em potência bruta, mas sim romper a dependência do Ocidente.
+<br/><br/>
+O sucesso do Mate 70 Pro+ no mercado chinês mostra que a estratégia está funcionando. Enquanto isso, a SMIC, fabricante do chip, vê seus lucros dispararem, mesmo enfrentando as limitações impostas pelos Estados Unidos.
+<br/><br/>
+No software, a Huawei também segue firme: o HarmonyOS Next substitui o Android e já oferece todos os aplicativos essenciais para os usuários na China.
+<br/><br/>
+Este é um momento decisivo. A China prova que, mesmo sob pressão, é capaz de inovar e se tornar independente. E a Huawei consolida seu papel como símbolo da resistência tecnológica.
+<br/><br/>
+Fique ligado no TV Mundo para mais atualizações sobre esse e outros temas que movem o mundo da tecnologia. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">EUA não terão controle sobre nosso território, diz Primeiro-ministro da Groenlândia</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O primeiro-ministro da Groenlândia, Jens-Frederik Nielsen, foi categórico em sua resposta ao presidente Donald Trump: a ilha não será anexada pelos Estados Unidos.</div>
+                <img src="https://pbs.twimg.com/media/GnVRUnVXYAAFZ_z?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Aqui é a TV Mundo, trazendo as últimas informações sobre a polêmica envolvendo a Groenlândia e os Estados Unidos. O primeiro-ministro da Groenlândia, Jens-Frederik Nielsen, foi categórico em sua resposta ao presidente Donald Trump: a ilha não será anexada pelos Estados Unidos.
+<br/><br/>
+Em uma publicação no Facebook no domingo, Nielsen deixou claro que a Groenlândia não está à venda. "O presidente Trump diz que os Estados Unidos estão ficando com a Groenlândia. Deixe-me ser claro: os Estados Unidos não ficarão com isso. Não pertencemos a mais ninguém. Nós determinamos nosso próprio futuro", afirmou o líder groenlandês.
+<br/><br/>
+A declaração foi uma resposta direta às afirmações de Trump, que, no sábado, confirmou à NBC News que teve conversas sobre a possível anexação do território. "Nós ficaremos com a Groenlândia. Sim, 100%", disse o presidente norte-americano.
+<br/><br/>
+O assunto ganhou ainda mais destaque após o vice-presidente dos Estados Unidos, JD Vance, visitar uma base militar no norte da Groenlândia na sexta-feira. Durante a visita, Vance criticou a Dinamarca, alegando que o país não tem protegido adequadamente a ilha, e sugeriu que os Estados Unidos fariam um trabalho melhor na defesa do território, considerado estrategicamente importante.
+<br/><br/>
+A Groenlândia é um território autônomo dinamarquês, com seu próprio governo, mas a defesa e as relações exteriores ainda são responsabilidade da Dinamarca. A rejeição de Nielsen reforça a posição da ilha de manter sua independência e autonomia.
+<br/><br/>
+Fiquem atentos aos próximos desdobramentos desta história. Aqui na TV Mundo, seguiremos acompanhando de perto todas as atualizações. Até a próxima, leitores e espectadores!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Peru Marca Eleições Gerais para 2026 em Meio a Crise Política e Violência</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">A presidente Dina Boluarte anunciou nesta terça-feira que o país realizará eleições gerais em abril de 2026, em uma tentativa de acalmar a instabilidade que tem marcado seu governo.</div>
+                <img src="https://pbs.twimg.com/media/GnUIeZWW8AALzn6?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Aqui é a TV Mundo, trazendo as últimas informações sobre a situação política no Peru. A presidente Dina Boluarte anunciou que o país realizará eleições gerais em abril de 2026, em uma tentativa de acalmar a instabilidade que tem marcado seu governo.
+<br/><br/>
+Boluarte, cuja taxa de desaprovação chega a impressionantes 93% segundo pesquisa da Datum Internacional, afirmou que o pleito elegerá um novo presidente, 130 deputados e 60 senadores. Curiosamente, o sistema bicameral não era utilizado desde os anos 1990. Em um breve discurso transmitido nacionalmente, a presidente garantiu que as eleições serão "democráticas, limpas, transparentes e ordeiras", mas não confirmou se pretende concorrer.
+<br/><br/>
+A mandatária assumiu o poder em 2022 após a queda de Pedro Castillo, que tentou dissolver o Congresso para evitar seu próprio impeachment. Desde então, seu governo tem enfrentado crescente rejeição popular, agravada pela escalada da criminalidade.
+<br/><br/>
+Na semana passada, o Congresso peruano destituiu o ministro do Interior, acusando-o de falhar no combate à violência. O clima de insegurança piorou após o assassinato de Paul Flores, vocalista da banda Armonia 10, morto a tiros por agressores após um show em Lima. O crime chocou o país e levou Boluarte a decretar estado de emergência na capital, enviando tropas para reforçar a segurança.
+<br/><br/>
+Os números são alarmantes: em 2024, foram registrados 2.057 homicídios, um aumento significativo em relação aos 1.506 do ano anterior. A medida emergencial, que já havia sido adotada entre setembro e dezembro, não foi suficiente para conter a onda de violência.
+<br/><br/>
+Enquanto o Peru se prepara para as eleições, a pressão sobre Boluarte só aumenta. A TV Mundo acompanhará de perto os desdobramentos desta crise política e social.
+<br/><br/>
+Para mais notícias como esta, continue acompanhando a TV Mundo. Até a próxima.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">China, Coreia do Sul e Japão Unem Forças para Fortalecer Cooperação Comercial</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Neste domingo, autoridades da Coreia do Sul, China e Japão deram um passo importante ao realizar sua primeira reunião ministerial comercial trilateral em seis anos.</div>
+                <img src="https://pbs.twimg.com/media/GnT_RVyXIAANzTO?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Aqui é a TV Mundo, trazendo as últimas atualizações sobre os desdobramentos econômicos na Ásia. Neste domingo, autoridades da Coreia do Sul, China e Japão deram um passo importante ao realizar sua primeira reunião ministerial comercial trilateral em seis anos. O encontro, que visa fortalecer a cooperação entre os três países, ocorre em um momento de tensões globais e aumento do protecionismo.
+<br/><br/>
+A reunião contou com a presença do ministro da Indústria da Coreia do Sul, Ahn Duk Geun, do ministro do Comércio da China, Wang Wentao, e do ministro do Comércio do Japão, Yoji Muto, no âmbito da 13ª Reunião Trilateral de Ministros da Economia e Comércio. Este foi o primeiro encontro do tipo desde dezembro de 2019 e a primeira vez em uma década que Seul, capital sul-coreana, sediou o evento. A última edição havia ocorrido em Pequim, conforme relatado pela agência de notícias Yonhap.
+<br/><br/>
+Em seu discurso, Ahn Duk Geun destacou a relevância da reunião diante das transformações na economia global, enfatizando que as decisões tomadas terão impacto não apenas nos três países, mas também na comunidade internacional. O ministro também defendeu a restauração do papel da OMC e a criação de um ambiente comercial global mais estável.
+<br/><br/>
+Ao final do encontro, os ministros assinaram uma declaração conjunta reafirmando seu compromisso com um sistema de comércio multilateral, aberto e baseado em regras, tendo a OMC como centro. Eles também concordaram em apoiar reformas na organização para fortalecer suas capacidades, especialmente em negociações comerciais.
+<br/><br/>
+Além disso, os três países anunciaram que irão colaborar para impulsionar tecnologias de energia limpa, incluindo fontes renováveis, nuclear e hidrogênio, além de ampliar a cooperação no campo digital.
+<br/><br/>
+A TV Mundo acompanhará de perto os próximos passos dessa parceria estratégica. Fique conosco para mais atualizações. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Trump Ameaça Irã com Bombardeios se Não Fechar Acordo nuclear</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O presidente dos Estados Unidos, Donald Trump, fez uma grave ameaça ao Irã neste domingo, alertando que...</div>
+                <img src="https://pbs.twimg.com/media/GnTcJU_WEAA9Bqb?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Aqui é a TV Mundo, trazendo as últimas informações sobre o impasse nuclear entre os Estados Unidos e o Irã.
+<br/><br/>
+O presidente dos Estados Unidos, Donald Trump, fez uma grave ameaça ao Irã neste domingo, alertando que "haverá bombardeios" e novas tarifas econômicas se o país não aceitar um acordo sobre seu programa nuclear. Em entrevista por telefone à NBC News, Trump afirmou que autoridades dos dois lados estão em contato, mas não revelou detalhes sobre as negociações.
+<br/><br/>
+Durante seu primeiro mandato (2017-2021), Trump retirou os Estados Unidos do acordo nuclear de 2015, que limitava as atividades atômicas iranianas em troca do fim de sanções internacionais. Além de abandonar o pacto, o governo americano reinstaurou pesadas sanções econômicas contra o Irã. Desde então, Teerã tem violado os limites do acordo, ampliando seu enriquecimento de urânio.
+<br/><br/>
+Até o momento, o Irã rejeitou as exigências de Trump, que insiste em um novo acordo sob risco de ação militar. O governo iraniano respondeu à carta de Trump por meio de Omã, segundo o chanceler Abbas Araqchi, citado pela agência estatal IRNA.
+<br/><br/>
+Enquanto potências ocidentais acusam o Irã de buscar armas nucleares, Teerã garante que seu programa é exclusivamente para fins pacíficos. A situação permanece tensa, com o mundo atento aos próximos capítulos desse confronto.
+<br/><br/>
+Esta foi a cobertura da TV Mundo. Acompanhe nossas plataformas para mais atualizações.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">'Ao invés de chorar, caia na realidade', diz Lula sobre Bolsonaro virar réu no STF.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O presidente criticou o adversário por pedir anistia sem que exista um processo julgado e afirmou que espera que a Justiça cumpra o seu papel..</div>
+                <img src="https://pbs.twimg.com/media/GnCc7uDWwAEfwrM?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="pt" dir="ltr">🚨URGENTE <br><br>Presidente Lula ACABA de dar uma BELA LAPADA no RÉU Bolsonaro (ao vivo) direitamente do Japão. <br><br>Lula RASGOU O VERBO lindamente!!! 💪💪 <a href="https://t.co/opy7vt5lDJ">pic.twitter.com/opy7vt5lDJ</a></p>&mdash; Pedro Rousseff (@pedrorousseff) <a href="https://twitter.com/pedrorousseff/status/1905088063950238041?ref_src=twsrc%5Etfw">March 27, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Palestinos se levantam contra o Hamas e clamam por paz.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Em uma rara demonstração pública de insatisfação, milhares de palestinos tomaram as ruas para protestar contra o Hamas</div>
+                <img src="https://pbs.twimg.com/media/GnALyvRX0AAmAvB?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Aqui é o TV Mundo, trazendo a você um relato inédito sobre os acontecimentos que estão marcando profundamente a região de Gaza. Em uma rara demonstração pública de insatisfação, milhares de palestinos tomaram as ruas para protestar contra o Hamas e exigir o fim da guerra devastadora que já dura 17 meses. Os protestos ocorreram principalmente no norte de Gaza, onde cidades como Beit Lahiya e Jabaliya se tornaram palcos de manifestações cheias de dor, desespero e coragem.
+<br/><br/>
+Os gritos ecoavam pelas ruínas das áreas fortemente bombardeadas: "O povo quer a queda do Hamas!" e "Fora, fora, fora! Hamas, fora!". Os manifestantes, muitos deles vítimas diretas da destruição causada pelo conflito com Israel, expressaram sua frustração não apenas com o grupo militante, mas também com a situação insuportável em que vivem. “Nossas crianças foram mortas. Nossas casas foram destruídas”, disse Abed Radwan, um dos participantes do protesto em Beit Lahiya. Sua voz reflete um sentimento coletivo de exaustão e revolta contra todas as partes envolvidas na crise.
+<br/><br/>
+Embora os protestos tenham começado como movimentos antiguerra, eles rapidamente ganharam um tom específico de crítica ao Hamas. Ammar Hassan, outra pessoa que participou dos atos, afirmou que os manifestantes sabem que seus esforços não podem cessar a ocupação israelense, mas podem pressionar o Hamas localmente. “É o único partido que podemos afetar”, declarou ele.
+<br/><br/>
+Curiosamente, desta vez o Hamas adotou uma postura mais discreta, sem intervenções diretas ou repressão violenta. Um alto funcionário do grupo, Bassem Naim, usou seu perfil no Facebook para reconhecer o direito de protestar, mas enfatizou que o foco deveria estar em Israel, chamando-o de “agressor criminoso”. Ainda assim, a ausência de confrontos entre manifestantes e apoiadores do Hamas marcou um contraste significativo com o histórico de repressão do grupo às vozes dissidentes.
+<br/><br/>
+Anciãos locais e comunidades tradicionais também deram declarações em apoio aos protestos, destacando que a luta não é política, mas sim pela sobrevivência. “Queremos parar a matança e o deslocamento, não importa o preço”, disse Mohammed Abu Saker, pai de três filhos de Beit Hanoun. Ele ressaltou que, embora seja impossível impedir os ataques israelenses, é possível pressionar o Hamas para fazer concessões.
+<br/><br/>
+Entretanto, nem todos os manifestantes se sentiram confortáveis com a cobertura da mídia israelense. Alguns relataram arrependimento por terem participado, temendo que suas vozes fossem usadas para legitimar agendas externas. Apesar disso, outros continuaram firmes, como um jovem de 19 anos cuja família foi deslocada múltiplas vezes. Ele acusou tanto Israel quanto o Hamas de falharem com o povo palestino. “As pessoas estão com raiva do mundo inteiro”, disse ele, incluindo os Estados Unidos e outras potências globais que, segundo ele, ignoraram a tragédia humanitária em Gaza.
+<br/><br/>
+Os protestos surgem em meio a novos combates intensos, após Israel encerrar um frágil cessar-fogo com o Hamas. Os ataques recentes deixaram centenas de mortos e levaram à suspensão de suprimentos essenciais para Gaza, incluindo alimentos, combustível e medicamentos. Enquanto Israel promete continuar a ofensiva até que o Hamas liberte os reféns restantes e abandone o poder, o grupo insiste que só negociará sob condições específicas, incluindo um cessar-fogo duradouro e a retirada israelense.
+<br/><br/>
+Este ciclo interminável de violência começou com o ataque do Hamas em outubro de 2023, que resultou na morte de cerca de 1.200 pessoas em Israel. A resposta israelense devastou Gaza, causando a morte de mais de 50.000 pessoas e deslocando quase toda a população do território. Hoje, o cenário é de ruínas e sofrimento generalizado, enquanto a população clama por paz e justiça.
+<br/><br/>
+Aqui, TV Mundo, nos despedimos agradecendo sua atenção e acompanhamento. Continuaremos monitorando os desenvolvimentos dessa crise complexa e oferecendo informações atualizadas aos nossos leitores e espectadores.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Bolsonaro e Aliados Viram Réus por Tentativa de Golpe.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">A Primeira Turma do Supremo Tribunal Federal (STF) decidiu, por unanimidade, aceitar a denúncia que torna o ex-presidente Jair Bolsonaro (PL) e mais sete aliados réus por crimes ligados a uma tentativa de golpe de Estado.
+.</div>
+                <img src="https://pbs.twimg.com/media/Gm-x8Q2WEAAxKcp?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Aqui é a TV Mundo, trazendo a você, leitor e espectador, os detalhes de um dos julgamentos mais impactantes da história recente do Brasil. A Primeira Turma do Supremo Tribunal Federal (STF) decidiu, por unanimidade, aceitar a denúncia que torna o ex-presidente Jair Bolsonaro (PL) e mais sete aliados réus por crimes ligados a uma tentativa de golpe de Estado.
+<br/><br/>
+Os oito acusados enfrentarão uma ação penal pelos seguintes crimes: organização criminosa armada, tentativa de abolição violenta do Estado Democrático de Direito, tentativa de golpe de Estado, dano qualificado pela violência e grave ameaça contra o patrimônio público, e deterioração de patrimônio tombado. A denúncia, apresentada pela Procuradoria-Geral da República (PGR), aponta que o grupo atuou entre 2021 e 2023 para deslegitimar as eleições, incitar um ambiente golpista e tentar impedir a posse do presidente Luiz Inácio Lula da Silva (PT).
+<br/><br/>
+O ministro Alexandre de Moraes, relator do caso, foi o primeiro a votar, seguido por Flávio Dino, Luiz Fux, Cármen Lúcia e Cristiano Zanin, que concordaram integralmente com seu posicionamento. Durante seu voto, Moraes exibiu imagens dos ataques de 8 de janeiro de 2023, questionando: "Se isso não é violência, o que é violência?". Já Flávio Dino lembrou que "golpe de Estado mata", reforçando a gravidade das acusações.
+<br/><br/>
+Entre os denunciados estão figuras como o deputado federal Alexandre Ramagem (PL-RJ), o ex-comandante da Marinha Almir Garnier, o ex-ministro da Justiça Anderson Torres, o general Augusto Heleno, o tenente-coronel Mauro Cid, o ex-ministro da Defesa Paulo Sérgio Nogueira e o general Walter Braga Netto. A PGR os acusa de integrar uma organização criminosa que planejou minar a democracia.
+<br/><br/>
+A defesa de Bolsonaro nega as acusações, alegando perseguição política. Seu advogado, Celso Vilardi, afirmou que o ex-presidente "repudiou o 8 de Janeiro" e que não há provas suficientes para vinculá-lo aos atos de violência. No entanto, o STF considerou que há indícios robustos para seguir com o processo.
+<br/><br/>
+Com a decisão, o STF inicia formalmente a ação penal, que poderá resultar em condenação ou absolvição dos acusados. O caso marca um capítulo crucial na história do país, sendo a primeira vez que um ex-presidente é levado a júri por tentativa de golpe.
+<br/><br/>
+Acompanhe os desdobramentos desta e de outras notícias aqui na TV Mundo, seu canal de informação com credibilidade e profundidade. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Ele sabia!</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Moraes afirma: Bolsonaro sabia do plano 'Punhal Verde e Amarelo' para assassinar Lula, Alckmin e o ministro.</div>
+                <img src="https://pbs.twimg.com/media/Gm-iJGaWIAAQE8k?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Aqui é o TV Mundo, seu canal de notícias na internet. Hoje trazemos um desdobramento de extrema relevância sobre uma denúncia que abalou os pilares da política brasileira. O ministro Alexandre de Moraes, do Supremo Tribunal Federal (STF), afirmou nesta quarta-feira (26) que o ex-presidente Jair Bolsonaro tinha pleno conhecimento da operação intitulada "Punhal Verde e Amarelo", cujo objetivo era assassinar figuras-chave da República: o presidente Luiz Inácio Lula da Silva, o vice Geraldo Alckmin e até mesmo o próprio magistrado.
+<br/><br/>
+As declarações de Moraes ocorreram durante o julgamento em que o STF analisa se aceita ou rejeita a denúncia apresentada pela Procuradoria-Geral da República (PGR) contra Bolsonaro e outros sete acusados por supostamente planejarem um golpe de Estado após as eleições presidenciais de 2022. Segundo o ministro, documentos comprovam que Bolsonaro não apenas sabia da existência dessa organização criminosa, como também teve participação ativa em suas articulações.
+<br/><br/>
+“Hoje ninguém mais tem dúvida de que é crime acampar na frente de quartéis para pedir decretação de golpe de Estado, volta do AI-5, da tortura, da quebra da normalidade democrática”, afirmou Moraes. Ele reiterou ainda que “não há mais nenhuma dúvida” de que Bolsonaro conhecia, manuseava e discutiu a chamada “minuta do golpe”, documento que detalhava estratégias antidemocráticas.
+<br/><br/>
+Durante sua fala, o ministro leu mensagens trocadas entre o general Mario Fernandes e o ex-ajudante de ordens Mauro Cid em 8 de dezembro de 2022. Essas conversas corroboram a tese de que Bolsonaro estava ciente das movimentações criminosas. Em uma das mensagens, o militar relata uma conversa com o então presidente: “Ele citou que o dia 12, pela diplomação do vagabundo [Lula], não seria uma restrição. Que qualquer ação nossa pode acontecer até 31 de dezembro... Mas na hora eu disse: pô, presidente, mas o quanto antes… a gente já perdeu tantas oportunidades”.
+<br/><br/>
+Além disso, Moraes destacou que a PGR demonstrou que Bolsonaro sabia que não havia fraude nas urnas eletrônicas. No entanto, o ex-presidente convocou uma reunião com embaixadores estrangeiros com o objetivo de divulgar informações falsas sobre o processo eleitoral. O ministro ressaltou que a missão dada pelo então presidente às Forças Armadas, sob comando do ministro da Defesa Paulo Sérgio, era comprovar fraudes inexistentes nas eleições.
+<br/><br/>
+Ainda segundo Moraes, a denúncia da PGR aponta claramente que Bolsonaro teve conhecimento prévio sobre o plano criminoso conhecido como “Punhal Verde e Amarelo”. Este plano visava monitorar e executar autoridades públicas brasileiras, colocando em risco a estabilidade democrática do país.
+<br/><br/>
+O caso segue em análise no STF, enquanto Bolsonaro nega envolvimento com a trama. A decisão final caberá aos ministros do tribunal, que decidirão se recebem ou rejeitam a denúncia formalmente apresentada.
+<br/><br/>
+Aqui é o TV Mundo, sempre comprometido em trazer informações atualizadas e transparentes para nossos leitores e espectadores. Até a próxima!<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Bolsonaro Aponta Zambelli por Derrota para Lula.
+.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O ex-presidente Jair Bolsonaro, do Partido Liberal (PL), apontou recentemente a deputada Carla Zambelli como uma das responsáveis por sua derrota nas eleições presidenciais de 2022, quando foi superado pelo atual presidente Luiz Inácio Lula da Silva...</div>
+                <img src="https://pbs.twimg.com/media/Gm7BCcxWcAAzaQJ?format=jpg&name=small" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+25 Mar 2025<br/><br/>
+Aqui é o TV Mundo, seu canal de notícias na internet, trazendo mais uma análise política que expõe os bastidores do cenário brasileiro. Hoje, revelamos detalhes sobre a relação conturbada entre o ex-presidente Jair Bolsonaro e a deputada federal Carla Zambelli.
+<br/><br/>
+O ex-presidente Jair Bolsonaro, do Partido Liberal (PL), apontou recentemente a deputada Carla Zambelli como uma das responsáveis por sua derrota nas eleições presidenciais de 2022, quando foi superado pelo atual presidente Luiz Inácio Lula da Silva. Uma relação que já foi marcada pela proximidade e apoio mútuo transformou-se em um distanciamento repleto de acusações e críticas públicas.
+<br/><br/>
+Carla Zambelli, conhecida por sua postura conservadora e fervorosa defesa dos valores defendidos por Bolsonaro, tornou-se uma figura central no governo do ex-presidente. Ela desempenhou papel ativo na promoção de pautas polêmicas, como a flexibilização do porte de armas e o combate às políticas pró-aborto. No entanto, esse apoio incondicional começou a oscilar com o passar do tempo, especialmente quando atritos surgiram dentro do núcleo político do governo.
+<br/><br/>
+Foi durante o processo eleitoral de 2022 que as divergências começaram a ficar evidentes. Apesar de Zambelli ter sido uma das vozes mais altas na campanha de reeleição de Bolsonaro, participando de lives e eventos como as motociatas organizadas pelo PL, o ex-presidente optou por não apoiá-la em sua candidatura ao Senado por São Paulo. Em vez disso, ele declarou apoio ao astronauta Marcos Pontes, que acabou eleito para o cargo.
+<br/><br/>
+Após a derrota nas urnas, a deputada tentou mobilizar figuras influentes, como o ex-comandante da Aeronáutica Carlos Batista Júnior e o então Ministro da Defesa, general Paulo Sérgio de Oliveira, para garantir suporte ao ex-presidente. Contudo, essas ações não foram suficientes para evitar o rompimento entre os dois lados.
+<br/><br/>
+Em 2023, a relação entre Bolsonaro e Zambelli atingiu seu ponto mais baixo. A deputada criticou publicamente a postura de Bolsonaro após a derrota para Lula, afirmando que “discordava da maneira que ele levou aquele tempo todo [para se manifestar] e o silêncio que teve”. Além disso, Zambelli fez gestos de aproximação com o Supremo Tribunal Federal (STF), incluindo o ministro Alexandre de Moraes, figura frequentemente alvo de ataques por parte dos bolsonaristas. Em entrevista à CNN, ela declarou que não defendia mais o impeachment de Moraes, algo que foi interpretado por Bolsonaro como uma traição.
+<br/><br/>
+Nos bastidores, Bolsonaro relatou a aliados que as declarações de Zambelli feriram profundamente sua confiança. Para ele, as falas da deputada representaram um afastamento definitivo e uma ruptura com os princípios que antes uniam ambos.
+<br/><br/>
+E assim encerramos mais este capítulo da política brasileira. Obrigado por acompanhar o TV Mundo, seu espaço para entender os acontecimentos que moldam o país. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Google afirma que notícias não valem nada para seu negócio de anúncios</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Hoje trazemos um desdobramento intrigante envolvendo o Google e sua estratégia em relação à exibição de notícias nos resultados de busca na Europa.</div>
+                <img src="https://pbs.twimg.com/media/GmrKC47XwAABSzC?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Em um experimento que chamou atenção global, o gigante da tecnologia removeu temporariamente as notícias dos resultados de pesquisa de 1% dos usuários por 2,5 meses em oito mercados europeus. O objetivo? Demonstrar que o conteúdo jornalístico tem pouco ou nenhum impacto financeiro para o negócio de anúncios da empresa.
+<br/><br/>
+O teste foi conduzido como uma resposta à legislação europeia de direitos autorais, que obriga plataformas digitais, como o Google, a pagarem aos editores de notícias pela reutilização de trechos de seus conteúdos. No entanto, os resultados do experimento apresentados pelo Google afirmam algo surpreendente: o valor das notícias para o modelo de negócios de anúncios "não pôde ser estatisticamente distinguido de zero". Essa conclusão vem sendo usada pela empresa como uma forma de pressionar as editoras europeias durante as negociações de pagamento.
+<br/><br/>
+Embora o Google tente usar esses dados como argumento, ele navega em águas turbulentas. Nos últimos anos, a empresa já enfrentou multas antitruste significativas na França, incluindo uma penalidade superior a meio bilhão de dólares por sua abordagem nas negociações de direitos autorais com editoras. Além disso, a Alemanha intensificou o escrutínio sobre o comportamento do Google em relação às notícias, forçando mudanças em suas práticas. Curiosamente, o Google optou por não realizar o teste na Alemanha e interrompeu a inclusão de usuários franceses após um alerta judicial, evitando novas sanções.
+<br/><br/>
+Essa situação levanta questões importantes sobre o verdadeiro valor do jornalismo para plataformas digitais e o equilíbrio entre regulamentações e interesses comerciais. Enquanto isso, editoras europeias continuam lutando para garantir compensação justa pelo uso de seus conteúdos.
+<br/><br/>
+Aqui encerramos mais uma reportagem do TV Mundo. Agradecemos a você, leitor e espectador, por acompanhar nossas atualizações. Continue conosco para mais notícias relevantes e análises exclusivas. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Novo Ataque Aéreo dos Estados Unidos no Iêmen</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">.</div>
+                <img src="https://pbs.twimg.com/media/GmSKzuNXEAAvcUp?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Boas-vindas, leitores e espectadores do canal de notícias TV Mundo. Aqui estamos para trazer a vocês as últimas atualizações sobre os eventos globais.
+<br/><br/>
+Na noite de segunda-feira, os Estados unidos lançaram um novo ataque aéreo contra o Iêmen, atingindo a capital, Sanaa, conforme relatado pela Al Masirah. Os bombardeios resultaram na destruição da fábrica de ferro Al-Habashi, localizada no distrito de Al-Salif. Além disso, posições dos Houthis na província de Al Hudaydah foram alvo dos ataques, segundo informações do Al Hadath.
+<br/>
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="es" dir="ltr">🚨🇾🇪 EE.UU. está llevando a cabo ataques aéreos contra Yemen, incluyendo la capital, Saná, informa el canal Al Masirah<br><br>Donald Trump ordenó la semana pasada una operación militar &quot;decisiva y poderosa&quot; contra los hutíes <a href="https://t.co/Fyk8ZO1IYI">https://t.co/Fyk8ZO1IYI</a> <a href="https://t.co/UGKcA0fmv5">pic.twitter.com/UGKcA0fmv5</a></p>&mdash; RT en Español (@ActualidadRT) <a href="https://twitter.com/ActualidadRT/status/1901761834622861579?ref_src=twsrc%5Etfw">March 17, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<br/>
+O ex-presidente dos Estados unidos, Donald Trump, acusou o grupo Houthi de conduzir uma "campanha implacável de pirataria, estupro e terrorismo contra navios, aviões e drones americanos e de outros países". Trump afirmou que essas ações "custaram à economia americana e global muitos bilhões de dólares e colocaram vidas inocentes em risco".
+<br/>
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="es" dir="ltr">‼️EE.UU. lanza nuevo BOMBARDEO contra Yemen<br><br>Como resultado se destruyó la fábrica de hierro de Al-Habashi, en el distrito de Al-Salif. Además, fueron atacadas posiciones de los hutíes en la provincia de Al Hudaydah, recoge el medio Al Hadath <br><br>Sepa más <a href="https://t.co/MxmPLgOEzs">https://t.co/MxmPLgOEzs</a> <a href="https://t.co/TjRsv6o7OG">pic.twitter.com/TjRsv6o7OG</a></p>&mdash; RT en Español (@ActualidadRT) <a href="https://twitter.com/ActualidadRT/status/1901759647511466412?ref_src=twsrc%5Etfw">March 17, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<br/>
+Enquanto isso, o Departamento de Defesa dos Estados unidos confirmou que, durante a onda inicial de ataques no último sábado, no oeste do Iêmen, mais de 30 alvos dos Houthis foram atingidos. Entre os alvos estavam locais de treinamento, infraestrutura de drones, instalações de armazenamento de armas, centros de comando e controle, além de um complexo que abrigava vários dos principais especialistas em drones do movimento.
+<br/>
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="ar" dir="rtl">اليمن .. غارات أمريكية على مصنع الحبشي للصلب في الحديدة ، وانباء عن تدمير المصنع بشكل كامل <a href="https://t.co/j3qVoqw5VR">pic.twitter.com/j3qVoqw5VR</a></p>&mdash; خبرني - khaberni (@khaberni) <a href="https://twitter.com/khaberni/status/1901758668795707528?ref_src=twsrc%5Etfw">March 17, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<br/>
+E assim, encerramos mais uma atualização do canal de notícias TV Mundo. Fiquem ligados para mais informações e análises sobre os eventos que estão moldando nosso mundo. Até a próxima.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">FLOPOU!.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Ato em Copacabana: Análise da Mobilização e Implicações Políticas..</div>
+                <img src="https://pbs.twimg.com/media/GmMtJ8Oa0AAgfoa?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+TV Mundo aqui, trazendo para nossos leitores e espectadores uma análise detalhada do ato realizado neste domingo (16) em Copacabana, Rio de Janeiro, pelo ex-presidente Jair Bolsonaro. O evento, que tinha como objetivo principal apoiar a anistia aos envolvidos na tentativa de golpe de 8 de janeiro de 2023, revelou-se um ponto de inflexão nas estratégias políticas do bolsonarismo.
+<br/><br/>
+Com uma participação bem abaixo do esperado, o ato reuniu cerca de 18 mil pessoas, segundo levantamento de pesquisadores da USP, contrastando com a previsão de um milhão de apoiadores feita pelo próprio Bolsonaro. A Polícia Militar do Rio de Janeiro estimou em 400 mil o público presente, mas essa contagem também ficou aquém das expectativas, representando apenas 40% do previsto pelos aliados do ex-presidente.
+<br/><br/>
+Analistas políticos ouvidos apontam que o evento não conseguiu demonstrar um apoio significativo para a aprovação de uma lei de anistia aos golpistas. Para que tal lei seja aprovada, Bolsonaro precisaria de pelo menos 257 votos na Câmara dos Deputados e 41 no Senado, além de uma força popular que pressionasse os presidentes das Casas Legislativas a pautarem a proposta. No entanto, a manifestação contou apenas com a presença de parlamentares bolsonaristas, sem a adesão de líderes partidários influentes, como o presidente do PSD, Gilberto Kassab, que não respondeu aos pedidos de confirmação de apoio.
+<br/><br/>
+a manifestação foi "muito aquém da capacidade de mobilização já demonstrada pelo bolsonarismo" e que a proximidade do julgamento no Supremo Tribunal Federal (STF), marcado para o dia 25 de março, tende a diminuir ainda mais essa força política. 
+<br/><br/>
+A professora Silvana Krause, da UFRGS, reforçou que não existe uma "frente ampla" pela anistia e que a participação dos governadores aliados é crucial para o avanço da pauta, o que não ocorreu.
+<br/><br/>
+O STF decidirá no dia 25 se aceita a denúncia contra Bolsonaro, que pode torná-lo réu por tentativa de golpe. O presidente da Câmara, Hugo Motta, anunciou que a decisão sobre pautar ou não o projeto de anistia caberá ao Colégio de Líderes, apesar de ser competência do presidente da Casa definir a pauta.
+<br/><br/>
+A pesquisa Datafolha de dezembro mostrou que 62% dos brasileiros são contra a anistia aos golpistas, enquanto 33% são a favor. O apoio é maior entre homens, evangélicos, empresários e aqueles que votaram em Bolsonaro em 2022.
+<br/><br/>
+Durante o ato, o governador de São Paulo, Tarcísio de Freitas, insinuou que o presidente Lula teme perder as eleições de 2026, ao que a ministra das Relações Institucionais, Gleisi Hoffmann, respondeu em tom de irritação nas redes sociais: "Não é Lula que tem medo de perder, governador Tarcísio. É Bolsonaro que tem medo da prisão".
+<br/><br/>
+O ato em Copacabana, portanto, não apenas demonstrou a fragilidade da mobilização bolsonarista, mas também evidenciou as divisões internas e a falta de apoio político mais amplo. Enquanto isso, nas redes sociais, influenciadores bolsonaristas tentam minimizar a situação, mas a realidade é que a pauta da anistia não parece estar nas ruas ou no cotidiano dos brasileiros.
+TV Mundo se despede, trazendo sempre as últimas notícias e análises para você. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+<iframe width="100%" height="425" src="https://www.youtube.com/embed/s9O56TVQm2A?si=ROm3Fsf4AU3NYiG4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ 
+        <!-- Coluna da direita --> </div>
+        <div class="right-column">
+            <!-- Post flutuante -->
+            <div class="floating-post">
+                <img src="https://via.placeholder.com/300" alt="">
+                <div class="post-title">MEU DNA É MARLEY</div>
+                <div class="post-description"><img src="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large" alt="Imagem do Post 1" class="post-image"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <div class="footer-nav">
+            <a href="https://tvmundo.github.io">&#9664;</a>
+            <a href="https://tvmundo.github.io/qwen/2025/mar/1.html">&#9654;</a>
+        </div>
+        <div class="footer-text">TV Mundo desde 2011</div>
+    </div>
+
+    <!-- Botão de rolagem -->
+    <button class="scroll-button" id="scrollButton">↑</button>
+
+    <script>
+        // Função para expandir/recolher os posts
+        document.querySelectorAll('.post-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.previousElementSibling; // Encontra o conteúdo do post
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    button.textContent = 'Continuar lendo...';
+                } else {
+                    content.style.display = 'block';
+                    button.textContent = 'Recolher';
+                }
+            });
+        });
+
+        // Função para rolar a página
+        const scrollButton = document.getElementById('scrollButton');
+        let isAtTop = true;
+
+        scrollButton.addEventListener('click', () => {
+            if (isAtTop) {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↑'; // Altera o ícone para subir
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↓'; // Altera o ícone para descer
+            }
+            isAtTop = !isAtTop; // Alterna o estado
+        });
+
+        // Atualiza o ícone do botão com base na posição da página
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                scrollButton.textContent = '↓'; // Ícone para descer
+                isAtTop = true;
+            } else if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+                scrollButton.textContent = '↑'; // Ícone para subir
+                isAtTop = false;
+            }
+        });
+    </script>
+</body>
+</html>

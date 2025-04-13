@@ -1,0 +1,43 @@
+  <link rel="stylesheet" href="styles.css">
+  <div class="video-container">
+    <!-- Botão para Abrir/Fechar o Menu -->
+    <button id="menuToggle">Mostrar Lista de Vídeos deste canal </button>
+
+    <!-- Player de Vídeo (API do YouTube) -->
+    <div id="player"></div>
+
+    <!-- Estado Final do Vídeo -->
+    <div id="endScreen" class="end-screen" style="display: none;">
+      <p>O vídeo acabou!</p>
+      <button id="restartVideo">Assistir Novamente</button>
+    </div>
+
+    <!-- Menu de Vídeos (Sobreposto ao Vídeo) -->
+    <div id="videoMenu" class="video-menu-overlay">
+      <div class="menu-header">
+        <span>Lista de Vídeos</span>
+        <button id="closeMenu">✕</button>
+      </div>
+      <ul>
+        <li data-video-id="s9O56TVQm2A">Vídeo 1: FLOPOU! Ato em Copacabana: Análise da Mobilização e Implicações Políticas.</li>
+        <li data-video-id="iquoKIaEjR0">Vídeo 2: Zuckerberg, Dimon e Nikesh Arora, vendem R$ 5,8 bi em ações antes de mercado desabar.</li>
+        <li data-video-id="HKFv8g2hRYk">Vídeo 3: Big techs desvalorizam R$ 4,3 trilhões...</li>
+        <li data-video-id="CYP0rHKXo-8">Vídeo 4: Ataques e Boicotes Contra Negócios de Elon Musk nos EUA e no Mundo Causam Prejuízos Milionários.</li>
+	    <li data-video-id="4VWlADvqdJY">Vídeo 5: Administração Trump mantêm pressão por venda do Chrome em nova ofensiva antitruste contra Google.</li>
+		<li data-video-id="Qm2jJgrUvlU">Vídeo 6: Milei Critica o Mercosul Enquanto Indústria Argentina Elogia o Bloco e o Exemplo Brasileiro.</li>
+		<li data-video-id="RN7PyjpyFrU">Vídeo 7: Engenheiro da OpenAI Rejeita oferta de Elon Musk e Acusa Bilionário de Ser "Ameaça à Democracia"</li>
+		<li data-video-id="a448Y7L4d0U">Vídeo 8: EUA exigem que Europa explique regras que punem as big techs</li>
+		<li data-video-id="1haeG-Jf0kA">Vídeo 9: Moraes alerta sobre o poder das big techs.</li>
+		<li data-video-id="fniMtk_QT8I">Vídeo 10: Ele sabia! Sabia e concordou com plano para assassinar Lula, Alckmin e Moraes, aponta PGR.</li>
+		<li data-video-id="lp5CPx5-lZ0">Vídeo 11: Mark Zuckerberg e Elon Musk Enfrentam Alta Rejeição nos EUA.</li>
+		<li data-video-id="yyQIrYYHoZ4">Vídeo 12: Steve Bannon Repete Saudação Nazista em Evento com Eduardo Bolsonaro: A Extrema Direita em Foco.</li>
+        <li data-video-id="uVpDSe9TP78">Vídeo 13: Javier Milei promove criptomoeda que despenca em horas e gera crise política</li>
+	  </ul>
+    </div>
+  </div>
+
+  <!-- Script da API do YouTube -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>

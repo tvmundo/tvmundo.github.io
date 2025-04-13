@@ -48,24 +48,24 @@ function resetPlayer() {
 }
 
 // Selecionar elementos
-const menuToggle = document.getElementById('menuToggle');
+const menuToggletvmundo = document.getElementById('menuToggletvmundo');
 const videoMenu = document.getElementById('videoMenu');
 const closeMenu = document.getElementById('closeMenu');
 
 // Função para abrir o menu
 function openMenu() {
   videoMenu.style.display = 'block';
-  menuToggle.textContent = 'Ocultar Lista de Vídeos';
+  menuToggletvmundo.textContent = 'Ocultar Lista de Vídeos';
 }
 
 // Função para fechar o menu
 function closeMenuOverlay() {
   videoMenu.style.display = 'none';
-  menuToggle.textContent = 'Mostrar Lista de Vídeos';
+  menuToggletvmundo.textContent = 'Mostrar Lista de Vídeos';
 }
 
 // Alternar visibilidade do menu overlay
-menuToggle.addEventListener('click', () => {
+menuToggletvmundo.addEventListener('click', () => {
   if (videoMenu.style.display === 'block') {
     closeMenuOverlay();
   } else {

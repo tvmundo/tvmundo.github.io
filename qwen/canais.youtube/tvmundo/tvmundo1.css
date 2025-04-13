@@ -1,0 +1,120 @@
+/* Estilização específica para tvmundo1 */
+.tvmundo1-container {
+  position: relative; /* Importante para posicionar elementos dentro do container */
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Botão Principal (Menu de Vídeos e Assistir Novamente) */
+#tvmundo1-menuToggle,
+.tvmundo1-end-screen button {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 12px 20px; /* Espaçamento interno */
+  background-color: #007bff; /* Cor de fundo azul */
+  color: white; /* Cor do texto */
+  border: none; /* Remove a borda padrão */
+  border-radius: 8px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  font-size: 16px; /* Tamanho da fonte */
+  font-weight: bold; /* Texto em negrito */
+  text-transform: uppercase; /* Texto em maiúsculas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  transition: all 0.3s ease; /* Transição suave para hover */
+}
+
+/* Efeito ao passar o mouse sobre os botões */
+#tvmundo1-menuToggle:hover,
+.tvmundo1-end-screen button:hover {
+  background-color: #0056b3; /* Escurece a cor de fundo */
+  transform: translateY(-2px); /* Eleva o botão levemente */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
+}
+
+/* Ícone no Botão do Menu */
+#tvmundo1-menuToggle::before {
+  content: "☰ "; /* Ícone de menu (hambúrguer) */
+  font-size: 20px; /* Tamanho do ícone */
+  margin-right: 8px; /* Espaçamento entre o ícone e o texto */
+}
+
+/* Player de Vídeo */
+#tvmundo1-player {
+  width: 100%;
+  height: 415px;
+  border: none;
+  position: relative; /* Garante que o player seja a base para o overlay */
+  z-index: 1; /* Garante que o player esteja abaixo do menu */
+}
+
+/* Estado Final do Vídeo */
+.tvmundo1-end-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 315px;
+  background-color: #000;
+  color: white;
+  font-size: 18px;
+  position: relative; /* Posicionamento relativo para o overlay */
+  z-index: 1; /* Garante que o estado final esteja abaixo do menu */
+}
+
+/* Menu de Vídeos (Overlay) */
+.tvmundo1-video-menu-overlay {
+  display: none;
+  position: absolute; /* Posiciona o menu sobre o vídeo */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupa toda a largura do container */
+  height: 100%; /* Ocupa toda a altura do container */
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
+  color: white;
+  z-index: 1000; /* Coloca o menu acima de tudo */
+  overflow-y: auto; /* Permite rolagem se necessário */
+}
+
+.tvmundo1-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tvmundo1-menu-header span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#tvmundo1-closeMenu {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#tvmundo1-closeMenu:hover {
+  color: #ff4d4d;
+}
+
+.tvmundo1-video-menu-overlay ul {
+  list-style: none;
+  margin: 0;
+  padding: 20px;
+}
+
+.tvmundo1-video-menu-overlay li {
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tvmundo1-video-menu-overlay li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}

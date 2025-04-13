@@ -48,24 +48,24 @@ function resetPlayer() {
 }
 
 // Selecionar elementos
-const menuToggle = document.getElementById('menuToggle');
+const menuDanielLopez = document.getElementById('menuDanielLopez');
 const videoMenu = document.getElementById('videoMenu');
 const closeMenu = document.getElementById('closeMenu');
 
 // Função para abrir o menu
 function openMenu() {
   videoMenu.style.display = 'block';
-  menuToggle.textContent = 'Ocultar Lista de Vídeos';
+  menuDanielLopez.textContent = 'Ocultar Lista de Vídeos';
 }
 
 // Função para fechar o menu
 function closeMenuOverlay() {
   videoMenu.style.display = 'none';
-  menuToggle.textContent = 'Mostrar Lista de Vídeos';
+  menuDanielLopez.textContent = 'Mostrar Lista de Vídeos';
 }
 
 // Alternar visibilidade do menu overlay
-menuToggle.addEventListener('click', () => {
+menuDanielLopez.addEventListener('click', () => {
   if (videoMenu.style.display === 'block') {
     closeMenuOverlay();
   } else {

@@ -14,7 +14,7 @@ body {
 }
 
 /* Botão Principal (Menu de Vídeos e Assistir Novamente) */
-#menuToggle,
+#menuDanielLopez,
 .end-screen button {
   display: inline-block;
   margin-bottom: 10px;
@@ -32,7 +32,7 @@ body {
 }
 
 /* Efeito ao passar o mouse sobre os botões */
-#menuToggle:hover,
+#menuDanielLopez:hover,
 .end-screen button:hover {
   background-color: #0056b3; /* Escurece a cor de fundo */
   transform: translateY(-2px); /* Eleva o botão levemente */
@@ -40,7 +40,7 @@ body {
 }
 
 /* Ícone no Botão do Menu */
-#menuToggle::before {
+#menuDanielLopez::before {
   content: "☰ "; /* Ícone de menu (hambúrguer) */
   font-size: 20px; /* Tamanho do ícone */
   margin-right: 8px; /* Espaçamento entre o ícone e o texto */

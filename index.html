@@ -286,26 +286,28 @@ Mas, a todos quantos o receberam, deu-lhes o poder de serem feitos filhos de Deu
                 <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
                 <p>
  <!--embed 🔴🔴🔴🔴🔴 Aqui-->
-  <link rel="stylesheet" href="styles.css"> <!-- Certifique-se de que o caminho está correto -->
-</head>
-<body>
-  <!-- Player TV Mundo 1 -->
-  <div class="video-container" id="tvmundo1">
-    <button class="menu-toggle">Mostrar Lista de Vídeos</button>
-    <div class="video-player">
-      <div id="player1"></div>
-    </div>
-    <div class="end-screen" style="display: none;">
+ <link rel="stylesheet" href="styles.css">
+  <div class="video-container">
+    <!-- Botão para Abrir/Fechar o Menu -->
+    <button id="menutvmundo1">Mostrar Lista de Vídeos deste canal </button>
+
+    <!-- Player de Vídeo (API do YouTube) -->
+    <div id="player"></div>
+
+    <!-- Estado Final do Vídeo -->
+    <div id="endScreen" class="end-screen" style="display: none;">
       <p>O vídeo acabou!</p>
-      <button class="restart-video">Assistir Novamente</button>
+      <button id="restartVideo">Assistir Novamente</button>
     </div>
-    <div class="video-menu-overlay">
+
+    <!-- Menu de Vídeos (Sobreposto ao Vídeo) -->
+    <div id="videoMenu" class="video-menu-overlay">
       <div class="menu-header">
         <span>Lista de Vídeos</span>
-        <button class="close-menu">✕</button>
+        <button id="closeMenu">✕</button>
       </div>
       <ul>
-        <li data-video-id="s9O56TVQm2A">Vídeo 1: FLOPOU! Ato em Copacabana: Análise da Mobilização e Implicações Políticas.</li>
+         <li data-video-id="s9O56TVQm2A">Vídeo 1: FLOPOU! Ato em Copacabana: Análise da Mobilização e Implicações Políticas.</li>
         <li data-video-id="iquoKIaEjR0">Vídeo 2: Zuckerberg, Dimon e Nikesh Arora, vendem R$ 5,8 bi em ações antes de mercado desabar.</li>
         <li data-video-id="HKFv8g2hRYk">Vídeo 3: Big techs desvalorizam R$ 4,3 trilhões...</li>
         <li data-video-id="CYP0rHKXo-8">Vídeo 4: Ataques e Boicotes Contra Negócios de Elon Musk nos EUA e no Mundo Causam Prejuízos Milionários.</li>
@@ -324,91 +326,7 @@ Mas, a todos quantos o receberam, deu-lhes o poder de serem feitos filhos de Deu
 
   <!-- Script da API do YouTube -->
   <script src="https://www.youtube.com/iframe_api"></script>
-  <script>
-    // Variável global para o player
-    let player;
-
-    // Função chamada automaticamente pela API do YouTube
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player1', {
-        height: '450',
-        width: '100%',
-        videoId: 's9O56TVQm2A', // Vídeo inicial
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          rel: 0,
-          modestbranding: 1,
-          showinfo: 0
-        },
-        events: {
-          onReady: onPlayerReady,
-          onStateChange: onPlayerStateChange
-        }
-      });
-    }
-
-    // Quando o player estiver pronto
-    function onPlayerReady(event) {
-      console.log("Player tvmundo1 pronto!");
-    }
-
-    // Quando o estado do player mudar
-    function onPlayerStateChange(event) {
-      if (event.data === YT.PlayerState.ENDED) {
-        document.getElementById('player1').style.display = 'none';
-        document.querySelector('#tvmundo1 .end-screen').style.display = 'flex';
-      }
-    }
-
-    // Reiniciar o vídeo
-    document.addEventListener('DOMContentLoaded', () => {
-      const restartButton = document.querySelector('#tvmundo1 .restart-video');
-      restartButton.addEventListener('click', () => {
-        resetPlayer();
-        player.playVideo();
-      });
-
-      // Alternar visibilidade do menu overlay
-      const menuToggle = document.querySelector('#tvmundo1 .menu-toggle');
-      const menuOverlay = document.querySelector('#tvmundo1 .video-menu-overlay');
-
-      menuToggle.addEventListener('click', () => {
-        if (menuOverlay.style.display === 'block') {
-          menuOverlay.style.display = 'none';
-          menuToggle.textContent = 'Mostrar Lista de Vídeos';
-        } else {
-          menuOverlay.style.display = 'block';
-          menuToggle.textContent = 'Ocultar Lista de Vídeos';
-        }
-      });
-
-      // Fechar menu ao clicar no botão "✕"
-      const closeMenu = document.querySelector('#tvmundo1 .close-menu');
-      closeMenu.addEventListener('click', () => {
-        menuOverlay.style.display = 'none';
-        menuToggle.textContent = 'Mostrar Lista de Vídeos';
-      });
-
-      // Alterar o vídeo ao clicar em um item do menu
-      const menuItems = document.querySelectorAll('#tvmundo1 .video-menu-overlay li');
-      menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-          const videoId = item.getAttribute('data-video-id');
-          resetPlayer();
-          player.loadVideoById(videoId);
-          menuOverlay.style.display = 'none';
-          menuToggle.textContent = 'Mostrar Lista de Vídeos';
-        });
-      });
-    });
-
-    // Função para resetar o player
-    function resetPlayer() {
-      document.getElementById('player1').style.display = 'block';
-      document.querySelector('#tvmundo1 .end-screen').style.display = 'none';
-    }
-  </script>			
+  <script src="script.js"></script>			
 				</p>
             </div>
             <button class="post-button">Continuar lendo...</button>

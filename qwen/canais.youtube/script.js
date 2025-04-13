@@ -8,7 +8,7 @@ function onYouTubeIframeAPIReady() {
     width: '100%',
     videoId: 'qvJ6R2gQegw', // Vídeo inicial
     playerVars: {
-      autoplay: 1,         // Autoplay ativado
+      autoplay: 0,         // Autoplay ativado
       controls: 0,         // Controles desativados
       rel: 0,              // Sugestões limitadas ao mesmo canal
       modestbranding: 1,   // Remove o logo do YouTube

@@ -14,10 +14,10 @@ body {
 }
 
 /* Botão Principal (Menu de Vídeos e Assistir Novamente) */
-.menu-toggle,
-.restart-video {
+#menutvmundo1,
+.end-screen button {
   display: inline-block;
-  margin-bottom: 15px; /* Espaçamento abaixo do botão */
+  margin-bottom: 10px;
   padding: 12px 20px; /* Espaçamento interno */
   background-color: #007bff; /* Cor de fundo azul */
   color: white; /* Cor do texto */
@@ -32,24 +32,24 @@ body {
 }
 
 /* Efeito ao passar o mouse sobre os botões */
-.menu-toggle:hover,
-.restart-video:hover {
+#menutvmundo1:hover,
+.end-screen button:hover {
   background-color: #0056b3; /* Escurece a cor de fundo */
   transform: translateY(-2px); /* Eleva o botão levemente */
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
 }
 
 /* Ícone no Botão do Menu */
-.menu-toggle::before {
+#menutvmundo1::before {
   content: "☰ "; /* Ícone de menu (hambúrguer) */
   font-size: 20px; /* Tamanho do ícone */
   margin-right: 8px; /* Espaçamento entre o ícone e o texto */
 }
 
 /* Player de Vídeo */
-#player1 {
+#player {
   width: 100%;
-  height: 315px;
+  height: 415px;
   border: none;
   position: relative; /* Garante que o player seja a base para o overlay */
   z-index: 1; /* Garante que o player esteja abaixo do menu */
@@ -72,12 +72,12 @@ body {
 
 /* Menu de Vídeos (Overlay) */
 .video-menu-overlay {
-  display: none; /* Inicialmente oculto */
+  display: none;
   position: absolute; /* Posiciona o menu sobre o vídeo */
-  top: 0; /* Alinha ao topo do contêiner */
-  left: 0; /* Alinha à esquerda do contêiner */
-  width: 100%; /* Ocupa toda a largura do contêiner */
-  height: 100%; /* Ocupa toda a altura do contêiner */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupa toda a largura do container */
+  height: 100%; /* Ocupa toda a altura do container */
   background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
   color: white;
   z-index: 1000; /* Coloca o menu acima de tudo */
@@ -97,7 +97,7 @@ body {
   font-weight: bold;
 }
 
-.close-menu {
+#closeMenu {
   background: none;
   border: none;
   color: white;
@@ -105,7 +105,7 @@ body {
   cursor: pointer;
 }
 
-.close-menu:hover {
+#closeMenu:hover {
   color: #ff4d4d;
 }
 
@@ -116,12 +116,10 @@ body {
 }
 
 .video-menu-overlay li {
-  padding: 18px 15px; /* Espaçamento interno para melhorar a legibilidade */
+  padding: 15px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 16px;
-  line-height: 1.5;
 }
 
 .video-menu-overlay li:hover {

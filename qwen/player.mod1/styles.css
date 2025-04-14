@@ -1,0 +1,76 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.video-container {
+    position: relative; /* Define o contêiner como referência para posicionamento */
+    margin-bottom: 30px; /* Espaçamento entre múltiplos players */
+}
+
+.dropdown {
+    position: relative; /* Mantém o menu relativo ao contêiner */
+    width: 100%; /* Garante que o menu tenha a mesma largura do contêiner */
+    z-index: 1000; /* Garante que o menu fique acima do player */
+    margin-bottom: 1px; /* Reduz a distância entre o menu e o player 10 */
+}
+
+.dropdown-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%; /* Ocupa toda a largura disponível */
+    text-align: left; /* Alinha o texto à esquerda */
+    transition: background-color 0.3s; /* Adiciona transição suave */
+}
+
+.dropdown-button:hover {
+    background-color: #0056b3;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Posiciona o menu abaixo do botão */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
+    z-index: 1000;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Mesma largura do botão */
+    max-height: 250px; /* Altura máxima com scroll */
+    overflow-y: auto; /* Scroll vertical quando necessário */
+}
+
+.dropdown-menu li {
+    padding: 12px 20px; /* Espaçamento maior */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
+    font-size: 14px; /* Tamanho de fonte ajustado */
+    color: #333; /* Cor de texto mais clara */
+}
+
+.dropdown-menu li:hover {
+    background-color: #007bff; /* Fundo azul ao passar o mouse */
+    color: white; /* Texto branco ao passar o mouse */
+}
+
+.youtube-player {
+    width: 100%;
+    max-width: 900px; /* 800 */
+    height: 450px;
+    margin: 0 auto; /* Remove margem superior para aproximar o player do menu */
+    border: 1px solid #ddd; /* Borda leve para destacar o player */
+    border-radius: 5px; /* Bordas arredondadas */
+}

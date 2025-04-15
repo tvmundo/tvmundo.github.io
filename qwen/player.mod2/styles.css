@@ -1,0 +1,154 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.video-container {
+  position: relative;
+  max-width: 800px;
+  margin: 30px auto;
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Botões */
+.menuToggle,
+.end-screen button {
+  display: inline-block;
+  margin-bottom: 1px;
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.menuToggle:hover,
+.end-screen button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.menuToggle::before {
+  content: "☰ ";
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+/* Player */
+.player {
+  width: 100%;
+  height: 415px;
+  border: none;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.player.hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Fim do vídeo */
+.end-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 315px;
+  background-color: #000;
+  color: white;
+  font-size: 18px;
+  z-index: 1;
+}
+
+.end-screen.hidden {
+  display: none;
+}
+/* ----------------------------------------------------------------------------------- */
+/* Menu */
+.video-menu-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* 100% */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  z-index: 1000;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu-header span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.closeMenu {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.closeMenu:hover {
+  color: #ff4d4d;
+}
+
+.video-menu-overlay ul {
+  list-style: none;
+  margin: 0;
+  padding: 20px;
+}
+
+.video-menu-overlay li {
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-menu-overlay li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+/* Estado Final do Vídeo */
+.end-screen {
+  position: absolute;
+  margin: -420px auto;
+  left: 0;
+  width: 100%;
+  height: 85%;
+  background-color: rgba(0,0,0,0.85);
+  color: white;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* IMPORTANTE: menor que o menu de vídeos */
+}

@@ -36,6 +36,122 @@
     <button class="reload-button" onclick="location.reload();">
         &#x21bb; <!-- Ícone de recarregar (unicode) -->
     </button>
+<!------------------------------estilo do player de video ini-------------------------------------------->
+  <style>
+    /* Estilo geral */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+
+    .tvmundo1 {
+      margin-bottom: 30px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Menu suspenso */
+    .dropdown-menu {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .dropdown-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-button:hover {
+      background-color: #0056b3;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 100%;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Player de vídeo */
+    .video-player {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* Proporção 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .video-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+<!------------------------------estilo do player de video FIM-------------------------------------------->
+<!------------------------------script do player de video ini-------------------------------------------->
+<script>
+    // Função para inicializar os menus suspensos e o carregamento de vídeos
+    document.addEventListener("DOMContentLoaded", function () {
+      const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+
+      dropdownMenus.forEach((menu) => {
+        const button = menu.querySelector(".dropdown-button");
+        const content = menu.querySelector(".dropdown-content");
+        const player = menu.parentElement.querySelector(".video-player iframe");
+
+        // Alternar visibilidade do menu suspenso
+        button.addEventListener("click", () => {
+          content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+
+        // Carregar vídeo ao clicar em um item do menu
+        content.addEventListener("click", (event) => {
+          if (event.target.tagName === "A") {
+            event.preventDefault();
+            const videoId = event.target.getAttribute("data-video-id");
+            player.src = `https://www.youtube.com/embed/${videoId}`;
+            content.style.display = "none"; // Esconder o menu após seleção
+          }
+        });
+      });
+    });
+  </script>
+<!------------------------------script do player de video fIM-------------------------------------------->
 </body>
 </html> 
 <!--- -------------------------atualizar pagina FiM---------------------------- --->
@@ -274,13 +390,40 @@ Mas, a todos quantos o receberam, deu-lhes o poder de serem feitos filhos de Deu
             <button class="post-button">Continuar lendo...</button>
         </div>
 	<!--Fim 🔴🔴🔴🔴🔴 O messias já veio Fim-->
-<!--------------------------------------------------player1------------------------------------------------------------------>
-<!-------titulo e descriçao------->    
-    <!-------titulo e descriçao Fim------->
-
-<!--------------------------------------------------player1 Fim------------------------------------------------------------------>
-
-   <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+ <!-- Primeiro player -->
+   <link rel="stylesheet" href="qwen/player.mod2/styles.css">
+  <!-- Primeiro bloco de player -->
+  <div class="video-container" data-initial-video="qvJ6R2gQegw">
+    <button class="menuToggle">Mostrar Lista de Vídeos deste canal</button>
+    <div class="player"></div>
+    <div class="end-screen hidden">
+      <p>O vídeo acabou!</p>
+      <button class="restartVideo">Assistir Novamente</button>
+    </div>
+    <div class="video-menu-overlay">
+      <div class="menu-header">
+        <span>Lista de Vídeos</span>
+        <button class="closeMenu">✕</button>
+      </div>
+      <ul>
+        <li data-video-id="s9O56TVQm2A">Vídeo 1: FLOPOU! Ato em Copacabana: Análise da Mobilização e Implicações Políticas.</li>
+        <li data-video-id="iquoKIaEjR0">Vídeo 2: Zuckerberg, Dimon e Nikesh Arora, vendem R$ 5,8 bi em ações antes de mercado desabar.</li>
+        <li data-video-id="HKFv8g2hRYk">Vídeo 3: Big techs desvalorizam R$ 4,3 trilhões...</li>
+        <li data-video-id="CYP0rHKXo-8">Vídeo 4: Ataques e Boicotes Contra Negócios de Elon Musk nos EUA e no Mundo Causam Prejuízos Milionários.</li>
+	    <li data-video-id="4VWlADvqdJY">Vídeo 5: Administração Trump mantêm pressão por venda do Chrome em nova ofensiva antitruste contra Google.</li>
+		<li data-video-id="Qm2jJgrUvlU">Vídeo 6: Milei Critica o Mercosul Enquanto Indústria Argentina Elogia o Bloco e o Exemplo Brasileiro.</li>
+		<li data-video-id="RN7PyjpyFrU">Vídeo 7: Engenheiro da OpenAI Rejeita oferta de Elon Musk e Acusa Bilionário de Ser "Ameaça à Democracia"</li>
+		<li data-video-id="a448Y7L4d0U">Vídeo 8: EUA exigem que Europa explique regras que punem as big techs</li>
+		<li data-video-id="1haeG-Jf0kA">Vídeo 9: Moraes alerta sobre o poder das big techs.</li>
+		<li data-video-id="fniMtk_QT8I">Vídeo 10: Ele sabia! Sabia e concordou com plano para assassinar Lula, Alckmin e Moraes, aponta PGR.</li>
+		<li data-video-id="lp5CPx5-lZ0">Vídeo 11: Mark Zuckerberg e Elon Musk Enfrentam Alta Rejeição nos EUA.</li>
+		<li data-video-id="yyQIrYYHoZ4">Vídeo 12: Steve Bannon Repete Saudação Nazista em Evento com Eduardo Bolsonaro: A Extrema Direita em Foco.</li>
+        <li data-video-id="uVpDSe9TP78">Vídeo 13: Javier Milei promove criptomoeda que despenca em horas e gera crise política</li>
+      </ul>
+    </div>
+  </div>
+ <!-- Primeiro player Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
         <div class="post">
         <div class="post-header"> <!-- Título do Post 1 -->
 	<div class="post-title">STF abre Ação Penal Contra Bolsonaro e mais Sete na Trama do Golpe</div>
@@ -293,7 +436,7 @@ Mas, a todos quantos o receberam, deu-lhes o poder de serem feitos filhos de Deu
                 <p>
 11 de abril de 2025<br/><br/>
 O Supremo Tribunal Federal (STF) abriu nesta sexta-feira (11) a ação penal contra o ex-presidente Jair Bolsonaro e mais sete acusados da trama golpista, que fazem parte do núcleo 1 do inquérito. A ação vai tramitar com o número 2.668. A medida é uma formalidade para cumprir a decisão da Primeira Turma da Corte, que aceitou a denúncia da Procuradoria-Geral da República (PGR) e transformou Bolsonaro, o general Braga Netto e outros acusados em réus.
-<br/><br/>
+<!-- Segundo player -->
 Com a abertura do processo criminal, os acusados passam a responder pelos crimes de organização criminosa armada, tentativa de abolição violenta do Estado Democrático de Direito, golpe de Estado, dano qualificado pela violência e grave ameaça e deterioração de patrimônio tombado. A ação penal também marca o início da instrução processual, fase na qual os advogados poderão indicar testemunhas e pedir a produção de novas provas para comprovar as teses de defesa. Os acusados também serão interrogados ao final dessa fase. Os trabalhos serão conduzidos pelo gabinete do ministro Alexandre de Moraes, relator do caso.
 <br/><br/>
 Após o fim da instrução, o julgamento será marcado e os ministros vão decidir se o ex-presidente e os demais acusados serão condenados à prisão ou absolvidos. Não há data definida para o julgamento. Em caso de condenação, a soma das penas para os crimes passa de 30 anos de prisão.
@@ -310,7 +453,38 @@ Até o momento, somente a denúncia contra o núcleo 1 foi julgada. Em março, p
             <button class="post-button">Continuar lendo...</button>
         </div>
 	<!--Fim 🔴🔴🔴🔴🔴 Fim--> 
-	
+ <!-- Segundo player -->
+ <!-- Segundo player --> 
+ <div class="video-container" data-initial-video="PVuS4USBe44">
+    <button class="menuToggle">Mostrar Lista de Vídeos deste canal</button>
+    <div class="player"></div>
+    <div class="end-screen hidden">
+      <p>O vídeo acabou!</p>
+      <button class="restartVideo">Assistir Novamente</button>
+    </div>
+    <div class="video-menu-overlay">
+      <div class="menu-header">
+        <span>Lista de Vídeos</span>
+        <button class="closeMenu">✕</button>
+      </div>
+      <ul>
+           <li data-video-id="s9O56TVQm2A">Vídeo 1: FLOPOU! Ato em Copacabana: Análise da Mobilização e Implicações Políticas.</li>
+        <li data-video-id="iquoKIaEjR0">Vídeo 2: Zuckerberg, Dimon e Nikesh Arora, vendem R$ 5,8 bi em ações antes de mercado desabar.</li>
+        <li data-video-id="HKFv8g2hRYk">Vídeo 3: Big techs desvalorizam R$ 4,3 trilhões...</li>
+        <li data-video-id="CYP0rHKXo-8">Vídeo 4: Ataques e Boicotes Contra Negócios de Elon Musk nos EUA e no Mundo Causam Prejuízos Milionários.</li>
+	    <li data-video-id="4VWlADvqdJY">Vídeo 5: Administração Trump mantêm pressão por venda do Chrome em nova ofensiva antitruste contra Google.</li>
+		<li data-video-id="Qm2jJgrUvlU">Vídeo 6: Milei Critica o Mercosul Enquanto Indústria Argentina Elogia o Bloco e o Exemplo Brasileiro.</li>
+		<li data-video-id="RN7PyjpyFrU">Vídeo 7: Engenheiro da OpenAI Rejeita oferta de Elon Musk e Acusa Bilionário de Ser "Ameaça à Democracia"</li>
+		<li data-video-id="a448Y7L4d0U">Vídeo 8: EUA exigem que Europa explique regras que punem as big techs</li>
+		<li data-video-id="1haeG-Jf0kA">Vídeo 9: Moraes alerta sobre o poder das big techs.</li>
+		<li data-video-id="fniMtk_QT8I">Vídeo 10: Ele sabia! Sabia e concordou com plano para assassinar Lula, Alckmin e Moraes, aponta PGR.</li>
+		<li data-video-id="lp5CPx5-lZ0">Vídeo 11: Mark Zuckerberg e Elon Musk Enfrentam Alta Rejeição nos EUA.</li>
+		<li data-video-id="yyQIrYYHoZ4">Vídeo 12: Steve Bannon Repete Saudação Nazista em Evento com Eduardo Bolsonaro: A Extrema Direita em Foco.</li>
+        <li data-video-id="uVpDSe9TP78">Vídeo 13: Javier Milei promove criptomoeda que despenca em horas e gera crise política</li>
+      </ul>
+    </div>
+  </div>
+  <!-- Segundo player Fim-->
  <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
         <div class="post">
         <div class="post-header"> <!-- Título do Post 1 -->
@@ -844,9 +1018,9 @@ A TV Mundo acompanhará de perto os próximos passos dessa parceria estratégica
             }
         });
     </script>
-<!------------------------------------------------codigo dos playes------------------------------------------------------>
- <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="qwen/player.mod1/script.js"></script>
-<!------------------------------------------------codigo dos playes Fim------------------------------------------------------>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+  <script src="qwen/player.mod2/script.js"></script>	
+	
 </body>
 </html>

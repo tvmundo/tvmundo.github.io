@@ -7,13 +7,13 @@ body {
 
 .video-container {
   position: relative;
-  max-width: 1000px; /* -------------800------------- */
-  margin: 30px auto;
+  width: 100%; /* ------max-width-------800px------------- */
+  margin: 30px auto; /* -------------30px------------- */
   text-align: center;
   background: white;
-  padding: 5px; /* -----espaço nas laterais---20px------ */
+  padding: 5px; /* -------espaço nas laterais------20px------------- */
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* -------------800-----0 4px 10px-------- */
 }
 
 /* Botões */

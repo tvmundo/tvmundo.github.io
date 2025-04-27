@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadoras de KM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input[type="text"] {
+            width: 100px;
+            padding: 5px;
+            font-size: 18px;
+        }
+        label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Primeira Calculadora -->
+    <div class="section">
+        <h2>Calculadora de KM Rodados</h2>
+        <div class="container">
+            <!-- Grupo do KM inicial -->
+            <div class="input-group">
+                <label for="numero1">KM inicial:</label>
+                <input type="text" id="numero1" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularSubtracao()">
+            </div>
+
+            <!-- Grupo do KM final -->
+            <div class="input-group">
+                <label for="numero2">KM final:</label>
+                <input type="text" id="numero2" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularSubtracao()">
+            </div>
+
+            <!-- Resultado -->
+            <div class="input-group">
+                <span class="result" id="resultado">KM rodado: </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Segunda Calculadora -->
+    <div class="section">
+        <h2>Calculadora de Corridas por KM</h2>
+        <div class="container">
+            <!-- Grupo do KM inicial -->
+            <div class="input-group">
+                <label for="kmInicialCorrida">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto()">
+            </div>
+
+            <!-- Grupo do KM final -->
+            <div class="input-group">
+                <label for="kmFinalCorrida">KM final:</label>
+                <input type="text" id="kmFinalCorrida" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto()">
+            </div>
+
+            <!-- Valor por KM -->
+            <div class="input-group">
+                <label for="valorPorKm">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm" placeholder="Ex: 0,60" oninput="calcularCusto()">
+            </div>
+
+            <!-- Resultados -->
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para calcular a subtração da primeira calculadora
+        function calcularSubtracao() {
+            const numero1 = document.getElementById('numero1').value;
+            const numero2 = document.getElementById('numero2').value;
+
+            localStorage.setItem('numero1', numero1);
+            localStorage.setItem('numero2', numero2);
+
+            if (numero1 === '' || numero2 === '') {
+                document.getElementById('resultado').textContent = 'KM rodado: ';
+                return;
+            }
+
+            const valor1 = parseInt(numero1, 10);
+            const valor2 = parseInt(numero2, 10);
+            const resultado = valor2 - valor1;
+
+            document.getElementById('resultado').textContent = 'KM rodado: ' + resultado;
+        }
+
+        // Função para calcular o custo da segunda calculadora
+        function calcularCusto() {
+            const kmInicial = document.getElementById('kmInicialCorrida').value;
+            const kmFinal = document.getElementById('kmFinalCorrida').value;
+            const valorPorKm = document.getElementById('valorPorKm').value;
+
+            localStorage.setItem('kmInicialCorrida', kmInicial);
+            localStorage.setItem('kmFinalCorrida', kmFinal);
+            localStorage.setItem('valorPorKm', valorPorKm);
+
+            if (kmInicial === '' || kmFinal === '' || valorPorKm === '') {
+                document.getElementById('kmRodadoCorrida').textContent = 'KM rodado: ';
+                document.getElementById('custoTotal').textContent = 'Custo total: ';
+                return;
+            }
+
+            const kmInicialNum = parseFloat(kmInicial);
+            const kmFinalNum = parseFloat(kmFinal);
+            const valorPorKmNum = parseFloat(valorPorKm.replace(',', '.')); // Substitui vírgula por ponto
+
+            const kmRodado = kmFinalNum - kmInicialNum;
+            const custoTotal = kmRodado * valorPorKmNum;
+
+            document.getElementById('kmRodadoCorrida').textContent = 'KM rodado: ' + kmRodado.toFixed(2);
+            document.getElementById('custoTotal').textContent = 'Custo total: R$ ' + custoTotal.toFixed(2);
+        }
+
+        // Carregar valores salvos no localStorage
+        window.onload = function () {
+            // Carregar valores da primeira calculadora
+            const numero1Salvo = localStorage.getItem('numero1');
+            const numero2Salvo = localStorage.getItem('numero2');
+
+            if (numero1Salvo) document.getElementById('numero1').value = numero1Salvo;
+            if (numero2Salvo) document.getElementById('numero2').value = numero2Salvo;
+
+            calcularSubtracao();
+
+            // Carregar valores da segunda calculadora
+            const kmInicialSalvo = localStorage.getItem('kmInicialCorrida');
+            const kmFinalSalvo = localStorage.getItem('kmFinalCorrida');
+            const valorPorKmSalvo = localStorage.getItem('valorPorKm');
+
+            if (kmInicialSalvo) document.getElementById('kmInicialCorrida').value = kmInicialSalvo;
+            if (kmFinalSalvo) document.getElementById('kmFinalCorrida').value = kmFinalSalvo;
+            if (valorPorKmSalvo) document.getElementById('valorPorKm').value = valorPorKmSalvo;
+
+            calcularCusto();
+        };
+    </script>
+</body>
+</html>

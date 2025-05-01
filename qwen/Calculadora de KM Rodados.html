@@ -1,3 +1,70 @@
+<!-------------------------------------cronometro------------------------------------>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cronômetro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            <!---text-align: center;--->
+            margin-top: 100px;
+        }
+        #tempo {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="tempo">00:00:00</div>
+    <button onclick="iniciar()">Iniciar</button>
+    <button onclick="parar()">Parar</button>
+    <button onclick="resetar()">Resetar</button>
+
+    <script>
+        let tempo = 0;
+        let intervalo = null;
+
+        function formatarTempo(ms) {
+            const totalSegundos = Math.floor(ms / 1000);
+            const minutos = String(Math.floor(totalSegundos / 60)).padStart(2, '0');
+            const segundos = String(totalSegundos % 60).padStart(2, '0');
+            const milissegundos = String((ms % 1000)).padStart(3, '0');
+            return `${minutos}:${segundos}:${milissegundos}`;
+        }
+
+        function iniciar() {
+            if (intervalo !== null) return;
+            intervalo = setInterval(() => {
+                tempo += 10;
+                document.getElementById('tempo').textContent = formatarTempo(tempo);
+            }, 10);
+        }
+
+        function parar() {
+            clearInterval(intervalo);
+            intervalo = null;
+        }
+
+        function resetar() {
+            parar();
+            tempo = 0;
+            document.getElementById('tempo').textContent = formatarTempo(tempo);
+        }
+    </script>
+
+</body>
+</html>
+
+<!------------------------------------------------------------------------->
 <script type="text/javascript">
         var gk_isXlsx = false;
         var gk_xlsxFileLookup = {};

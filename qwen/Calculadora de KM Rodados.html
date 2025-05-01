@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +65,7 @@
             font-size: 18px;
         }
         label {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
         }
         .result {
@@ -43,17 +82,30 @@
         h2 {
             margin-top: 0;
         }
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <!-- Primeira Calculadora -->
     <div class="section">
-        <h2>Calculadora de KM Rodados</h2>
+        <h2>Troca do óleo</h2>
         <div class="container">
             <!-- Grupo do KM inicial -->
             <div class="input-group">
                 <label for="numero1">KM inicial:</label>
                 <input type="text" id="numero1" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularSubtracao()">
+                <button onclick="copiarTexto('numero1')">Copiar</button>
             </div>
 
             <!-- Grupo do KM final -->
@@ -69,34 +121,510 @@
         </div>
     </div>
 
-    <!-- Segunda Calculadora -->
+    <!-- Calculadoras de Corridas por KM -->
     <div class="section">
-        <h2>Calculadora de Corridas por KM</h2>
+        <h2>Calculadora de Corridas por KM 1</h2>
         <div class="container">
             <!-- Grupo do KM inicial -->
             <div class="input-group">
-                <label for="kmInicialCorrida">KM inicial:</label>
-                <input type="text" id="kmInicialCorrida" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto()">
+                <label for="kmInicialCorrida1">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida1" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(1)">
+                <button onclick="copiarTexto('kmInicialCorrida1')">Copiar</button>
             </div>
 
             <!-- Grupo do KM final -->
             <div class="input-group">
-                <label for="kmFinalCorrida">KM final:</label>
-                <input type="text" id="kmFinalCorrida" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto()">
+                <label for="kmFinalCorrida1">KM final:</label>
+                <input type="text" id="kmFinalCorrida1" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(1)">
             </div>
 
             <!-- Valor por KM -->
             <div class="input-group">
-                <label for="valorPorKm">Valor por KM (R$):</label>
-                <input type="text" id="valorPorKm" placeholder="Ex: 0,60" oninput="calcularCusto()">
+                <label for="valorPorKm1">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm1" placeholder="Ex: 0,60" oninput="calcularCusto(1)">
             </div>
 
             <!-- Resultados -->
             <div class="input-group">
-                <span class="result" id="kmRodadoCorrida">KM rodado: </span>
+                <span class="result" id="kmRodadoCorrida1">KM rodado: </span>
             </div>
             <div class="input-group">
-                <span class="result" id="custoTotal">Custo total: </span>
+                <span class="result" id="custoTotal1">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 2</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida2">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida2" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(2)">
+                <button onclick="copiarTexto('kmInicialCorrida2')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida2">KM final:</label>
+                <input type="text" id="kmFinalCorrida2" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(2)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm2">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm2" placeholder="Ex: 0,60" oninput="calcularCusto(2)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida2">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal2">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 3</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida3">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida3" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(3)">
+                <button onclick="copiarTexto('kmInicialCorrida3')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida3">KM final:</label>
+                <input type="text" id="kmFinalCorrida3" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(3)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm3">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm3" placeholder="Ex: 0,60" oninput="calcularCusto(3)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida3">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal3">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 4</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida4">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida4" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(4)">
+                <button onclick="copiarTexto('kmInicialCorrida4')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida4">KM final:</label>
+                <input type="text" id="kmFinalCorrida4" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(4)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm4">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm4" placeholder="Ex: 0,60" oninput="calcularCusto(4)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida4">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal4">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 5</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida5">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida5" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(5)">
+                <button onclick="copiarTexto('kmInicialCorrida5')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida5">KM final:</label>
+                <input type="text" id="kmFinalCorrida5" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(5)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm5">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm5" placeholder="Ex: 0,60" oninput="calcularCusto(5)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida5">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal5">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 6</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida6">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida6" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(6)">
+                <button onclick="copiarTexto('kmInicialCorrida6')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida6">KM final:</label>
+                <input type="text" id="kmFinalCorrida6" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(6)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm6">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm6" placeholder="Ex: 0,60" oninput="calcularCusto(6)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida6">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal6">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 7</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida7">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida7" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(7)">
+                <button onclick="copiarTexto('kmInicialCorrida7')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida7">KM final:</label>
+                <input type="text" id="kmFinalCorrida7" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(7)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm7">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm7" placeholder="Ex: 0,60" oninput="calcularCusto(7)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida7">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal7">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 8</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida8">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida8" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(8)">
+                <button onclick="copiarTexto('kmInicialCorrida8')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida8">KM final:</label>
+                <input type="text" id="kmFinalCorrida8" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(8)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm8">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm8" placeholder="Ex: 0,60" oninput="calcularCusto(8)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida8">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal8">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 9</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida9">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida9" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(9)">
+                <button onclick="copiarTexto('kmInicialCorrida9')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida9">KM final:</label>
+                <input type="text" id="kmFinalCorrida9" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(9)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm9">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm9" placeholder="Ex: 0,60" oninput="calcularCusto(9)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida9">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal9">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 10</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida10">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida10" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(10)">
+                <button onclick="copiarTexto('kmInicialCorrida10')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida10">KM final:</label>
+                <input type="text" id="kmFinalCorrida10" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(10)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm10">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm10" placeholder="Ex: 0,60" oninput="calcularCusto(10)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida10">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal10">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 11</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida11">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida11" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(11)">
+                <button onclick="copiarTexto('kmInicialCorrida11')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida11">KM final:</label>
+                <input type="text" id="kmFinalCorrida11" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(11)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm11">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm11" placeholder="Ex: 0,60" oninput="calcularCusto(11)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida11">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal11">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 12</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida12">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida12" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(12)">
+                <button onclick="copiarTexto('kmInicialCorrida12')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida12">KM final:</label>
+                <input type="text" id="kmFinalCorrida12" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(12)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm12">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm12" placeholder="Ex: 0,60" oninput="calcularCusto(12)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida12">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal12">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 13</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida13">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida13" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(13)">
+                <button onclick="copiarTexto('kmInicialCorrida13')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida13">KM final:</label>
+                <input type="text" id="kmFinalCorrida13" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(13)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm13">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm13" placeholder="Ex: 0,60" oninput="calcularCusto(13)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida13">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal13">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 14</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida14">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida14" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(14)">
+                <button onclick="copiarTexto('kmInicialCorrida14')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida14">KM final:</label>
+                <input type="text" id="kmFinalCorrida14" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(14)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm14">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm14" placeholder="Ex: 0,60" oninput="calcularCusto(14)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida14">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal14">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 15</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida15">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida15" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(15)">
+                <button onclick="copiarTexto('kmInicialCorrida15')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida15">KM final:</label>
+                <input type="text" id="kmFinalCorrida15" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(15)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm15">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm15" placeholder="Ex: 0,60" oninput="calcularCusto(15)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida15">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal15">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 16</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida16">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida16" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(16)">
+                <button onclick="copiarTexto('kmInicialCorrida16')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida16">KM final:</label>
+                <input type="text" id="kmFinalCorrida16" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(16)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm16">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm16" placeholder="Ex: 0,60" oninput="calcularCusto(16)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida16">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal16">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 17</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida17">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida17" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(17)">
+                <button onclick="copiarTexto('kmInicialCorrida17')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida17">KM final:</label>
+                <input type="text" id="kmFinalCorrida17" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(17)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm17">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm17" placeholder="Ex: 0,60" oninput="calcularCusto(17)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida17">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal17">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 18</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida18">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida18" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(18)">
+                <button onclick="copiarTexto('kmInicialCorrida18')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida18">KM final:</label>
+                <input type="text" id="kmFinalCorrida18" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(18)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm18">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm18" placeholder="Ex: 0,60" oninput="calcularCusto(18)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida18">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal18">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 19</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida19">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida19" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(19)">
+                <button onclick="copiarTexto('kmInicialCorrida19')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida19">KM final:</label>
+                <input type="text" id="kmFinalCorrida19" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(19)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm19">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm19" placeholder="Ex: 0,60" oninput="calcularCusto(19)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida19">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal19">Custo total: </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Calculadora de Corridas por KM 20</h2>
+        <div class="container">
+            <div class="input-group">
+                <label for="kmInicialCorrida20">KM inicial:</label>
+                <input type="text" id="kmInicialCorrida20" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(20)">
+                <button onclick="copiarTexto('kmInicialCorrida20')">Copiar</button>
+            </div>
+            <div class="input-group">
+                <label for="kmFinalCorrida20">KM final:</label>
+                <input type="text" id="kmFinalCorrida20" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularCusto(20)">
+            </div>
+            <div class="input-group">
+                <label for="valorPorKm20">Valor por KM (R$):</label>
+                <input type="text" id="valorPorKm20" placeholder="Ex: 0,60" oninput="calcularCusto(20)">
+            </div>
+            <div class="input-group">
+                <span class="result" id="kmRodadoCorrida20">KM rodado: </span>
+            </div>
+            <div class="input-group">
+                <span class="result" id="custoTotal20">Custo total: </span>
             </div>
         </div>
     </div>
@@ -122,31 +650,51 @@
             document.getElementById('resultado').textContent = 'KM rodado: ' + resultado;
         }
 
-        // Função para calcular o custo da segunda calculadora
-        function calcularCusto() {
-            const kmInicial = document.getElementById('kmInicialCorrida').value;
-            const kmFinal = document.getElementById('kmFinalCorrida').value;
-            const valorPorKm = document.getElementById('valorPorKm').value;
+        // Função para calcular o custo das calculadoras de corrida
+        function calcularCusto(index) {
+            const kmInicial = document.getElementById(`kmInicialCorrida${index}`).value;
+            const kmFinal = document.getElementById(`kmFinalCorrida${index}`).value;
+            const valorPorKm = document.getElementById(`valorPorKm${index}`).value;
 
-            localStorage.setItem('kmInicialCorrida', kmInicial);
-            localStorage.setItem('kmFinalCorrida', kmFinal);
-            localStorage.setItem('valorPorKm', valorPorKm);
+            localStorage.setItem(`kmInicialCorrida${index}`, kmInicial);
+            localStorage.setItem(`kmFinalCorrida${index}`, kmFinal);
+            localStorage.setItem(`valorPorKm${index}`, valorPorKm);
 
             if (kmInicial === '' || kmFinal === '' || valorPorKm === '') {
-                document.getElementById('kmRodadoCorrida').textContent = 'KM rodado: ';
-                document.getElementById('custoTotal').textContent = 'Custo total: ';
+                document.getElementById(`kmRodadoCorrida${index}`).textContent = 'KM rodado: ';
+                document.getElementById(`custoTotal${index}`).textContent = 'Custo total: ';
                 return;
             }
 
             const kmInicialNum = parseFloat(kmInicial);
             const kmFinalNum = parseFloat(kmFinal);
-            const valorPorKmNum = parseFloat(valorPorKm.replace(',', '.')); // Substitui vírgula por ponto
+            const valorPorKmNum = parseFloat(valorPorKm.replace(',', '.'));
 
             const kmRodado = kmFinalNum - kmInicialNum;
             const custoTotal = kmRodado * valorPorKmNum;
 
-            document.getElementById('kmRodadoCorrida').textContent = 'KM rodado: ' + kmRodado.toFixed(2);
-            document.getElementById('custoTotal').textContent = 'Custo total: R$ ' + custoTotal.toFixed(2);
+            document.getElementById(`kmRodadoCorrida${index}`).textContent = 'KM rodado: ' + kmRodado.toFixed(2);
+            document.getElementById(`custoTotal${index}`).textContent = 'Custo total: R$ ' + custoTotal.toFixed(2);
+        }
+
+        // Função para copiar texto para a área de transferência
+        function copiarTexto(id) {
+            const elemento = document.getElementById(id);
+            const texto = elemento.value;
+
+            if (!texto) {
+                alert("Nenhum valor para copiar!");
+                return;
+            }
+
+            const textarea = document.createElement('textarea');
+            textarea.value = texto;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            alert("Valor copiado: " + texto);
         }
 
         // Carregar valores salvos no localStorage
@@ -160,16 +708,18 @@
 
             calcularSubtracao();
 
-            // Carregar valores da segunda calculadora
-            const kmInicialSalvo = localStorage.getItem('kmInicialCorrida');
-            const kmFinalSalvo = localStorage.getItem('kmFinalCorrida');
-            const valorPorKmSalvo = localStorage.getItem('valorPorKm');
+            // Carregar valores das calculadoras de corrida
+            for (let i = 1; i <= 20; i++) {
+                const kmInicialSalvo = localStorage.getItem(`kmInicialCorrida${i}`);
+                const kmFinalSalvo = localStorage.getItem(`kmFinalCorrida${i}`);
+                const valorPorKmSalvo = localStorage.getItem(`valorPorKm${i}`);
 
-            if (kmInicialSalvo) document.getElementById('kmInicialCorrida').value = kmInicialSalvo;
-            if (kmFinalSalvo) document.getElementById('kmFinalCorrida').value = kmFinalSalvo;
-            if (valorPorKmSalvo) document.getElementById('valorPorKm').value = valorPorKmSalvo;
+                if (kmInicialSalvo) document.getElementById(`kmInicialCorrida${i}`).value = kmInicialSalvo;
+                if (kmFinalSalvo) document.getElementById(`kmFinalCorrida${i}`).value = kmFinalSalvo;
+                if (valorPorKmSalvo) document.getElementById(`valorPorKm${i}`).value = valorPorKmSalvo;
 
-            calcularCusto();
+                calcularCusto(i);
+            }
         };
     </script>
 </body>

@@ -24,7 +24,7 @@
 </head>
 <body>
 
-    <div id="tempo">00:00:00</div>
+    <div id="tempo">00:00:00:000</div>
     <button onclick="iniciar()">Iniciar</button>
     <button onclick="parar()">Parar</button>
     <button onclick="resetar()">Resetar</button>
@@ -35,16 +35,18 @@
 
         function formatarTempo(ms) {
             const totalSegundos = Math.floor(ms / 1000);
-            const minutos = String(Math.floor(totalSegundos / 60)).padStart(2, '0');
-            const segundos = String(totalSegundos % 60).padStart(2, '0');
-            const milissegundos = String((ms % 1000)).padStart(3, '0');
-            return `${minutos}:${segundos}:${milissegundos}`;
+            const horas = String(Math.floor(totalSegundos / 3600)).padStart(2, '0'); // 1 hora = 3600 segundos
+            const segundosRestantes = totalSegundos % 3600;
+            const minutos = String(Math.floor(segundosRestantes / 60)).padStart(2, '0');
+            const segundos = String(segundosRestantes % 60).padStart(2, '0');
+            const milissegundos = String((ms % 1000)).padStart(3, '0'); // Milissegundos
+            return `${horas}:${minutos}:${segundos}:${milissegundos}`;
         }
 
         function iniciar() {
             if (intervalo !== null) return;
             intervalo = setInterval(() => {
-                tempo += 10;
+                tempo += 10; // Atualiza a cada 10 ms
                 document.getElementById('tempo').textContent = formatarTempo(tempo);
             }, 10);
         }
@@ -63,7 +65,6 @@
 
 </body>
 </html>
-
 <!------------------------------------------------------------------------->
 <script type="text/javascript">
         var gk_isXlsx = false;

@@ -7,8 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            <!---text-align: center;--->
-            margin-top: 100px;
+            margin-top: 0px;
         }
         #tempo {
             font-size: 3em;
@@ -23,7 +22,6 @@
     </style>
 </head>
 <body>
-
     <div id="tempo">00:00:00:000</div>
     <button onclick="iniciar()">Iniciar</button>
     <button onclick="parar()">Parar</button>
@@ -32,37 +30,90 @@
     <script>
         let tempo = 0;
         let intervalo = null;
+        let inicioTimestamp = null;
 
         function formatarTempo(ms) {
             const totalSegundos = Math.floor(ms / 1000);
-            const horas = String(Math.floor(totalSegundos / 3600)).padStart(2, '0'); // 1 hora = 3600 segundos
+            const horas = String(Math.floor(totalSegundos / 3600)).padStart(2, '0');
             const segundosRestantes = totalSegundos % 3600;
             const minutos = String(Math.floor(segundosRestantes / 60)).padStart(2, '0');
             const segundos = String(segundosRestantes % 60).padStart(2, '0');
-            const milissegundos = String((ms % 1000)).padStart(3, '0'); // Milissegundos
+            const milissegundos = String(ms % 1000).padStart(3, '0');
             return `${horas}:${minutos}:${segundos}:${milissegundos}`;
+        }
+
+        function atualizarTempo() {
+            document.getElementById('tempo').textContent = formatarTempo(tempo);
+        }
+
+        function salvarEstado() {
+            try {
+                const estado = {
+                    tempo,
+                    inicioTimestamp,
+                    ativo: intervalo !== null
+                };
+                localStorage.setItem('cronometro', JSON.stringify(estado));
+                console.log('Estado salvo:', estado); // Para depuração
+            } catch (e) {
+                console.error('Erro ao salvar estado:', e);
+            }
+        }
+
+        function carregarEstado() {
+            try {
+                const estadoSalvo = localStorage.getItem('cronometro');
+                if (estadoSalvo) {
+                    const { tempo: savedTempo, inicioTimestamp: savedTimestamp, ativo } = JSON.parse(estadoSalvo);
+                    console.log('Estado carregado:', { savedTempo, savedTimestamp, ativo }); // Para depuração
+                    if (ativo && savedTimestamp) {
+                        // Calcula o tempo decorrido desde o timestamp salvo
+                        const agora = Date.now();
+                        tempo = savedTempo + (agora - savedTimestamp);
+                        iniciar(); // Reinicia o cronômetro
+                    } else {
+                        tempo = savedTempo || 0; // Usa 0 se savedTempo for undefined
+                        atualizarTempo();
+                    }
+                } else {
+                    console.log('Nenhum estado encontrado no localStorage.');
+                }
+            } catch (e) {
+                console.error('Erro ao carregar estado:', e);
+            }
         }
 
         function iniciar() {
             if (intervalo !== null) return;
+            inicioTimestamp = Date.now() - tempo; // Ajusta o timestamp para manter a continuidade
             intervalo = setInterval(() => {
-                tempo += 10; // Atualiza a cada 10 ms
-                document.getElementById('tempo').textContent = formatarTempo(tempo);
+                tempo = Date.now() - inicioTimestamp;
+                atualizarTempo();
+                salvarEstado();
             }, 10);
+            salvarEstado();
         }
 
         function parar() {
-            clearInterval(intervalo);
-            intervalo = null;
+            if (intervalo !== null) {
+                clearInterval(intervalo);
+                intervalo = null;
+                salvarEstado();
+            }
         }
 
         function resetar() {
             parar();
             tempo = 0;
-            document.getElementById('tempo').textContent = formatarTempo(tempo);
+            inicioTimestamp = null;
+            atualizarTempo();
+            localStorage.removeItem('cronometro');
+            console.log('Estado resetado e removido do localStorage.');
         }
-    </script>
 
+        // Carrega o estado ao abrir a página
+        window.onload = carregarEstado;
+    </script>
 </body>
 </html>
 <!------------------------------------------------------------------------->

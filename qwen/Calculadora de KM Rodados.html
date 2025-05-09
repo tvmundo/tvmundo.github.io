@@ -216,30 +216,6 @@
     </style>
 </head>
 <body>
-    <!-- Primeira Calculadora -->
-    <div class="section">
-        <h2>Troca do óleo</h2>
-        <div class="container">
-            <!-- Grupo do KM inicial -->
-            <div class="input-group">
-                <label for="numero1">KM inicial:</label>
-                <input type="text" id="numero1" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularSubtracao()">
-                <button onclick="copiarTexto('numero1')">Copiar</button>
-            </div>
-
-            <!-- Grupo do KM final -->
-            <div class="input-group">
-                <label for="numero2">KM final:</label>
-                <input type="text" id="numero2" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularSubtracao()">
-            </div>
-
-            <!-- Resultado -->
-            <div class="input-group">
-                <span class="result" id="resultado">KM rodado: </span>
-            </div>
-        </div>
-    </div>
-
     <!-- Calculadoras de Corridas por KM -->
     <div class="section">
         <h2>Calculadora de Corridas por KM 1</h2>
@@ -747,7 +723,30 @@
             </div>
         </div>
     </div>
+  <!-- troca do oleo -->
+   <div class="section">
+    <h2 style="color: red;">Troca do óleo</h2>
+    <div class="container">
+        <!-- Grupo do KM inicial -->
+        <div class="input-group">
+            <label for="numero1" style="color: red;">KM inicial:</label>
+            <input type="text" id="numero1" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularSubtracao()">
+            <button onclick="copiarTexto('numero1')">Copiar</button>
+        </div>
 
+        <!-- Grupo do KM final -->
+        <div class="input-group">
+            <label for="numero2" style="color: red;">KM final:</label>
+            <input type="text" id="numero2" placeholder="Digite 5 dígitos" maxlength="5" oninput="calcularSubtracao()">
+        </div>
+
+        <!-- Resultado -->
+        <div class="input-group">
+            <span class="result" id="resultado" style="color: red;">KM rodado: </span>
+        </div>
+    </div>
+</div>
+<!-- troca do oleo Fim-->
     <script>
         // Função para calcular a subtração da primeira calculadora
         function calcularSubtracao() {

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apurado por Dia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.6rem;
+    }
+
+    .dia {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.4rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .gasolina, .manutencao {
+      color: red;
+    }
+
+    .total-dia {
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .totais-finais {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .totais-finais span {
+      display: block;
+      font-size: 1.6rem;
+      color: #2c3e50;
+      margin-bottom: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Apurado por Dia</h2>
+
+<div id="formularios"></div>
+
+<div class="totais-finais">
+  <span>Total Uber: R$ <span id="totalUber">0,00</span></span>
+  <span>Total 99: R$ <span id="total99">0,00</span></span>
+  <span>Total Gasolina: R$ <span id="totalGasolina">0,00</span></span>
+  <span>Total Manutenção: R$ <span id="totalManutencao">0,00</span></span>
+  <span>Subtotal Total: R$ <span id="subtotalTotal">0,00</span></span>
+</div>
+
+<script>
+  // Cria os campos dinamicamente
+  const container = document.getElementById("formularios");
+
+  for (let i = 1; i <= 31; i++) {
+    const diaDiv = document.createElement("div");
+    diaDiv.className = "dia";
+    diaDiv.innerHTML = `
+      <label>Dia ${i}</label><br>
+      Uber: <input type="number" step="0.01" id="uber${i}" oninput="calcularTotais()"><br>
+      99: <input type="number" step="0.01" id="noveNove${i}" oninput="calcularTotais()"><br>
+      <span class="gasolina">Gasolina: <input type="number" step="0.01" id="gasolina${i}" oninput="calcularTotais()"></span><br>
+      <span class="manutencao">Manutenção: <input type="number" step="0.01" id="manutencao${i}" oninput="calcularTotais()"></span><br>
+      Valor do dia: R$ <span class="total-dia" id="valorDia${i}">0,00</span>
+    `;
+    container.appendChild(diaDiv);
+  }
+
+  // Carrega valores salvos no localStorage ao carregar a página
+  window.onload = function () {
+    for (let i = 1; i <= 31; i++) {
+      const valorUber = parseFloat(localStorage.getItem(`uber_${i}`)) || 0;
+      const valor99 = parseFloat(localStorage.getItem(`nove_nove_${i}`)) || 0;
+      const valorGasolina = parseFloat(localStorage.getItem(`gasolina_${i}`)) || 0;
+      const valorManutencao = parseFloat(localStorage.getItem(`manutencao_${i}`)) || 0;
+      document.getElementById("uber" + i).value = isNaN(valorUber) ? "" : valorUber.toFixed(2);
+      document.getElementById("noveNove" + i).value = isNaN(valor99) ? "" : valor99.toFixed(2);
+      document.getElementById("gasolina" + i).value = isNaN(valorGasolina) ? "" : valorGasolina.toFixed(2);
+      document.getElementById("manutencao" + i).value = isNaN(valorManutencao) ? "" : valorManutencao.toFixed(2);
+
+      const totalDia = (valorUber + valor99 - valorGasolina - valorManutencao).toFixed(2);
+      document.getElementById("valorDia" + i).textContent = "R$ " + totalDia;
+    }
+
+    // Carrega os totais gerais
+    let totalUber = parseFloat(localStorage.getItem('totalUber')) || 0;
+    let total99 = parseFloat(localStorage.getItem('total99')) || 0;
+    let totalGasolina = parseFloat(localStorage.getItem('totalGasolina')) || 0;
+    let totalManutencao = parseFloat(localStorage.getItem('totalManutencao')) || 0;
+    document.getElementById("totalUber").textContent = totalUber.toFixed(2);
+    document.getElementById("total99").textContent = total99.toFixed(2);
+    document.getElementById("totalGasolina").textContent = totalGasolina.toFixed(2);
+    document.getElementById("totalManutencao").textContent = totalManutencao.toFixed(2);
+    document.getElementById("subtotalTotal").textContent = (totalUber + total99 - totalGasolina - totalManutencao).toFixed(2);
+  };
+
+  // Função para calcular e salvar os totais
+  function calcularTotais() {
+    let totalUber = 0;
+    let total99 = 0;
+    let totalGasolina = 0;
+    let totalManutencao = 0;
+
+    for (let i = 1; i <= 31; i++) {
+      const valorUber = parseFloat(document.getElementById("uber" + i).value) || 0;
+      const valor99 = parseFloat(document.getElementById("noveNove" + i).value) || 0;
+      const valorGasolina = parseFloat(document.getElementById("gasolina" + i).value) || 0;
+      const valorManutencao = parseFloat(document.getElementById("manutencao" + i).value) || 0;
+      totalUber += valorUber;
+      total99 += valor99;
+      totalGasolina += valorGasolina;
+      totalManutencao += valorManutencao;
+
+      // Atualiza o valor do dia
+      document.getElementById("valorDia" + i).textContent = "R$ " + (valorUber + valor99 - valorGasolina - valorManutencao).toFixed(2);
+
+      // Salva os valores diários no localStorage
+      localStorage.setItem(`uber_${i}`, isNaN(valorUber) ? "" : valorUber.toFixed(2));
+      localStorage.setItem(`nove_nove_${i}`, isNaN(valor99) ? "" : valor99.toFixed(2));
+      localStorage.setItem(`gasolina_${i}`, isNaN(valorGasolina) ? "" : valorGasolina.toFixed(2));
+      localStorage.setItem(`manutencao_${i}`, isNaN(valorManutencao) ? "" : valorManutencao.toFixed(2));
+    }
+
+    // Salva os totais gerais
+    localStorage.setItem('totalUber', totalUber.toFixed(2));
+    localStorage.setItem('total99', total99.toFixed(2));
+    localStorage.setItem('totalGasolina', totalGasolina.toFixed(2));
+    localStorage.setItem('totalManutencao', totalManutencao.toFixed(2));
+
+    // Atualiza os totais na tela
+    document.getElementById("totalUber").textContent = totalUber.toFixed(2);
+    document.getElementById("total99").textContent = total99.toFixed(2);
+    document.getElementById("totalGasolina").textContent = totalGasolina.toFixed(2);
+    document.getElementById("totalManutencao").textContent = totalManutencao.toFixed(2);
+    document.getElementById("subtotalTotal").textContent = (totalUber + total99 - totalGasolina - totalManutencao).toFixed(2);
+  }
+</script>
+
+</body>
+</html>

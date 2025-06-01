@@ -61,6 +61,21 @@
       color: #2c3e50;
       margin-bottom: 18px;
     }
+
+    .reset-button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .reset-button:hover {
+      background-color: #c0392b;
+    }
   </style>
 </head>
 <body>
@@ -75,6 +90,7 @@
   <span>Total Gasolina: R$ <span id="totalGasolina">0,00</span></span>
   <span>Total Manutenção: R$ <span id="totalManutencao">0,00</span></span>
   <span>Subtotal Total: R$ <span id="subtotalTotal">0,00</span></span>
+  <button class="reset-button" onclick="zerarCampos()">Zerar Todos os Campos</button>
 </div>
 
 <script>
@@ -162,6 +178,36 @@
     document.getElementById("totalGasolina").textContent = totalGasolina.toFixed(2);
     document.getElementById("totalManutencao").textContent = totalManutencao.toFixed(2);
     document.getElementById("subtotalTotal").textContent = (totalUber + total99 - totalGasolina - totalManutencao).toFixed(2);
+  }
+
+  // Função para zerar todos os campos
+  function zerarCampos() {
+    for (let i = 1; i <= 31; i++) {
+      document.getElementById("uber" + i).value = "";
+      document.getElementById("noveNove" + i).value = "";
+      document.getElementById("gasolina" + i).value = "";
+      document.getElementById("manutencao" + i).value = "";
+      document.getElementById("valorDia" + i).textContent = "R$ 0,00";
+
+      // Limpa os valores diários no localStorage
+      localStorage.removeItem(`uber_${i}`);
+      localStorage.removeItem(`nove_nove_${i}`);
+      localStorage.removeItem(`gasolina_${i}`);
+      localStorage.removeItem(`manutencao_${i}`);
+    }
+
+    // Zera os totais gerais
+    document.getElementById("totalUber").textContent = "0,00";
+    document.getElementById("total99").textContent = "0,00";
+    document.getElementById("totalGasolina").textContent = "0,00";
+    document.getElementById("totalManutencao").textContent = "0,00";
+    document.getElementById("subtotalTotal").textContent = "0,00";
+
+    // Limpa os totais gerais no localStorage
+    localStorage.removeItem('totalUber');
+    localStorage.removeItem('total99');
+    localStorage.removeItem('totalGasolina');
+    localStorage.removeItem('totalManutencao');
   }
 </script>
 

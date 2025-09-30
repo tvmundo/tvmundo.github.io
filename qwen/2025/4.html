@@ -1,0 +1,1270 @@
+<!--- -------------------------atualizar pagina ini---------------------------- --->
+    <style>
+        /* Estilo do botão */
+        .reload-button {
+            position: fixed; /* Permite ajustar a posição fixa na tela */
+            top: 1%; /* Ajuste a altura inicial (50% da página) */
+            bottom: 20px; /* Distância do fundo da página */
+            right: 5px; /* Distância da direita da página */
+            background-color: #6200ea; /* Cor de fundo moderna */
+            color: white; /* Cor do texto */
+            border: none; /* Sem borda */
+            border-radius: 50%; /* Formato circular */
+            width: 30px; /* Largura do botão */
+            height: 30px; /* Altura do botão 50 */
+            font-size: 15px; /* Tamanho do ícone 24 */
+            cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efeito moderno */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave */
+            z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+        }
+
+        /* Efeito ao passar o mouse */
+        .reload-button:hover {
+            transform: scale(1.1); /* Aumenta o tamanho levemente */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+        }
+
+        /* Efeito ao clicar */
+        .reload-button:active {
+            transform: scale(0.95); /* Diminui o tamanho levemente */
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão de Recarregar -->
+    <button class="reload-button" onclick="location.reload();">
+        &#x21bb; <!-- Ícone de recarregar (unicode) -->
+    </button>
+<!------------------------------estilo do player de video ini-------------------------------------------->
+  <style>
+    /* Estilo geral */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+
+    .tvmundo1 {
+      margin-bottom: 30px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Menu suspenso */
+    .dropdown-menu {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .dropdown-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-button:hover {
+      background-color: #0056b3;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 100%;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Player de vídeo */
+    .video-player {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* Proporção 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .video-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+<!------------------------------estilo do player de video FIM-------------------------------------------->
+<!------------------------------script do player de video ini-------------------------------------------->
+<script>
+    // Função para inicializar os menus suspensos e o carregamento de vídeos
+    document.addEventListener("DOMContentLoaded", function () {
+      const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+
+      dropdownMenus.forEach((menu) => {
+        const button = menu.querySelector(".dropdown-button");
+        const content = menu.querySelector(".dropdown-content");
+        const player = menu.parentElement.querySelector(".video-player iframe");
+
+        // Alternar visibilidade do menu suspenso
+        button.addEventListener("click", () => {
+          content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+
+        // Carregar vídeo ao clicar em um item do menu
+        content.addEventListener("click", (event) => {
+          if (event.target.tagName === "A") {
+            event.preventDefault();
+            const videoId = event.target.getAttribute("data-video-id");
+            player.src = `https://www.youtube.com/embed/${videoId}`;
+            content.style.display = "none"; // Esconder o menu após seleção
+          }
+        });
+      });
+    });
+  </script>
+<!------------------------------script do player de video fIM-------------------------------------------->
+</body>
+</html> 
+<!--- -------------------------atualizar pagina FiM---------------------------- --->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Mundo</title>
+    <style>
+        /* Estilo básico para o layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabeçalho */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Layout principal */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+
+        /* Coluna da esquerda (posts) */
+        .left-column {
+            flex: 2;
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Post individual */
+        .post {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .post-title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .post-description {
+            color: #555;
+        }
+
+        .post-image, .post-video {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .post-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .post-button {
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .post-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Coluna da direita */
+        .right-column {
+            flex: 1;
+            padding: 20px;
+            background-color: #e9ecef;
+            position: relative;
+        }
+
+        /* Post flutuante */
+        .floating-post {
+            position: fixed;
+            top: 20%;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10; /* Garante que o post flutuante fique acima do conteúdo */
+        }
+
+        .floating-post img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .footer-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            font-size: 1em;
+        }
+
+        /* Botão de rolagem */
+        .scroll-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 20; /* Garante que o botão fique acima do conteúdo */
+        }
+
+        .scroll-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .right-column {
+                display: none; /* Oculta a coluna direita em dispositivos móveis */
+            }
+
+            .floating-post {
+                display: none; /* Oculta o post flutuante em dispositivos móveis */
+            }
+        }
+    </style>
+</head>
+<body>
+        <!-- Cabeçalho -->
+    <div class="header">
+        <a href="https://tvmundo.github.io/"><img src="https://pbs.twimg.com/media/GkvBOZJWsAAV-Uu?format=png&name=small" alt="Logo TV Mundo" class="header-logo"><a href="https://tvmundo.github.io/"></a>
+<div class="header-title">TV Mundo</div>
+</div>
+    <!-- Conteúdo principal -->
+    <div class="main-container">
+        <!-- Coluna da esquerda -->
+             <!-- Coluna post -->
+    <div class="left-column">
+ 
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">O messias já veio e habitou entre nós:</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Veio para o que era seu, e os seus não o receberam.</div>
+                <img src="https://pbs.twimg.com/media/GmGXoIwXIAELn7l?format=jpg&name=medium" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Mas, a todos quantos o receberam, deu-lhes o poder de serem feitos filhos de Deus, aos que crêem; Os quais não nasceram do sangue, nem da vontade da carne, nem da vontade do homem, mas de Deus. E o Verbo se fez carne, e habitou entre nós, e vimos a sua glória, como a glória do unigênito do Pai, cheio de graça e de verdade
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 O messias já veio Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Venezuela e Rússia selam aliança estratégica com tratado aprovado pela Assembleia Nacional</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O canal de notícias TV Mundo traz os detalhes da histórica aprovação, nesta terça-feira, do tratado de parceria estratégica e cooperação entre a República Bolivariana da Venezuela e a Federação Russa. O projeto de lei foi aprovado em segunda discussão pela Assembleia Nacional venezuelana, consolidando um marco nas relações bilaterais entre Caracas e Moscou.</div>
+                <img src="https://pbs.twimg.com/media/G2ILLrWXkAAn6Ti?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+30 de setembro de 2025 <br/><br/>
+O canal de notícias TV Mundo traz com exclusividade os detalhes da histórica aprovação, nesta terça-feira, do tratado de parceria estratégica e cooperação entre a República Bolivariana da Venezuela e a Federação Russa. O projeto de lei foi aprovado em segunda discussão pela Assembleia Nacional venezuelana, consolidando um marco nas relações bilaterais entre Caracas e Moscou.
+<br/><br/>
+O presidente do Legislativo venezuelano, Jorge Rodríguez, destacou antes da votação a relevância simbólica e prática do acordo. “É de transcendental importância que a Assembleia Nacional, que o Parlamento [...] aprove e endosse um acordo já assinado entre o Governo da Venezuela, presidido por Nicolás Maduro, e o Governo da Federação Russa, presidido pelo presidente Vladimir Putin, porque é a expressão da irmandade, de uma forma diferente de relacionar pessoas e governos”, afirmou Rodríguez, ressaltando o caráter inovador do entendimento entre as duas nações.
+<br/><br/>
+O embaixador russo em Caracas, Sergei Melik-Bagdasarov, esteve presente na sessão legislativa e, entre aplausos dos deputados venezuelanos, recebeu oficialmente o texto da lei aprovada, selando mais uma etapa na concretização do tratado inicialmente assinado em maio. Na ocasião, o presidente venezuelano Nicolás Maduro esteve em Moscou para participar das comemorações dos 80 anos do Dia da Vitória na Grande Guerra Patriótica, momento em que formalizou o compromisso ao lado do presidente russo Vladimir Putin.
+<br/><br/>
+O tratado estabelece uma ampla gama de cooperações estratégicas entre os dois países. Entre os principais pontos acordados, destaca-se o compromisso de reforçar uma associação baseada na confiança mútua e na cooperação estratégica, mantendo um diálogo político e diplomático regular e próximo. Além disso, Moscou e Caracas concordaram em aprofundar os laços de defesa em áreas de interesse comum, considerando essa cooperação um componente essencial para a segurança regional e global.
+<br/><br/>
+Prevê-se ainda uma intensificação da cooperação militar-técnica, voltada ao fortalecimento das capacidades defensivas de ambos os Estados, facilitando a celebração de novos acordos nessa esfera. O documento também expressa forte oposição às medidas coercitivas e restritivas unilaterais — especialmente sanções de caráter extraterritorial — que afetam a soberania e o desenvolvimento dos países signatários.
+<br/><br/>
+Ambas as nações se comprometeram a empreender esforços conjuntos para combater a falsificação da história do colonialismo, denunciar o racismo, o genocídio e outros crimes históricos cometidos contra os povos da América Latina, além de se opor firmemente a qualquer manifestação neocolonial nas relações interestaduais. O tratado também reforça a condenação conjunta à glorificação do nazismo, neonazismo e outras práticas que alimentam a intolerância e o extremismo.
+<br/><br/>
+Na esfera da segurança internacional, Venezuela e Rússia acordaram cooperar em matéria de controle de armas, desarmamento e não proliferação, com o objetivo de promover a estabilidade global e garantir a segurança igual e indivisível de todos os Estados. A luta contra o terrorismo internacional, o extremismo, a lavagem de dinheiro proveniente de atividades criminosas e o financiamento do terrorismo também figura entre as prioridades do acordo.
+<br/><br/>
+Outro eixo central do tratado é o combate ao crime organizado transnacional, incluindo a produção ilícita e o tráfico de entorpecentes, substâncias psicotrópicas e seus precursores, bem como a corrupção em todas as suas formas. No campo econômico, os dois países se comprometeram a promover iniciativas conjuntas no âmbito da OPEP+ e outras organizações internacionais, visando o desenvolvimento equilibrado e estável dos mercados globais de energia, sem o uso de restrições artificiais ou práticas de concorrência desleal.
+<br/><br/>
+O documento reconhece ainda o papel da América Latina e do Caribe como “um importante centro de influência política e econômica no emergente mundo multipolar”. Nesse contexto, a Venezuela se compromete a impulsionar as relações da Rússia com as principais associações de integração regional, especialmente a Comunidade dos Estados Latino-Americanos e do Caribe (CELAC) e a Aliança Bolivariana para os Povos de Nossa América – Tratado de Comércio Popular (ALBA-TCP), com vistas a promover o desenvolvimento sustentável e a paz na região.
+<br/><br/>
+Como parte da cooperação financeira, as partes promoverão a formação de uma infraestrutura financeira russo-venezuelana independente, reduzindo a dependência de sistemas financeiros ocidentais. Ademais, a colaboração no campo espacial será ampliada, com destaque para o lançamento de um projeto que prevê a instalação de uma estação terrestre GLONASS na Venezuela, além de outras iniciativas pacíficas no setor espacial.
+<br/><br/>
+O tratado terá validade inicial de dez anos e será automaticamente renovado a cada cinco anos, salvo se uma das partes notificar a outra, por escrito, com pelo menos seis meses de antecedência, sobre sua intenção de rescindir o acordo.
+<br/><br/>
+TV Mundo agradece a leitura e a audiência de seus leitores e espectadores.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Moro apresenta emenda para tentar salvar PEC da Bandidagem</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">trazemos os desdobramentos mais recentes em torno da polêmica Proposta de Emenda à Constituição conhecida como “PEC da Blindagem”...</div>
+                <img src="https://pbs.twimg.com/media/G1kVGndWQAE403l?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+trazemos os desdobramentos mais recentes em torno da polêmica Proposta de Emenda à Constituição conhecida como “PEC da Blindagem”. Diante de uma onda de críticas nas redes sociais e de protestos registrados nas 27 capitais do país no último domingo (21), o senador Sergio Moro (União Brasil-PR) apresentou nesta terça-feira (23) uma emenda com o objetivo de tentar salvar o texto aprovado na Câmara dos Deputados na semana passada — ou, ao menos, redirecioná-lo para um escopo mais restrito.
+<br/><br/>
+A proposta de Moro busca limitar a abrangência da PEC ao exigir autorização prévia da Câmara dos Deputados ou do Senado Federal para a abertura de investigações contra parlamentares nos casos em que os supostos crimes sejam contra a honra ou quando a acusação for “fundada exclusivamente em opiniões, palavras e votos” do deputado ou senador. Fica expressamente ressalvado, contudo, o crime de ameaça, que não se enquadra nessa proteção.
+<br/><br/>
+O senador, cuja trajetória política foi construída com base no discurso de combate à corrupção, argumenta que sua emenda visa reforçar a liberdade de expressão e a imunidade parlamentar, garantindo ao mesmo tempo a manutenção do regime atual para crimes comuns, como corrupção e lavagem de dinheiro. Além disso, Moro propõe que, mesmo em casos envolvendo outros tipos penais, o Congresso Nacional possa “sustar, até a decisão final, o andamento da ação” contra o parlamentar.
+<br/><br/>
+A ideia já havia sido antecipada na segunda-feira (22) pelo presidente do PP, senador Ciro Nogueira (PI), em meio à forte reação da sociedade civil contra a PEC. A proposta original, aprovada pelos deputados federais, obriga o Supremo Tribunal Federal (STF) a solicitar licença prévia ao Congresso para processar criminalmente deputados federais e senadores — uma regra que vigorou entre 1988 e 2001, mas foi abolida justamente por ter se tornado um instrumento de impunidade.
+<br/><br/>
+Embora publicamente justificada como uma defesa contra possíveis coações judiciais motivadas por discursos ou posições ideológicas, nos bastidores há um temor mais concreto: as investigações conduzidas pelo STF sobre suspeitas de corrupção na aplicação das bilionárias emendas parlamentares. A PEC da Blindagem, nesse contexto, é vista por muitos como um escudo contra ações penais em curso.
+<br/><br/>
+A emenda apresentada por Moro conta com o apoio de outros 12 senadores, incluindo figuras de peso tanto da base governista quanto da oposição. Entre os signatários estão Ciro Nogueira (PP-PI), o líder do PL, Carlos Portinho (RJ), o líder da oposição, Rogério Marinho (PL-RN), e o ex-vice-presidente da República Hamilton Mourão (Republicanos-RS). Também assinam o texto os senadores Esperidião Amin (PP-SC), Alan Rick (União Brasil-AC), Jorge Seif (PL-SC), Plínio Valério (PSDB-AM), Jaime Bagattoli (PL-RO), Marcos Rogério (PL-RO), Dorinha Seabra (União Brasil-TO) e Márcio Bittar (PL-AC).
+<br/><br/>
+Outro ponto destacado na emenda é a forma de votação no plenário do Senado: Moro defende que o processo seja aberto, ao contrário do que foi aprovado na Câmara, onde a votação ocorreu de forma sigilosa. Para que um parlamentar seja efetivamente blindado, bastaria ainda assim a maioria simples dos votos no plenário.
+<br/><br/>
+Apesar do esforço de Moro e de seus aliados, a PEC enfrenta resistência firme dentro do próprio Senado. O presidente da Comissão de Constituição e Justiça (CCJ), senador Otto Alencar (PSD-BA), já se posicionou de forma contundente contra qualquer tentativa de aperfeiçoamento do texto. Questionado pela Folha sobre a sugestão de Ciro Nogueira, Alencar afirmou que “essa PEC não pode nem deve voltar para a Câmara, absolutamente, porque lá podem repor [trechos que forem descartados ou modificados]. O que nós devemos fazer é rejeitá-la. Sepultá-la na CCJ e no plenário do Senado Federal”.
+<br/><br/>
+A PEC da Blindagem está marcada como o primeiro item da pauta de votações da CCJ nesta quarta-feira (24). Apesar da emenda de Moro, parlamentares avaliam que há votos suficientes para enterrar definitivamente a proposta, encerrando assim um dos episódios mais controversos do atual debate legislativo.
+<br/><br/>
+TV Mundo — informando com precisão para leitores e espectadores comprometidos com a verdade.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Bolsonaro na Cadeia, Trump na Casa Branca: O Brasil Fez o Que os EUA Não Tiveram Coragem de Fazer
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O The New York Times:<br/><br/>
+“Brasil teve sucesso onde os EUA falharam”</div>
+                <img src="https://pbs.twimg.com/media/G0reU9UXwAARiW9?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Brasil Consegue o Que os Estados Unidos Não Conseguiram: Justiça Contra um Golpista
+<br/><br/>
+O The New York Times publicou nesta sexta-feira, 12 de setembro, um artigo de opinião que marca um momento histórico na análise das democracias contemporâneas. Sob o título implícito de uma lição global, o jornal norte-americano afirma com clareza: “Brasil teve sucesso onde os Estados Unidos falharam”. A comparação não é acidental nem casual — ela nasce do julgamento histórico proferido pela Primeira Turma do Supremo Tribunal Federal, que condenou o ex-presidente Jair Bolsonaro a 27 anos e 3 meses de prisão por liderar uma trama golpista destinada a manter-se no poder após sua derrota eleitoral em 2022.
+<br/><br/>
+O veredito, alcançado por votação unânime de 4 a 1, representa um marco sem precedentes na história republicana brasileira. Pela primeira vez, um ex-chefe de Estado é condenado por tentativa de subverter o resultado legítimo das urnas. Os ministros da Corte, ao analisarem as evidências reunidas ao longo de mais de dois anos de investigações, concluíram que Bolsonaro não apenas questionou os resultados eleitorais — ele organizou, incentivou e financiou uma rede sistemática de desinformação, ameaças à integridade das instituições e articulações para impedir a posse do presidente eleito. O esquema envolveu militares, aliados políticos e até mesmo tentativas de manipulação da própria estrutura de segurança nacional. A decisão foi finalizada com a precisão de um instrumento jurídico que não se deixou levar por pressões externas ou internas.
+<br/><br/>
+Enquanto isso, nos Estados Unidos, o cenário é diametralmente oposto. Donald Trump, cuja tentativa de anular a eleição de 2020 culminou na insurreição do Capitólio em 6 de janeiro de 2021, não enfrentou qualquer pena judicial concreta. Ao contrário: ele foi novamente colocado como candidato à presidência — e, hoje, está em posição de retornar à Casa Branca. O NYT destaca esse contraste como uma falha estrutural da democracia americana: enquanto o Brasil prendeu quem tentou derrubá-la, os Estados Unidos permitiram que seu principal agente golpista voltasse ao centro do poder.
+<br/><br/>
+Mas a crítica vai além da simples comparação entre condenações e absolvições. O artigo, assinado pelos professores Steven Levitsky, da Harvard, e Filipe Campante, da Universidade Johns Hopkins, aponta um ato deliberado de vingança política por parte do governo Trump contra o Brasil. “Trump não se limitou a criticar o esforço do Brasil em defender a democracia: ele também a puniu.” A referência é direta: a imposição de tarifas de 50% sobre a maioria das exportações brasileiras, além de sanções individuais contra ministros do STF — incluindo o relator do caso, Alexandre de Moraes — foram medidas que não visavam apenas interesses comerciais. Foram ataques coordenados, conforme o NYT, para intimidar o Judiciário brasileiro, forçando-o a recuar diante de um ex-presidente que havia sido denunciado por crimes contra a ordem democrática.
+<br/><br/>
+Essa estratégia, segundo os autores, revela uma lógica perigosa: os Estados Unidos estão punindo os brasileiros por fazerem algo que os americanos deveriam ter feito, mas não fizeram. Responsabilizar um ex-presidente por tentar anular uma eleição. Enquanto o Brasil encaminhou Bolsonaro à justiça com base em provas documentais, gravações, depoimentos e atos concretos de conspiração, os Estados Unidos ainda lutam contra a paralisia política, a polarização extrema e a impunidade sistêmica. O Departamento de Justiça dos EUA, embora tenha apresentado acusações formais contra Trump por seus esforços para anular a eleição de 2020, não conseguiu traduzir essas acusações em condenação. A máquina judiciária americana, por sua vez, continua travada em processos intermináveis, recursos, adiamentos e negociações políticas que diluem a gravidade dos crimes.
+<br/><br/>
+O artigo ainda ressalta que Bolsonaro inspirou-se fortemente no “manual de Trump” — desde a negação sistemática dos resultados eleitorais até o uso da retórica de “eleição roubada” como ferramenta de mobilização. Mas, diferentemente dos EUA, o Brasil não se deixou seduzir pela narrativa de “perseguição política”. As autoridades judiciais e políticas brasileiras, conscientes do passado autoritário do país — da ditadura militar aos golpes velados da redemocratização — entenderam que a democracia não é um estado permanente, mas um contrato vivo que exige defesa constante. Por isso, não deram o sistema por garantido. Eles o protegeram.
+<br/><br/>
+O acórdão que formaliza a decisão da Primeira Turma do STF será publicado em breve. As defesas de Bolsonaro e dos outros sete réus condenados ainda podem recorrer — mas os caminhos são estreitos, e os recursos não permitem revisão substancial da sentença. A justiça brasileira avançou, e não retrocederá. Enquanto isso, nos Estados Unidos, a democracia continua em risco, não por falta de leis, mas por falta de coragem política.
+<br/><br/>
+A lição do Brasil não é apenas jurídica. É moral. É histórica. É uma demonstração de que, mesmo em meio à fragmentação social e à violência discursiva, é possível manter o equilíbrio entre liberdade e responsabilidade. O mundo assiste. E agora, o The New York Times — porta-voz de uma das maiores democracias do planeta — reconhece: o Brasil fez o que os Estados Unidos não conseguiram.
+<br/><br/>
+TV Mundo.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">STF Forma Maioria para Condenar Bolsonaro por Liderar Trama Golpista</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">STF condena Bolsonaro a 27 anos e 3 meses de prisão. <br/><br/> STF formou maioria pela condenação do ex-presidente Jair Bolsonaro e mais sete aliados por liderarem uma organização criminosa com o objetivo de manter-se no poder após a derrota eleitoral de 2022.</div>
+                <img src="https://pbs.twimg.com/media/G0mDua5WEAApRww?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Na tarde de quinta-feira, o Supremo Tribunal Federal marcou um momento decisivo na história republicana do Brasil. A Primeira Turma, após dias de debate intenso e votos que desvelaram as entranhas de uma conspiração planejada para derrubar a democracia, formou maioria pela condenação do ex-presidente Jair Bolsonaro e mais sete aliados por liderarem uma organização criminosa com o objetivo de manter-se no poder após a derrota eleitoral de 2022.
+<br/><br/>
+A ministra Cármen Lúcia, ao proferir seu voto, não apenas aderiu à tese do relator Alexandre de Moraes, mas o reforçou com linguagem inédita na corte: “Bolsonaro não foi tragado para a trama golpista — ele era causador e líder.” Suas palavras ecoaram como um martelo sobre o silêncio de quem tentou negar a evidência. Ela rejeitou categoricamente a defesa de que os atos foram meras manifestações de insatisfação política. Para ela, houve plano, hierarquia, coordenação e execução sistemática. “A tentativa de desmoralizar o processo eleitoral é isso. Uma tentativa que vem marcada, de combater mais e mais o Poder Judiciário, veio marcada com uma série de comportamentos delituosos, que foram se encadeando.”
+<br/><br/>
+O vídeo apresentado por Moraes, gravado em plena avenida Paulista em 7 de setembro de 2021, onde Bolsonaro, diante de multidões, incitava a ruptura constitucional, foi usado como prova irrefutável. “Não há dúvida da ocorrência de reuniões do réu Jair Messias Bolsonaro com comandantes das Forças Armadas, entre outras pessoas, para discutir a quebra da normalidade constitucional”, afirmou Moraes, cujo voto de mais de quatro horas foi um retrato minucioso da máquina golpista em funcionamento. Ele apontou cada nome, cada cargo, cada mensagem interceptada — desde anotações de Alexandre Ramagem questionando a legitimidade das urnas, até ordens transmitidas por Anderson Torres, então ministro da Justiça, para dificultar a apuração dos votos.
+<br/><br/>
+Flávio Dino, já na sessão anterior, havia sido claro: “Houve violência e atos executórios, não só de preparação.” E acrescentou, com tom de advertência: “Não cabe anistia a esses tipos de crimes.” Seus comentários foram entendidos como um recado direto ao Congresso Nacional, onde vozes ainda clamam por perdão e pacificação sem justiça. “O Brasil só vale a pena porque nós estamos conseguindo manter o Estado democrático de Direito”, disse Cármen Lúcia, ao final de seu voto, numa frase que se tornará referência nos livros de história.
+<br/><br/>
+A dissidência de Luiz Fux, que votou pela absolvição de Bolsonaro e pelos demais réus — exceto Mauro Cid e Braga Netto —, gerou um clima de tensão jamais visto em julgamentos recentes da corte. Fux sustentou que a Procuradoria-Geral da República não delimitou adequadamente a responsabilidade de cada acusado e que “ninguém pode ser punido por cogitar”. Sua posição foi recebida com silêncio pesado, mas também com alfinetadas discretas. Cármen Lúcia, ao responder aos argumentos dele, lembrou: “Sempre votei do mesmo jeito.” A frase, simples, foi carregada de significado político e moral. Era um recado direto ao colega que, segundo seus pares, abandonara o princípio da legalidade em nome de uma interpretação restritiva que, na prática, absolve o mandatário e condena o subordinado.
+<br/><br/>
+A cara de pau, como observou um dos presentes na sala, estava na contradição: Fux condenou o mordomo, Mauro Cid, por ter entregado documentos e gravações que provavam a trama, mas livrou o chefe que ordenou os crimes. “É a mesma lógica de quem condena o ladrão e absolve o patrão que contratou o assalto”, comentou um jurista fora da corte.
+<br/><br/>
+A delação de Mauro Cid, mantida por unanimidade, foi o ponto de virada da investigação. Ele, ex-ajudante de ordens, tornou-se o elo que conectou as reuniões secretas no Palácio do Planalto às ações nas ruas e nos quartéis. Seu testemunho permitiu que o STF visse, em tempo real, como o plano evoluiu: da desinformação nas redes sociais, passando pela pressão sobre os ministros do TSE, até o ataque físico aos prédios dos Três Poderes em 8 de janeiro de 2023. “O 8 de Janeiro não foi um acontecimento banal, depois de um almoço de domingo, quando as pessoas saíram a passear”, frisou Cármen. “Foi o ápice de um ano e meio de insuflamento, malícia e instigação.”
+<br/><br/>
+Cristiano Zanin, presidente da Primeira Turma e último a votar, confirmou a tendência da corte. “Bolsonaro manteve uma organização criminosa estável”, disse. Ele endossou a tese de que os crimes não foram episódicos, mas estruturais — e que a estrutura se sustentava nos cargos públicos ocupados pelos réus: general quatro estrelas no GSI, ex-ministros da Defesa, da Justiça, da Casa Civil, chefe da Abin, comandante da Marinha. Todos, em posições de confiança, usaram o poder institucional para minar o próprio sistema que juraram defender.
+<br/><br/>
+Os crimes pelos quais respondem são cinco: organização criminosa armada; tentativa de abolição violenta do Estado Democrático de Direito; tentativa de golpe de Estado; dano qualificado pela violência e grave ameaça contra patrimônio da União; e deterioração de patrimônio tombado. Alexandre Ramagem, atual deputado federal, responde apenas a três desses crimes, por imunidade parlamentar durante seu mandato. Mas sua participação, conforme provas apresentadas, foi central: foi ele quem, em reuniões internas, sugeriu ataques às urnas e questionou a integridade do sistema eletrônico com base em teorias infundadas.
+<br/><br/>
+Nenhum dos réus foi isento de culpa. Mesmo aqueles considerados de menor importância, como Augusto Heleno e Paulo Sérgio Nogueira, tiveram suas ações catalogadas como componentes indispensáveis da cadeia de comando. “Menor importância não significa inocência”, ressaltou Dino.
+<br/><br/>
+O julgamento, acelerado por fatiamento da ação em cinco núcleos, foi conduzido com rigor procedural, mas também com urgência ética. Gilmar Mendes, em sessão anterior, já havia dito: “Crimes contra o Estado democrático de Direito são insuscetíveis de perdão.” E agora, com a maioria formada, o precedente está lançado: no Brasil, quem usa o cargo público para destruir a democracia não será perdoado. Será julgado. E, se comprovado, condenado.
+<br/><br/>
+As penas ainda serão definidas. Amanhã, sexta-feira, a Primeira Turma retornará para fixar o tempo de prisão de cada réu. Mas o que já está decidido transcende o cálculo das sanções. O que está decidido é que, neste país, a democracia não é um privilégio de alguns — é o fundamento de todos. E quem a ataca, seja com palavras ou com armas, enfrentará o peso da lei.
+<br/><br/>
+E o Supremo Tribunal Federal, com essa decisão, não apenas aplicou a Constituição — ela a restabeleceu.
+<br/><br/>
+TV Mundo.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">O Pix Conquista o Mundo.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O que começou como uma inovação nacional, impulsionada pelo Banco Central brasileiro em 2020, hoje se transforma em uma força global...</div>
+                <img src="https://pbs.twimg.com/media/GxirLBNXcAAddCv?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+O Pix Além das Fronteiras: Como o Sistema Brasileiro de Pagamentos Instantâneos Conquista o Mundo
+<br/><br/> 
+A TV Mundo traz, com exclusividade, o desdobramento de um fenômeno que está redefinindo a forma como o mundo entende pagamentos digitais. O que começou como uma inovação nacional, impulsionada pelo Banco Central brasileiro em 2020, hoje se transforma em uma força global: o Pix. Mais do que uma simples ferramenta de transferência instantânea, o sistema está se espalhando por continentes, sendo adotado em lojas, restaurantes, aeroportos e redes de varejo fora do Brasil, e ganhando força como um modelo de exportação tecnológica e financeira do país.
+<br/><br/> 
+A PagBrasil, empresa de tecnologia de pagamentos sediada em Porto Alegre, está na vanguarda desse movimento. Na semana passada, em parceria com a Verifone — gigante americana de maquininhas de cartão —, lançou oficialmente a solução de Pix Internacional nos Estados Unidos. O anúncio, que poderia passar despercebido em outro contexto, ganhou contornos simbólicos ao coincidir com declarações do ex-presidente Donald Trump, que criticou o sistema de pagamentos brasileiro, inadvertidamente atestando seu potencial disruptivo.
+<br/><br/> 
+Para Alex Hoffmann, cofundador e CEO da PagBrasil, essa coincidência foi mais do que oportuna. "Foi uma feliz coincidência, porque preparávamos esse lançamento havia dois anos. E não atrapalhou. Na verdade, acabou sendo um reconhecimento da qualidade do Pix." Segundo Hoffmann, o ataque de Trump, longe de desacreditar o sistema, serviu como um alerta global: o duopólio Visa-Mastercard tem um novo concorrente, não apenas em escala regional, mas com potencial de se integrar a uma nova infraestrutura de pagamentos globais.
+<br/><br/> 
+O modelo do Pix Internacional é simples, mas eficaz. Em países onde a solução está disponível, o lojista digita o valor da compra na moeda local — como o peso argentino ou o dólar americano — e a maquininha gera um QR Code. Ao escanear esse código, o brasileiro vê imediatamente o valor convertido para reais, com o IOF já incluso. O câmbio é fixado no momento da transação, eliminando a incerteza que acompanha o uso de cartões de crédito no exterior, onde o valor final depende da cotação do dia do fechamento da fatura.
+<br/><br/> 
+A odontóloga Tuanny, que visitou recentemente Buenos Aires, relata que em quase todos os restaurantes que frequentou, o pagamento via Pix era uma opção. "Funciona assim: o lojista pega a maquininha, digita o valor em moeda local, em pesos argentinos, por exemplo, e o QR Code do Pix sai na tela. A pessoa escaneia e o valor é automaticamente convertido para real, com tudo já embutido." Em Ciudad del Este, no Paraguai, a aceitação é ainda mais ampla. "Em quase todos os lugares aceitavam, nas lojas grandes aceitavam sempre", diz ela, destacando a naturalidade com que o sistema já integra o cotidiano de brasileiros que viajam para países vizinhos.
+<br/><br/> 
+A ideia do Pix Internacional nasceu durante um réveillon em Punta del Este, no Uruguai. Hoffmann conta que, cercado por brasileiros — cerca de 80% do público local na temporada —, percebeu o absurdo de não poder usar o mesmo sistema de pagamento que já era parte da rotina no Brasil. "Por que não posso pagar com Pix aqui, se estou no mesmo continente, muitas vezes sem sequer precisar de passaporte?" A partir dessa pergunta, surgiu o projeto. Poucos meses depois, a solução já estava operacional no Uruguai, onde hoje cerca de 6 mil estabelecimentos aceitam Pix, incluindo postos de combustível para jatos particulares no aeroporto de Montevidéu.
+<br/><br/> 
+O sucesso uruguaio foi o estopim para uma expansão acelerada. Após o Uruguai, a PagBrasil levou o sistema para Chile, México, Argentina, Espanha, Portugal, Holanda e até a China. Em Portugal, o fenômeno se repete: imigrantes brasileiros que mantêm contas no Brasil preferem usar o Pix por sua praticidade e pela eliminação de taxas abusivas de câmbio. "É uma forma de pagar como se estivesse no Brasil", resume Hoffmann.
+<br/><br/> 
+A parceria com a Verifone foi crucial para a entrada nos Estados Unidos. Inicialmente, a gigante americana era cética. "No início, eles eram reticentes, achavam que só fazia sentido no e-commerce." Mas o cenário mudou quando o Pix passou a ser destaque em veículos de imprensa globais, como The Economist e Financial Times, sendo apontado como um dos maiores avanços em infraestrutura financeira dos últimos anos. "Depois disso, se convenceram", diz Hoffmann.
+<br/><br/> 
+Nos Estados Unidos, o foco inicial será em estados com alta concentração de turistas brasileiros: Flórida e Nova York. A Verifone vai oferecer a opção do Pix diretamente em suas maquininhas, permitindo que o cliente escaneie o código, veja o valor em reais e efetue o pagamento com sua conta bancária brasileira — sem precisar baixar nenhum app adicional. O lojista, por sua vez, recebe o valor em dólares. O spread cambial gira em torno de 2%, bem abaixo das taxas cobradas por cartões internacionais.
+<br/><br/> 
+Mas a inovação não para por aí. A PagBrasil desenvolveu o que chama de Pix Roaming, uma solução voltada para estrangeiros que vêm ao Brasil ou querem usar o sistema em outros países. Por meio dessa tecnologia, bancos e carteiras digitais de outros países podem integrar o Pix aos seus próprios aplicativos. Um paraguaio, por exemplo, pode pagar com Pix em uma loja nos Estados Unidos, desde que seu banco local tenha fechado parceria com a rede Pix. O projeto já está em operação no Peru e no Paraguai, por meio do Itaú local.
+<br/><br/> 
+Para Hoffmann, o Pix não precisa se tornar a única infraestrutura global de pagamentos. "Não acredito que ele se tornará uma infraestrutura global em si, porque não faz sentido substituir soluções locais, como o UPI na Índia." O futuro, segundo ele, está na conexão entre grandes hubs regionais — como o próprio Pix, o UPI indiano e os sistemas europeus — que, ao se interligarem, formarão uma nova malha de pagamentos instantâneos capaz de desafiar o domínio de Visa e Mastercard. "O mundo é muito diverso para que um duopólio americano processe todos os pagamentos. Ninguém sonha pagar com Visa numa padaria da Cracóvia. Isso só acontecia porque não havia alternativas."
+<br/><br/> 
+Apesar das pressões que podem surgir — de bancos tradicionais, de governos ou do próprio duopólio — Hoffmann é categórico: "O duopólio vai espernear, mas não tem como parar a história, no máximo atrasar. Pode haver pressão de alguns bancos e alguns países, mas política é algo de momento. Já o Pix é imparável." E completa: "Toda essa agenda do governo Trump acelera a busca por alternativas."
+<br/><br/> 
+O que começou como um sistema nacional de pagamentos instantâneos está, agora, moldando o futuro financeiro global. O Brasil não apenas inovou — exportou sua inovação. E o mundo, aos poucos, começa a pagar com Pix.
+<br/><br/> 
+Encerramos aqui esta reportagem. Acompanhe mais notícias como esta no canal TV Mundo, onde o mundo chega primeiro.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Dados mostram que a fidelidade à marca da Tesla entrou em colapso após o apoio de Musk a Trump</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">o declínio acentuado na fidelidade dos clientes da Tesla nos Estados Unidos, diretamente ligado ao envolvimento político de seu CEO, Elon Musk.</div>
+                <img src="https://pbs.twimg.com/media/Gxg1ETOXEAA5ry-?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+A TV Mundo traz uma análise sobre um dos fenômenos mais marcantes do setor automotivo nos últimos anos: o declínio acentuado na fidelidade dos clientes da Tesla nos Estados Unidos, diretamente ligado ao envolvimento político de seu CEO, Elon Musk.
+<br/><br/>
+Por quase uma década, a Tesla se consolidou como a montadora com a base de consumidores mais leais do mercado norte-americano. Enquanto outras marcas lutavam para manter seus usuários, a empresa de veículos elétricos via mais da metade de seus proprietários retornarem para adquirir outro modelo da marca. Em junho de 2024, esse índice atingiu seu ápice: 73% dos lares norte-americanos que possuíam um Tesla e estavam prontos para uma nova compra optaram por permanecer com a marca. Um recorde absoluto no setor, inédito entre fabricantes tradicionais como Ford, Chevrolet ou Toyota.
+<br/><br/>
+No entanto, tudo mudou em julho do mesmo ano. O ponto de inflexão coincide com o apoio público de Elon Musk ao ex-presidente Donald Trump, declarado logo após uma tentativa de assassinato contra o candidato republicano na Pensilvânia. A partir daquele momento, os dados da S&P Global Mobility — obtidos exclusivamente pela Reuters e analisados com base nos registros de veículos em todos os 50 estados dos Estados Unidos — mostram uma queda abrupta na taxa de fidelidade da Tesla.
+<br/><br/>
+A curva descendente foi rápida e consistente. Em março de 2025, a fidelidade caiu para 49,9%, um patamar inferior à média do setor automotivo. O colapso foi tão acentuado que Tom Libby, analista sênior da S&P, definiu como "sem precedentes". "Nunca vi uma queda tão rápida em tão pouco tempo", afirmou. "Estamos falando do líder absoluto em fidelidade de marca caindo para níveis comuns da indústria em menos de nove meses."
+<br/><br/>
+Embora a taxa tenha se recuperado parcialmente, alcançando 57,4% em maio de 2025 — o mês mais recente com dados disponíveis —, esse número ainda representa uma queda drástica em relação ao pico de 2024. Atualmente, a Tesla se encontra em um patamar semelhante ao da Toyota, mas atrás de Chevrolet e Ford em termos de retenção de clientes.
+<br/><br/>
+A coincidência temporal entre o engajamento político de Musk e a erosão da base de consumidores não passou despercebida. Analistas apontam que o perfil demográfico dos proprietários da Tesla — em geral, mais jovens, urbanos e alinhados com causas ambientais — tende a se inclinar politicamente para o Partido Democrata. Com o apoio explícito de Musk a Trump, e especialmente com seu envolvimento direto na criação do Departamento de Eficiência Governamental de Trump em janeiro de 2025 — uma iniciativa voltada a cortes massivos no serviço público —, muitos consumidores parecem ter se distanciado da marca.
+<br/><br/>
+"Se esses clientes tendem a votar no Partido Democrata, talvez passem a considerar outras marcas além da Tesla", afirmou Seth Goldstein, analista da Morningstar. "A identidade da marca está profundamente ligada à imagem do CEO. Quando essa imagem muda, os consumidores reagem."
+<br/><br/>
+Além do fator político, a Tesla enfrenta desafios estruturais. Sua linha de produtos está envelhecida. Desde 2020, o único lançamento relevante foi o Cybertruck, um caminhão com design futurista e angular, cujas vendas ficaram muito aquém das projeções otimistas de Musk, que previa centenas de milhares de unidades anuais. Enquanto isso, concorrentes como General Motors, Hyundai e BMW intensificaram sua oferta de veículos elétricos com preços competitivos e tecnologia avançada.
+<br/><br/>
+A concorrência chinesa também tem pressionado o mercado global. Em meio a esse cenário, a Tesla viu suas vendas globais recuarem: uma queda de 8% nos Estados Unidos nos primeiros cinco meses de 2025 e uma drástica redução de 33% na Europa nos primeiros seis meses do ano. Na Europa, a reação negativa ao ativismo político de Musk tem sido particularmente intensa, com campanhas de boicote e críticas generalizadas nas redes sociais.
+<br/><br/>
+Garrett Nelson, analista da CFRA Research especializado em veículos elétricos, classificou o momento como "um desastre de marca". "O aumento do ativismo político de Musk foi um momento muito ruim para a Tesla", disse. "Isso ocorreu exatamente quando a empresa enfrentava concorrência mais forte do que nunca, tanto de montadoras tradicionais quanto de fabricantes chineses. A perda de participação de mercado é real, e o maior desafio agora é reparar os danos à imagem da marca."
+<br/><br/>
+Os dados da S&P também revelam outra mudança significativa: o fluxo líquido de clientes. Até julho de 2024, a Tesla atraía quase cinco novos lares para cada um que perdia para outra marca. Nenhum outro grande fabricante se aproximava desse desempenho. A Genesis, da Hyundai, vinha em segundo lugar, com 2,8 lares atraídos para cada um perdido. Ford, Toyota e Honda, por outro lado, perdiam mais clientes do que ganhavam.
+<br/><br/>
+Desde fevereiro de 2025, esse equilíbrio mudou. A Tesla passou a atrair menos de dois lares para cada um que perde — seu nível mais baixo já registrado. Marcas como Rivian, Polestar, Porsche e Cadillac agora atraem mais clientes da Tesla do que perdem para ela, indicando uma migração clara de consumidores para alternativas premium no segmento elétrico.
+<br/><br/>
+Dentro da própria Tesla, os executivos reconhecem os desafios. Em uma conferência de resultados em abril, o CFO Vaibhav Taneja mencionou "o impacto negativo do vandalismo e da hostilidade injustificada contra nossa marca e nossas pessoas", mas também admitiu interrupções na produção devido à reconfiguração das fábricas para lançar uma versão atualizada do Model Y. Musk, por sua vez, afirmou que "na ausência de questões macroeconômicas, não vemos redução na demanda", minimizando os sinais de enfraquecimento no mercado de consumo.
+<br/><br/>
+No entanto, ações corporativas recentes indicam preocupação com a estabilidade da liderança. Na segunda-feira, a Tesla aprovou a concessão de 96 milhões de ações a Elon Musk, avaliadas em cerca de 29 bilhões de dólares. A medida visa garantir sua permanência na empresa enquanto ele contesta judicialmente a anulação de seu antigo plano de remuneração, considerado excessivo por um tribunal.
+<br/><br/>
+Apesar dos desafios, alguns investidores ainda acreditam no futuro da Tesla. Brian Mulberry, gerente de carteiras da Zacks Investment Management, afirmou que não está preocupado com os lucros de longo prazo. Sua confiança está ligada aos planos ambiciosos da empresa com os robotaxis. Em junho, a Tesla lançou um teste limitado do serviço em Austin, oferecendo passeios a fãs e influenciadores, mas ainda sem acesso ao público geral. "Se a Tesla conseguir expandir essa tecnologia", disse Mulberry, "há um argumento válido de que a Tesla pode não precisar mais vender carros e caminhões."
+<br/><br/>
+Mas, por enquanto, o mercado de veículos continua sendo o coração do negócio. E os números mostram que a lealdade dos consumidores — uma vez inabalável — está mais frágil do que nunca. A fusão entre liderança corporativa e ativismo político, especialmente em um contexto polarizado, provou ter um custo real: o afastamento de quem antes via a Tesla não apenas como uma fabricante de carros, mas como um símbolo de inovação e sustentabilidade.
+<br/><br/>
+A TV Mundo acompanha de perto essas transformações no setor automotivo e continuará trazendo análises aprofundadas sobre os impactos do comportamento dos líderes corporativos no mercado e na sociedade. Para leitores e espectadores, o recado é claro: decisões fora das fábricas podem mudar o destino das marcas dentro delas.
+<br/><br/>
+Até a próxima atualização, TV Mundo — informação com profundidade, onde você estiver.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title"> Maioria apoia uso de tornozeleira em Bolsonaro e acredita que ele queria fugir do país.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Para 55%, a decisão do ministro do STF (Supremo Tribunal federal) Alexandre de Moraes foi correta</div>
+                <img src="https://pbs.twimg.com/media/GxTZr04WEAAHY6e?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+A TV Mundo traz, com apuração rigorosa e compromisso com os fatos, um panorama detalhado sobre o clima político e social no Brasil diante das medidas cautelares impostas ao ex-presidente Jair Bolsonaro. Em meio a um cenário de intensa polarização, uma pesquisa realizada pelo Datafolha revela que a maioria da população brasileira endossa a decisão do ministro do Supremo Tribunal Federal (STF), Alexandre de Moraes, de determinar o uso de tornozeleira eletrônica e outras restrições ao ex-mandatário.
+<br/><br/>
+Segundo os dados coletados nos dias 29 e 30 de julho com 2.004 pessoas com mais de 16 anos, em 130 cidades do país, 55% dos entrevistados consideram correta a decisão do ministro. Esse mesmo percentual acredita que Bolsonaro pretendia deixar o Brasil antes de enfrentar o julgamento no qual é réu. O processo trata da chamada trama golpista, que teria como objetivo manter o ex-presidente no poder após sua derrota para Luiz Inácio Lula da Silva, do PT, nas eleições de 2022. O julgamento está previsto para setembro.
+<br/><br/>
+Entre os que aprovam as medidas, 44% afirmam ser totalmente favoráveis. Já entre os 41% que discordam, 32% manifestam desaprovação convicta. Apenas 3% não opinaram, e 1% se declarou indiferente. A margem de erro da pesquisa é de dois pontos percentuais para mais ou para menos, o que reforça a confiabilidade dos resultados.
+<br/><br/>
+Há duas semanas, Alexandre de Moraes determinou a colocação da tornozeleira eletrônica em Bolsonaro, além de restringir sua movimentação: ele não pode sair de casa à noite nem nos fins de semana, está proibido de manter contato com outros investigados no inquérito e de se pronunciar publicamente de forma indireta. A decisão foi tomada após uma série de eventos que elevaram o grau de risco de fuga.
+<br/><br/>
+Um dos fatores centrais foi a atuação de Eduardo Bolsonaro, filho do ex-presidente, junto a grupos trumpistas nos Estados Unidos. A aproximação com essas redes, somada às declarações do ex-presidente americano Donald Trump — que justificou a imposição de tarifas elevadas sobre produtos brasileiros ao que chamou de "caça às bruxas" contra Bolsonaro — acendeu alertas no STF. Na quarta-feira (30), os Estados Unidos anunciaram tarifas de até 50% sobre importações do Brasil, agravando uma crise diplomática em curso.
+<br/><br/>
+Moraes entendeu que havia risco real de que Bolsonaro tentasse deixar o país, especialmente considerando precedentes. Em 2024, o ex-presidente passou dois dias na embaixada da Hungria no Brasil, em uma manobra vista por autoridades como um "test-drive" para evitar prisão. O país é governado por Viktor Orbán, aliado político de Bolsonaro. Além disso, durante operação da Polícia Federal em sua residência, foram encontrados dólares em espécie, o que levantou suspeitas sobre planos de fuga.
+<br/><br/>
+A percepção de que Bolsonaro poderia tentar deixar o país é compartilhada por 55% dos entrevistados. Já 36% acreditam que ele não tinha essa intenção, e 10% não se posicionaram.
+<br/><br/>
+O apoio às medidas cautelares varia conforme o perfil socioeconômico e regional dos entrevistados. Entre pessoas com menor nível de escolaridade, a aprovação chega a 59%, enquanto entre os que possuem ensino superior, o índice cai para 51%. No grupo de renda de até dois salários mínimos, o apoio é de 57%, mas entre a classe média baixa, historicamente alinhada ao bolsonarismo, esse número recua para 44%.
+<br/><br/>
+As divisões refletem as profundas linhas de polarização que marcam o país. Entre os evangélicos, grupo historicamente ligado a Bolsonaro, apenas 40% apoiam as restrições, enquanto 56% as reprovam. Já entre as mulheres, a desaprovação é de 38%, contra 44% entre os homens. Regionalmente, o Nordeste, principal base eleitoral de Lula, registra o maior índice de apoio às medidas: 63%.
+<br/><br/>
+Após a imposição das restrições, um novo episódio gerou tensão. Bolsonaro concedeu uma entrevista usando a tornozeleira, sendo fotografado com o dispositivo no tornozelo. A atitude foi interpretada por Moraes como uma forma indireta de se pronunciar publicamente, o que viola as regras estabelecidas. O ministro chegou a ameaçar prisão imediata, mas o caso resultou apenas em uma advertência e em uma nova clarificação das condutas permitidas até o julgamento.
+<br/><br/>
+Bolsonaro tem se manifestado contra o processo, chamando-o de "farsa política" e afirmando que as medidas têm caráter persecutório. Apesar disso, a maioria da população acompanha os desdobramentos com atenção, e os dados indicam um respaldo significativo ao papel do STF na condução do caso.
+<br/><br/>
+A TV Mundo seguirá acompanhando de perto todos os desdobramentos deste processo, com cobertura contínua e análise aprofundada para seus leitores e espectadores.
+<br/><br/>
+TV Mundo – Informação com responsabilidade, clareza e independência.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Começa prazo de 15 dias para defensores de Bolsonaro e réus apresentarem alegações finais no caso da trama golpista</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">A TV Mundo traz detalhes sobre uma das etapas decisivas no andamento da ação penal que investiga o chamado “núcleo crucial” da trama golpista no Brasil.</div>
+                <img src="https://pbs.twimg.com/media/GxM_z-WWoAI3IDa?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+A TV Mundo traz detalhes sobre uma das etapas decisivas no andamento da ação penal que investiga o chamado “núcleo crucial” da trama golpista no Brasil. Com o início da fase de alegações finais no final de junho, defensores do ex-presidente Jair Bolsonaro e de outros seis réus têm agora um prazo de 15 dias para apresentar seus memoriais ao Supremo Tribunal Federal (STF). O período marca um momento crucial no processo, que pode definir o destino político e jurídico de figuras centrais do governo anterior.
+<br/><br/>
+A fase foi aberta por decisão do ministro Alexandre de Moraes, relator do caso na Primeira Turma do STF. Desde então, a Procuradoria-Geral da República (PGR) já apresentou seu documento, no qual reitera o pedido de condenação dos oito réus acusados de participar de um plano para atentar contra o Estado democrático de direito. Entre eles, está o nome de Jair Bolsonaro, que, como ex-presidente da República, responde ao processo no foro privilegiado.
+<br/><br/>
+Pouco tempo depois, a defesa do tenente-coronel Mauro Cid, réu colaborador premiado no inquérito, também entregou suas alegações. O documento busca a absolvição de Cid com base no argumento de que ele agiu “no cumprimento de ordens superiores”, sem dolo de subverter a ordem constitucional. Por ter firmado acordo de colaboração com a Justiça, sua manifestação foi apresentada antes dos demais acusados, em conformidade com os trâmites previstos no processo.
+<br/><br/>
+Agora, é a vez das defesas de Jair Bolsonaro, Alexandre Ramagem, Almir Garnier, Anderson Torres, Augusto Heleno, Paulo Sérgio Nogueira e Walter Braga Netto encaminharem seus memoriais ao STF. O prazo conjunto de 15 dias começou a correr após a manifestação da PGR e de Mauro Cid, devendo se encerrar em meados de agosto. Apesar do recesso do Judiciário, que termina em 31 de julho, os prazos seguem válidos devido à presença de um réu preso — o general Walter Braga Netto —, o que mantém a tramitação do processo em andamento.
+<br/><br/>
+As alegações finais representam a última oportunidade para acusação e defesa apresentarem seus argumentos de forma estruturada antes do julgamento. Nesses documentos, chamados de memoriais, as partes reúnem e analisam todas as provas, depoimentos e ocorrências registradas durante a fase de instrução processual. É nesse momento que reforçam os fundamentos para a condenação ou absolvição dos acusados, com base no conjunto probatório produzido ao longo dos meses.
+<br/><br/>
+Apesar de serem documentos essenciais, os memoriais não vinculam os ministros do STF. Cada integrante da Primeira Turma analisa o caso de forma independente, levando em conta o processo como um todo. A decisão final será tomada por maioria de votos, considerando individualmente a situação de cada réu.
+<br/><br/>
+O caminho até aqui foi delineado por etapas processuais bem definidas. A denúncia da PGR foi formalizada em fevereiro deste ano, com a acusação de que o grupo teria articulado um plano para impedir a posse do presidente eleito em 2022. Em março, a Primeira Turma aceitou a denúncia, autorizando a abertura da ação penal. Nas sequências dos meses de abril, maio e junho, ocorreu a fase de instrução, com a produção de provas, coleta de depoimentos, acareações e diligências complementares.
+<br/><br/>
+Com o encerramento dos prazos para as alegações finais, o processo estará completo do ponto de vista procedimental e poderá ser incluído na pauta de julgamentos da Primeira Turma. A data ainda não foi definida, mas o desfecho está previsto para o segundo semestre. O julgamento será decisivo: caso a maioria dos ministros entenda que houve crime e que os réus são responsáveis, haverá condenação. Caso contrário, poderá ocorrer a absolvição, o que levaria ao arquivamento do processo e à extinção da punibilidade.
+<br/><br/>
+Acompanhe a cobertura completa da TV Mundo para atualizações em tempo real sobre este e outros desdobramentos jurídicos de impacto nacional.
+<br/><br/>
+TV Mundo — informação clara, precisa e direta para seus leitores e espectadores.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">General confirma autoria de plano para assassinar Lula em audiência no STF</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Um general da reserva confirmou, em audiência no Supremo Tribunal Federal (STF), ter sido o autor de um plano que previa o assassinato do presidente Luiz Inácio Lula da Silva, do vice-presidente Geraldo Alckmin e do ministro Alexandre de Moraes...</div>
+                <img src="https://pbs.twimg.com/media/GwqaQ5LWkAAEHKb?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Sejam bem-vindos ao TV Mundo, seu canal de notícias independente na internet, onde acompanhamos os fatos com rigor e compromisso com a informação. Hoje trazemos um dos capítulos mais graves da investigação sobre a trama golpista que teve como alvo as instituições democráticas do Brasil. Um general da reserva confirmou, em audiência no Supremo Tribunal Federal (STF), ter sido o autor de um plano que previa o assassinato do presidente Luiz Inácio Lula da Silva, do vice-presidente Geraldo Alckmin e do ministro Alexandre de Moraes.
+<br/><br/>
+O general Mario Fernandes, atualmente preso, prestou depoimento no âmbito do inquérito que apura a tentativa de golpe de Estado após a derrota de Jair Bolsonaro nas eleições de 2022. Em sua fala perante o STF, Fernandes confirmou a autoria do plano denominado “Punhal Verde Amarelo”, que já havia sido descoberto pela Polícia Federal em seus equipamentos eletrônicos. Segundo o documento, havia um detalhamento técnico de como executar os assassinatos, incluindo o uso de substâncias químicas para provocar um colapso orgânico em Lula, além de explosivos e venenos para eliminar o ministro Moraes durante eventos oficiais.
+<br/><br/>
+O general, no entanto, tentou minimizar a gravidade do conteúdo ao afirmar que o plano seria apenas "um pensamento digitalizado", resultado de uma análise de riscos feita por ele de forma pessoal. “Não foi mostrado a ninguém. Não foi compartilhado com ninguém”, declarou. Fernandes afirmou ainda que se arrependia de ter digitalizado o documento e que o imprimiu apenas por costume, rasgando-o logo depois. A PF, no entanto, encontrou impressões desse plano no Palácio do Planalto, em duas ocasiões: nos dias 9 de novembro e 6 de dezembro de 2022 — momentos críticos no contexto pós-eleitoral.
+<br/><br/>
+O plano, segundo a investigação, continha descrições de uso de armamento pesado, como pistolas, fuzis, metralhadoras e até um lança-granadas. A motivação por trás do documento, segundo a PF, estaria ligada à tentativa de impedir a posse de Lula e manter Jair Bolsonaro no poder. O general faz parte do chamado núcleo 2 da trama golpista, composto por servidores de segundo escalão da gestão Bolsonaro, acusados de gerenciar ações concretas para a tomada do poder.
+<br/><br/>
+A investigação também apontou que Fernandes teria estado no Palácio do Planalto em um dia em que Bolsonaro estava presente. A PF recuperou mensagens trocadas entre o general e o ex-ajudante de ordens do ex-presidente, Mauro Cid, nas quais o militar aparece como um dos articuladores do discurso de Bolsonaro após a derrota nas urnas. Em uma dessas mensagens, datada de 9 de dezembro de 2022, Fernandes comemora o fato de o ex-presidente ter rompido seu isolamento e falado publicamente, sugerindo que a ideia do discurso partiu dele próprio.
+<br/><br/>
+As audiências com os réus dos núcleos 2 e 4 da trama golpista seguem em andamento. Hoje, foram ouvidos ao todo 12 acusados, restando apenas o depoimento de Silvinei Vasques, ex-diretor geral da Polícia Rodoviária Federal (PRF). As sessões têm sido realizadas por videochamada, ao passo que os membros do núcleo 1 — que inclui o próprio Bolsonaro e seus ex-ministros — tiveram suas audiências presenciais.
+<br/><br/>
+Os advogados dos réus têm criticado a rapidez com que o processo avança, alegando falta de tempo hábil para análise do volume de provas apresentadas. Apesar disso, nenhum dos acusados até agora preferiu permanecer em silêncio. Todos tiveram a oportunidade de se manifestar e rebater as acusações, em um momento decisivo para o desenrolar da maior investigação política dos últimos anos.
+<br/><br/>
+Acompanhem sempre a TV Mundo para estarem informados com seriedade e isenção. Até a próxima.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Moraes determina bloqueio de bens e contas de Eduardo Bolsonaro.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">TV Mundo – Em uma decisão que repercute diretamente no cenário político e jurídico nacional, o ministro Alexandre de Moraes, do Supremo Tribunal Federal, determinou o bloqueio integral das contas bancárias, chaves Pix e bens móveis e imóveis do deputado federal Eduardo Bolsonaro (PL-SP)...</div>
+                <img src="https://pbs.twimg.com/media/Gwe7tQmWUAEc9Eu?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+TV Mundo – Em uma decisão que repercute diretamente no cenário político e jurídico nacional, o ministro Alexandre de Moraes, do Supremo Tribunal Federal, determinou o bloqueio integral das contas bancárias, chaves Pix e bens móveis e imóveis do deputado federal Eduardo Bolsonaro (PL-SP). A medida, assinada no último sábado, 19, atinge diretamente o parlamentar que, desde então, permanece nos Estados Unidos, onde se encontra há quatro meses após solicitar licença do mandato alegando perseguição política.
+<br/><br/>
+A decisão judicial tem como base um inquérito em andamento no STF que investiga a atuação de Eduardo Bolsonaro no exterior com o objetivo de pressionar autoridades brasileiras e minar instituições democráticas do país. Segundo apontam os autos, o deputado teria intensificado suas ações após a aplicação de medidas cautelares contra o ex-presidente Jair Bolsonaro, pai de Eduardo, na sexta-feira, 18. Na ocasião, Jair foi obrigado a usar tornozeleira eletrônica e teve sua liberdade de movimento restringida entre 19h e 6h.
+<br/><br/>
+Além do bloqueio de bens, o ministro determinou a retenção do salário de Eduardo como parlamentar. A medida visa impedir que o deputado continue a atuar politicamente de forma ativa no exterior, utilizando recursos financeiros que possam sustentar atividades consideradas prejudiciais ao Estado democrático de direito.
+<br/><br/>
+A Polícia Federal, por sua vez, segue com investigações sobre o envio de aproximadamente 2 milhões de reais por Jair Bolsonaro ao filho, supostamente para financiar sua permanência nos Estados Unidos. O fluxo de recursos está sob análise para verificar a origem dos valores e se houve desvio de finalidade ou obstrução de investigações em curso.
+<br/><br/>
+Paralelamente ao aspecto jurídico, a situação ganha contornos políticos com o fim do prazo de licença concedida pela Câmara dos Deputados. O período de 120 dias expirou no domingo, 20, e como Eduardo não retornou ao Brasil, ele pode ser cassado por ausência não justificada, conforme prevê o Regimento Interno da Casa. Apesar disso, em uma live realizada após a divulgação das decisões judiciais, o deputado afirmou que não renunciará ao cargo e pretende “levar o mandato por pelo menos mais três meses”, mesmo de forma remota.
+<br/><br/>
+Durante a transmissão, Eduardo Bolsonaro ironizou o ministro Alexandre de Moraes e fez declarações que foram interpretadas como ameaças diretas à atuação da Polícia Federal. Ao se referir a agentes da instituição, afirmou: “Se eu ficar sabendo quem é você… Ah, eu vou me mexer aqui”. A fala gerou repercussão imediata e motivou o líder do PT na Câmara, deputado Lindbergh Farias (RJ), a protocolar pedido de prisão preventiva contra Eduardo, sob a acusação de coação no curso do processo e obstrução à justiça.
+<br/><br/>
+O ministro Moraes determinou ainda a inclusão de outras postagens recentes do deputado no inquérito. Uma delas, em especial, chamou atenção: Eduardo celebrou a suspensão de vistos de ministros do STF pelo governo de Donald Trump, classificando a medida como uma “vitória internacional contra o Supremo”. A postagem reforça o teor das investigações, que apontam para uma atuação coordenada no exterior com o intuito de desestabilizar o sistema institucional brasileiro.
+<br/><br/>
+Apesar da pressão jurídica e do afastamento físico do país, aliados de Eduardo Bolsonaro dentro do PL afirmam que ele continuará cumprindo seu mandato. Em declaração nesta segunda-feira, 21, o deputado Sóstenes Cavalcante (PL-RJ) afirmou: “Quero garantir que ele vai terminar o seu mandato. Seja votando matérias legislativas ou com soluções políticas”. A posição evidencia o apoio partidário ao parlamentar, ainda que sua atuação esteja cada vez mais distanciada do território nacional.
+<br/><br/>
+O caso segue em evolução, com o Supremo Tribunal Federal acompanhando de perto os movimentos do deputado e as reações políticas geradas por suas ações. O bloqueio de bens e a possibilidade de cassação do mandato colocam em xeque não apenas a trajetória individual de Eduardo Bolsonaro, mas também os limites da atuação parlamentar em contextos de investigações por crimes contra a democracia.
+<br/><br/>
+TV Mundo – Informação direta, clara e contínua para seus leitores e espectadores.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Cartões de Crédito: A Ascensão da UnionPay no Brasil e o Novo Xadrez da Guerra dos Pagamentos</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">A TV Mundo traz uma análise detalhada sobre um dos movimentos mais estratégicos do setor financeiro global nos últimos anos: a provável entrada da UnionPay como emissora de cartões no Brasil...</div>
+                <img src="https://pbs.twimg.com/media/GwesUjSW4AAgKYN?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+A TV Mundo traz uma análise detalhada sobre um dos movimentos mais estratégicos do setor financeiro global nos últimos anos: a provável entrada da UnionPay como emissora de cartões no Brasil, por meio da fintech nacional Left Pagamentos. Essa iniciativa, ainda em fase de implementação, pode redefinir o mapa dos meios de pagamento no país e reflete um deslocamento de poder mais amplo no sistema financeiro internacional.
+<br/><br/>
+O que à primeira vista pode parecer apenas uma nova opção de cartão para os consumidores brasileiros é, na verdade, parte de um cenário muito mais complexo — um tabuleiro onde tecnologia, economia e geopolítica se entrelaçam. A UnionPay, bandeira chinesa de pagamentos, já é hoje uma das forças dominantes no sistema financeiro global. E sua aproximação com o mercado brasileiro não é casual.
+<br/><br/>
+Até o momento, a presença da UnionPay no Brasil se limitava à aceitação de cartões emitidos no exterior, principalmente em estabelecimentos frequentados por turistas chineses. Hoje, 60% dos comerciantes brasileiros já aceitam a bandeira, graças à integração com terminais da REDE e da Stone, além de saques em caixas eletrônicos do Banco Itaú. Mas a nova etapa — a emissão local de cartões — representa um salto qualitativo. Pela primeira vez, brasileiros poderão solicitar cartões diretamente vinculados à UnionPay, emitidos por uma fintech nacional.
+<br/><br/>
+A Left Pagamentos, responsável por viabilizar essa operação, entra assim para o grupo de empresas que atuam como ponte entre o sistema financeiro brasileiro e redes internacionais. O modelo de fintech, que combina tecnologia e serviços financeiros, tem sido cada vez mais utilizado para acelerar a inovação no setor. Fintechs oferecem contas digitais, pagamentos por aproximação (NFC), transferências instantâneas, crédito online e soluções baseadas em inteligência artificial — tudo com menor burocracia e maior velocidade do que os bancos tradicionais.
+<br/><br/>
+A escolha da UnionPay para esse movimento não surpreende quando se analisam os números. Segundo o relatório “Estatísticas da UnionPay 2025: Volumes de Transações, Participação de Mercado e Inovações Tecnológicas”, publicado em 16 de junho de 2025 pelo portal especializado CoinLaw, a UnionPay já é a maior rede de pagamento do mundo em número de cartões emitidos.
+<br/><br/>
+Em 2025, a UnionPay contabiliza 8,96 bilhões de cartões em circulação global — o que representa 59% de todos os cartões ativos no planeta. Em comparação, a Visa possui 3,56 bilhões (24%) e a Mastercard, 2,33 bilhões (15%). A ultrapassagem da Visa ocorreu em 2022, e desde então a liderança da UnionPay se mantém inabalável.
+<br/><br/>
+No volume financeiro processado, a diferença ainda favorece a Visa, com US$ 38,2 trilhões contra US$ 35,7 trilhões da UnionPay. A Mastercard aparece em terceiro, com US$ 21,3 trilhões. No entanto, no segmento de pagamentos móveis — transações realizadas por smartphones, relógios inteligentes ou outros dispositivos digitais — a UnionPay registra US$ 2,1 trilhões em 2025, com crescimento de 18% em relação ao ano anterior.
+<br/><br/>
+A expansão global da UnionPay em 2025 é acelerada e estratégica. Enquanto Visa e Mastercard dominam a América do Norte e a Europa, a UnionPay detém 53% do mercado da Ásia-Pacífico. Na China, seu mercado doméstico, a participação é de 96%. No exterior, a aceitação da bandeira cresce rapidamente: 83% dos lojistas de varejo na Europa já aceitam UnionPay, e na América do Norte houve aumento de 14% na adesão, especialmente em áreas turísticas.
+<br/><br/>
+A bandeira está presente em 192 países e regiões, com forte crescimento na África e na América Latina. Cartões UnionPay já são emitidos em mais de 80 países, incluindo Japão, Rússia, Coreia do Sul, Emirados Árabes, Canadá, Reino Unido e Austrália. As carteiras digitais vinculadas à UnionPay tiveram aumento global de 22% na adoção, e 32% dos novos cartões emitidos em 2025 foram fora da China — um sinal claro de sua estratégia de internacionalização sem perder o foco no mercado interno.
+<br/><br/>
+A tecnologia por trás da UnionPay também chama atenção. A taxa de aprovação de transações é de 98,3%, um dos índices mais altos do setor. A empresa já utiliza blockchain para liquidações, garantindo maior segurança e transparência nas operações. Em cinco países, pagamentos biométricos já estão implantados, e a inteligência artificial é usada para detecção de fraudes, reduzindo os incidentes em 63%.
+<br/><br/>
+Outras inovações incluem o cartão virtual multimoeda, compatível com 24 moedas diferentes, e um crescimento de 52% nas transações de comércio eletrônico — um setor em expansão constante, impulsionado pela digitalização global.
+<br/><br/>
+Por trás dessa expansão, está em curso uma disputa econômica e geopolítica de grandes proporções. A entrada da UnionPay no Brasil como emissora local não é apenas uma questão de concorrência comercial. É parte de uma guerra silenciosa pelos meios de pagamento, onde Estados Unidos e China disputam influência sobre os fluxos financeiros globais.
+<br/><br/>
+Até mesmo o PIX, o sistema de pagamentos instantâneos do Brasil, já foi alvo de críticas indiretas e pressões por parte de representantes dos Estados unidos, que veem com preocupação a crescente autonomia financeira de países emergentes. A adoção de tecnologias nacionais ou alinhadas a potências rivais é vista como uma ameaça ao domínio do dólar e às redes financeiras tradicionais controladas por empresas norte-americanas.
+<br/><br/>
+Nesse contexto, a parceria entre a Left Pagamentos e a UnionPay ganha dimensão estratégica. Se concretizada, significará que o Brasil passa a integrar oficialmente o grupo de países onde a UnionPay não apenas opera, mas emite seus próprios cartões. Será mais um passo na transformação digital do sistema financeiro brasileiro — e mais um movimento no xadrez global dos pagamentos.
+<br/><br/>
+A concorrência, quando bem regulada, traz benefícios diretos aos consumidores: mais opções, tarifas menores, inovação acelerada. Esse é o lado positivo da disputa entre gigantes financeiros. Mas também exige atenção do Estado, para garantir soberania, segurança e proteção de dados em um ambiente cada vez mais digital e interconectado.
+<br/><br/>
+O que resta agora é aguardar. Ainda não há data oficial para o lançamento dos cartões UnionPay emitidos pela Left Pagamentos. Mas se os planos seguirem o ritmo previsto, os próximos meses podem marcar o início de uma nova era para os meios de pagamento no Brasil — e mais um capítulo na batalha global por influência econômica.
+<br/><br/>
+TV Mundo, informando com profundidade, clareza e responsabilidade. Até a próxima atualização.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">PF faz operação contra Bolsonaro e ex-presidente será submetido ao uso de tornozeleira eletrônica</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Na manhã desta sexta-feira (18), agentes da PF cumpriram mandados de busca e apreensão na residência do ex-presidente, onde foram encontrados novos elementos que reforçam as suspeitas sobre seu envolvimento em ações que teriam impacto direto no cenário internacional. Entre os materiais apreendidos, foi localizado um pen-drive escondido dentro de um banheiro, além de 14 mil dólares (cerca de R$ 78 mil) e R$ 8 mil em espécie.</div>
+                <img src="https://pbs.twimg.com/media/GwKSd63WYAAVhfe?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+O canal de notícias TV Mundo traz detalhes sobre uma nova operação deflagrada pela Polícia Federal, que revela indícios de que o ex-presidente Jair Bolsonaro teria financiado uma operação com o objetivo de atacar a soberania nacional e interferir na independência dos Poderes brasileiros.
+<br/><br/>
+Na manhã desta sexta-feira (18), agentes da PF cumpriram mandados de busca e apreensão na residência do ex-presidente, onde foram encontrados novos elementos que reforçam as suspeitas sobre seu envolvimento em ações que teriam impacto direto no cenário internacional. Entre os materiais apreendidos, foi localizado um pen-drive escondido dentro de um banheiro, além de 14 mil dólares (cerca de R$ 78 mil) e R$ 8 mil em espécie.
+<br/><br/>
+De acordo com as investigações, Bolsonaro teria repassado cerca de R$ 2 milhões para uma operação conduzida por seu filho, o deputado licenciado Eduardo Bolsonaro (PL-SP), nos Estados Unidos. O objetivo seria promover ações contra o Brasil e contra ministros do Supremo Tribunal Federal (STF), com reflexos diretos na decisão do então presidente norte-americano Donald Trump de impor tarifas ao país.
+<br/><br/>
+Essas ações fazem parte de um inquérito que apura a tentativa de obstrução de investigações no Supremo Tribunal Federal, especialmente aquelas ligadas aos eventos do dia 8 de janeiro, quando ocorreram ataques aos prédios do Congresso Nacional, Supremo Tribunal Federal e Palácio do Planalto. Neste novo desdobramento, Bolsonaro é acusado de coação no curso do processo, obstrução da Justiça e ataque à soberania nacional.
+<br/><br/>
+Além disso, o ex-presidente já é réu em outro processo movido pela Procuradoria Geral da República, que o acusa por organização criminosa armada, tentativa de abolição violenta do Estado Democrático de Direito, golpe de Estado, dano qualificado pela violência e grave ameaça contra o patrimônio da União, com prejuízo considerável, e deterioração de patrimônio tombado.
+<br/><br/>
+As medidas determinadas pelo ministro do STF Alexandre de Moraes incluem uso de tornozeleira eletrônica, recolhimento domiciliar das 19h às 7h, além de nos fins de semana. Bolsonaro também está proibido de acessar redes sociais, de se comunicar com embaixadores e diplomatas estrangeiros, bem como com outros réus e investigados vinculados ao processo.
+<br/><br/>
+As informações foram confirmadas após apuração com base em relatos do jornal O Estado de S. Paulo , e dão continuidade a um cenário jurídico complexo, que envolve não apenas a responsabilização individual, mas também a defesa das instituições democráticas frente a ações consideradas antidemocráticas e de impacto internacional.
+<br/><br/>
+O canal de notícias TV Mundo segue acompanhando todos os desdobramentos e mantendo leitores e espectadores informados com a profundidade e a responsabilidade que o tema exige.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">novo algoritmo da Uber cobra mais dos clientes e paga menos aos motoristas, diz estudo.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Uber lucra mais, enquanto motoristas recebem menos...</div>
+                <img src="https://pbs.twimg.com/media/GuTRExnWwAEDc00?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Estudo Revela Desigualdade Crescente Entre Passageiros, Motoristas e Lucros da Uber
+<br/><br/>
+O canal de notícias TV Mundo traz à tona um estudo inédito realizado pela Universidade de Oxford que aponta uma crescente desigualdade no modelo de precificação dinâmica da Uber. A pesquisa revela que passageiros estão pagando mais por corridas enquanto os motoristas recebem menos, com a empresa ampliando sua participação nos ganhos totais.
+<br/><br/>
+A análise foi conduzida por pesquisadores do Departamento de Ciência da Computação da Universidade de Oxford e se baseou em dados coletados entre 2016 e 2024, abrangendo mais de 1,5 milhão de viagens realizadas por 258 motoristas do Reino Unido. Segundo os resultados, a partir de 2023, quando a Uber implementou um novo algoritmo de preços, houve uma mudança significativa na dinâmica financeira entre passageiros, motoristas e a própria plataforma.
+<br/><br/>
+O estudo indica que o novo sistema faz com que a taxa de serviço da Uber — também conhecida como comissão — aumente proporcionalmente em viagens de maior valor. Em termos práticos, quanto mais caro é o trajeto para o passageiro, menor é o retorno efetivo ao motorista por minuto trabalhado. “Quanto maior o valor da viagem, maior é a fatia que a Uber retém. Isso significa que, conforme o cliente paga mais, o motorista efetivamente ganha menos por minuto”, afirmou Reuben Binns, professor associado e autor principal da pesquisa.
+<br/><br/>
+Os dados mostram que a renda horária média dos motoristas, já ajustada pela inflação, caiu de mais de £ 22 para pouco mais de £ 19 antes de considerar custos operacionais, como combustível e manutenção. Além disso, os profissionais relataram um aumento no tempo ocioso, período em que permanecem sem receber aguardando novas solicitações de corridas.
+<br/><br/>
+Outro ponto destacado pelo levantamento é o crescimento da comissão da Uber sobre cada viagem. Antes da atualização do algoritmo, a taxa média era de cerca de 25%. Atualmente, subiu para 29%, com alguns casos específicos ultrapassando a marca de 50% do valor total pago pelos passageiros.
+<br/><br/>
+Para os pesquisadores, esses números evidenciam um problema estrutural nas relações entre plataformas digitais, trabalhadores e usuários finais. O estudo traz à luz questões importantes sobre transparência, justiça e ética nos modelos econômicos baseados em algoritmos, especialmente em setores da economia de plataformas como o da Uber.
+<br/><br/>
+Os resultados serão apresentados oficialmente durante a ACM Conference on Fairness, Accountability, and Transparency (FAccT 2025), evento internacional dedicado a discutir temas relacionados à responsabilidade e à ética em sistemas automatizados, marcado para acontecer no final de junho.
+<br/><br/>
+Em resposta ao estudo, a Uber emitiu uma nota negando os números apresentados. A empresa afirmou: “Não reconhecemos os números apresentados neste relatório. Os motoristas parceiros no Reino Unido receberam mais de £ 1 bilhão em ganhos entre janeiro e março deste ano, um valor superior ao do mesmo período do ano anterior.”
+<br/><br/>
+A companhia reforçou ainda que os motoristas escolhem a plataforma pela flexibilidade de horários e pela transparência nas corridas aceitas. Segundo a Uber, todos os condutores têm acesso a relatórios semanais detalhando seus ganhos, incluindo o montante repassado à empresa. A Uber concluiu afirmando ter orgulho de ver milhares de motoristas continuarem optando por trabalhar com a plataforma, num contexto de aumento contínuo na demanda por viagens.
+<br/><br/>
+O debate em torno da equidade nos modelos de trabalho da economia digital promete continuar em alta, especialmente diante de avanços tecnológicos que alteram as relações de distribuição de renda entre plataformas, trabalhadores e consumidores.
+<br/><br/>
+Encerramos aqui esta edição. Siga o TV Mundo , seu canal de notícias online, sempre em tempo real com o que há de mais relevante no Brasil e no mundo.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+  <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Cronograma de prisão de Bolsonaro é traçado por advogados e aliados após decisão do STF</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Bolsonaro deverá ser preso até o mês de outubro.</div>
+                <img src="https://pbs.twimg.com/media/GtNBcGJWkAAA8C6?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+O canal de notícias TV Mundo traz detalhes sobre o andamento do processo que envolve o ex-presidente Jair Bolsonaro (PL) e a investigação sobre uma suposta tentativa de golpe no Brasil. 
+<br/><br/>
+De acordo com informações apuradas junto a advogados que atuam no caso e também confirmadas por aliados próximos ao ex-presidente, há um cálculo preciso sobre quando ele deve ser preso: até outubro deste ano.
+<br/><br/>
+A previsão surge com base na decisão do Supremo Tribunal Federal (STF) de acelerar o julgamento do caso, o que indica que o processo estará encerrado em aproximadamente quatro meses. A expectativa é que, com essa nova dinâmica imposta pelo tribunal, não haja espaço para prolongamentos significativos.
+<br/><br/>
+Na terça-feira (10), foram concluídos os interrogatórios dos oito réus considerados parte do núcleo central da tentativa de golpe. Com isso, os advogados dos acusados têm cinco dias úteis para apresentar novos pedidos de diligências. Esses requerimentos devem ser feitos na próxima semana, e caberá ao ministro Alexandre de Moraes, relator do processo, analisar cada um deles.
+<br/><br/>
+Segundo fontes ligadas à defesa, o entendimento geral é de que o ministro seguirá o padrão já estabelecido anteriormente e rejeitará a maioria dessas solicitações. Uma vez concluída essa etapa, será aberto um prazo de 15 dias para que a Procuradoria-Geral da República (PGR) apresente suas alegações finais. Nesse momento, espera-se que a PGR reforce a tese da condenação de Bolsonaro.
+<br/><br/>
+Após a manifestação da PGR, será dado início a uma nova fase: o tenente-coronel Mauro Cid, delator do caso, terá 15 dias para apresentar seus próprios argumentos, assim como os advogados do ex-presidente, que buscarão sustentar sua absolvição.
+<br/><br/>
+Esse ciclo processual tende a se encerrar entre os meses de julho e agosto. Apesar de não haver um prazo legal para que o ministro Alexandre de Moraes apresente seu relatório final, as expectativas dentro do meio jurídico indicam que ele fará isso ainda em agosto, marcando logo em seguida o julgamento do caso no plenário do STF.
+<br/><br/>
+Caso tudo ocorra conforme previsto pelos especialistas, Bolsonaro seria condenado já em setembro. Após a sentença, seus advogados deverão apresentar embargos — recursos que normalmente visam reverter ou revisar partes da decisão. No entanto, a análise desse tipo de recurso também ficará sob responsabilidade de Alexandre de Moraes, cuja tendência, segundo observadores do processo, é de manter a linha rígida adotada até aqui.
+<br/><br/>
+Assim, a projeção mais realista entre os profissionais do direito e aliados do ex-presidente é de que os embargos sejam rejeitados de forma ampla e rápida, culminando com a prisão de Bolsonaro em outubro.
+<br/><br/>
+Essa possibilidade tem mobilizado não apenas a equipe jurídica, mas também familiares do ex-presidente, que já trabalham internamente com esse cenário como real. O clima entre os apoiadores mais próximos é de tensão e preparação para lidar com as implicações políticas e sociais que virão com a efetivação da prisão.
+<br/><br/>
+O canal de notícias TV Mundo continuará acompanhando todos os desdobramentos desse processo, trazendo análises, contextos e entrevistas com especialistas para que leitores e espectadores estejam sempre bem informados sobre os fatos que marcam esta nova fase da história política do país.
+<br/><br/>
+Encerramos aqui esta edição. Siga o canal de notícias TV Mundo nas redes sociais e fique por dentro das últimas atualizações. Até a próxima cobertura.<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+  <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">CRISE À VISTA? ECONOMISTAS ALERTAM: EUA PODEM COLAPSAR EM 2025!
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">🚨 Peter Schiff, Larry Fink, George Saravelos e Ray Dalio — quatro gigantes do mercado financeiro — soaram o alarme: a economia dos Estados Unidos está à beira do colapso?</div>
+                <img src="https://pbs.twimg.com/media/GsXNpOZXQAAA2cY?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+<iframe width="100%" height="425" src="https://www.youtube.com/embed/2yVLvz0U4Ds?si=UvdvhKuzrPlgpchN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">IDF Intensifica Invasão Expandida de Gaza – Acordo de Cessar-Fogo Estaria em Discussão</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">As IDF estão envolvidas em uma operação de grande escala, com cinco divisões militares operando simultaneamente dentro de Gaza. Esta é a primeira vez desde o final de 2023 e início de 2024 que um volume tão grande de soldados está engajado no terreno. </div>
+                <img src="https://pbs.twimg.com/media/GrQ6snOXIAEvi8Q?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Bem-vindos ao canal de notícias TV Mundo, onde trazemos a vocês as atualizações mais recentes sobre o conflito entre Israel e o Hamas em Gaza. Nos últimos desenvolvimentos, as Forças de Defesa de Israel (IDF) ampliaram sua operação militar na região, visando derrotar as forças do Hamas.
+<br/><br/>
+As IDF estão envolvidas em uma operação de grande escala, com cinco divisões militares operando simultaneamente dentro de Gaza. Esta é a primeira vez desde o final de 2023 e início de 2024 que um volume tão grande de soldados está engajado no terreno. Durante a operação, cerca de 670 alvos foram atingidos, incluindo infraestruturas relacionadas ao Hamas, tais como túneis e postos de mísseis antitanque.
+<br/><br/>
+A estratégia das IDF durante esta fase da invasão tem sido concentrar ataques sobre as forças armadas do Hamas enquanto evita danificar intencionalmente os centros administrativos, possivelmente devido à reorganização limitada dos comandos do grupo terrorista desde a retomada das hostilidades em março deste ano.
+<br/><br/>
+Apesar do aumento da intensidade dos combates, o governo israelense, sob o primeiro-ministro Benjamin Netanyahu, continua aberto à possibilidade de negociações para um cessar-fogo. Um acordo que poderia resultar na troca de reféns mantidos pelo Hamas também foi mencionado como parte dessas discussões potenciais.
+<br/><br/>
+Contudo, fontes dentro das IDF negam a circulação de ordens para uma preparação iminente para um cessar-fogo, sugerindo que a operação militar ainda busca avançar significativamente na conquista territorial, aumentando seu controle de aproximadamente 40-50% para 70-80% de Gaza.
+<br/><br/>
+Por outro lado, há áreas onde as IDF têm se abstido de agir diretamente, principalmente para evitar acidentes que possam custar a vida de reféns israelenses. Essa precaução é uma continuidade da política adotada ao longo da guerra. O Chefe do Estado-Maior das FDI, Tenente-General Eyal Zamir, reforçou a missão atual para os comandantes no campo: quebrar o espírito de luta do Hamas e criar condições para a devolução dos reféns.
+<br/><br/>
+Os relatos sobre vítimas civis palestinas desde o início dos ataques recentes variam, com o Hamas afirmando que mais de 260 pessoas foram mortas e mais de 600 feridas. As IDF indicaram que, apesar dos esforços para minimizar perdas civis, ainda seria cedo para confirmar esses números.
+<br/><br/>
+No final do domingo, houve um ataque limitado do Hamas com dois foguetes disparados de Gaza em direção a território israelense, mas ambos não conseguiram causar danos significativos, sendo um abatido e o outro caindo em campo aberto.
+<br/><br/>
+De modo geral, o Hamas tem enfrentado dificuldades para lançar ofensivas significativas contra Israel desde o início do ano, exceto por algumas instâncias pontuais durante eventos específicos no conflito.
+<br/><br/>
+Esse panorama complica ainda mais o cenário humanitário e político na região, com potenciais implicações internacionais.
+<br/><br/>
+Agradecemos sua leitura. Continuem acompanhando o canal de notícias TV Mundo para mais atualizações sobre este e outros assuntos relevantes em todo o mundo. Até breve!
+<br/><br/>
+Encerramos aqui nosso olhar sobre os desenvolvimentos recentes em Gaza, convidando vocês a se manterem informados através do nosso conteúdo confiável e atualizado. Até a próxima, é isso do canal de notícias TV Mundo!<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Deputada Carla Zambelli diz que não resistiria dentro da cadeia</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Na arena política do Brasil, onde disputas e acusações são comuns, a parlamentar federal Carla Zambelli enfrenta um desafio legal sem precedentes. Considerada culpada pela Primeira Turma do STF...</div>
+                <img src="https://pbs.twimg.com/media/GrPGIp9WsAAfQx7?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Em resposta à condenação, Zambelli criticou duramente o STF, questionando a validade das provas apresentadas contra ela e pedindo suporte da Câmara dos Deputados. Ela argumentou que as acusações são parte de uma perseguição política, negando qualquer envolvimento nos crimes atribuídos.
+<br/><br/>
+A decisão do tribunal ainda está aberta para recursos, o que significa que a prisão e a perda definitiva do mandato só se concretizarão após esgotar todas as possibilidades judiciais. No entanto, com base na Lei da Ficha Limpa, Zambelli já enfrenta inelegibilidade devido à decisão.
+<br/><br/>
+Zambelli compartilhou suas preocupações pessoais sobre a prisão em um pronunciamento público, onde destacou suas condições médicas — depressão, síndrome da taquicardia postural ortostática e síndrome de Ehlers-Danlos. Ela afirmou que esses problemas de saúde tornariam impossível seu sustento na prisão.
+<br/><br/>
+Durante a coletiva à imprensa, um assessor entregou uma caixa com medicamentos para ela demonstrar suas necessidades médicas perante as câmeras. A parlamentar também comentou sobre Walter Delgatti Neto, o hacker que supostamente auxiliou na invasão ao sistema do CNJ e foi igualmente condenado.
+<br/><br/>
+A denúncia apresentada pela PGR (Procuradoria-Geral da República) sugere um plano coordenado por Zambelli para emitir alvarás de soltura falsos, visando desestabilizar o Judiciário. Ela rejeitou a acusação e comparou o caso ao envolvimento do deputado Alexandre Ramagem na mesma trama.
+<br/><br/>
+A investigação da Polícia Federal em 2023 revelou que Delgatti invadiu o sistema do CNJ usando credenciais de funcionários, além de inserir alvarás falsos e um mandado falso contra o ministro Alexandre de Moraes. Essas ações ocorreram no contexto das eleições presidenciais entre Jair Bolsonaro (PL) e Luiz Inácio Lula da Silva (PT).
+<br/><br/>
+O julgamento em plenário virtual do STF, criticado por limitar as sustentações orais da defesa de Zambelli, resultou num veredicto unânime contra a parlamentar. Em uma decisão anterior, o tribunal já havia votado majoritariamente para condená-la em outros crimes.
+<br/><br/>
+No Tribunal Regional Eleitoral de São Paulo (TRE-SP), uma decisão adicional cassou seu mandato por desinformação eleitoral durante as eleições de 2022, esperando-se que essa decisão seja definitiva após o esgotamento dos recursos legais.
+<br/><br/>
+O cenário político continua tenso, com parlamentares discutindo possíveis ações em retaliação ao Judiciário, utilizando o caso Zambelli como ponto focal. O advogado da parlamentar criticou abertamente as práticas do STF, argumentando que essas medidas infringem os direitos de defesa.
+<br/><br/>
+Como sempre, a TV MUNDO acompanha de perto estas e outras notícias relevantes para você. Até breve, com mais informações e análises em profundidade.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">O Milionário que Mata Crianças Pobres: Bill Gates acusa Elon Musk</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">"A imagem do homem mais rico do mundo matando as crianças mais pobres do mundo não é bonita", afirmou Gates em entrevista ao Financial Times.</div>
+                <img src="https://pbs.twimg.com/media/GqeIZuVWwAEOP_9?format=jpg&name=small" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+Olá, leitores e espectadores do Canal de Notícias TV Mundo! Aqui estamos novamente com uma notícia que está fazendo grande polêmica no mundo dos negócios e da filantropia. O cofundador da Microsoft, Bill Gates, criticou duramente o CEO da Tesla, Elon Musk, por cortar programas de ajuda humanitária ligados ao Departamento de Eficiência Governamental (DOGE).
+<br/><br/>
+Segundo Gates, os cortes afetaram instituições como a Agência dos Estados Unidos para o Desenvolvimento Internacional (USAID), incluindo projetos voltados à saúde infantil e materna em regiões vulneráveis. Um exemplo citado foi um hospital em Gaza, Moçambique, que atuava na prevenção da transmissão do HIV de mães para filhos.
+<br/><br/>
+"A imagem do homem mais rico do mundo matando as crianças mais pobres do mundo não é bonita", afirmou Gates em entrevista ao Financial Times. Ele também criticou a falta de preparo de Musk ao tomar decisões com grande impacto social.
+<br/><br/>
+Na ocasião, Musk teria confundido Gaza, em Moçambique, com a região de mesmo nome no Oriente Médio e justificou o corte do financiamento alegando que o projeto visava fornecer preservativos ao grupo extremista Hamas. "Eu adoraria que ele fosse até lá conhecer as crianças que agora estão infectadas com HIV porque ele cortou o dinheiro", disparou Gates.
+<br/><br/>
+Ainda na entrevista, o fundador da Fundação Bill & Melinda Gates reforçou seu compromisso com a filantropia: "Podem dizer muitas coisas sobre mim quando eu morrer, mas estou determinado a garantir que 'ele morreu rico' não será uma delas. Há problemas urgentes demais no mundo para ignorar."
+<br/><br/>
+E falando em doações e filantropia, Bill Gates anunciou recentemente que doará "praticamente toda" sua fortuna para a filantropia por meio de sua fundação, que distribuirá o dinheiro para "a causa de salvar e melhorar vidas ao redor do mundo" pelos próximos 20 anos.
+<br/><br/>
+"As pessoas vão dizer muitas coisas sobre mim quando eu morrer, mas estou determinado que 'morri rico' não seja uma delas", disse Gates. "Há tantos problemas urgentes para resolver que não consigo me apegar a recursos que poderiam ser usados ​​para ajudar as pessoas."
+<br/><br/>
+Gates, 69, fará uma das maiores doações filantrópicas da história ao doar 99% de sua imensa fortuna, avaliada pela Bloomberg em US$ 168 bilhões e pela Forbes em US$ 113 bilhões, para causas beneficentes.
+<br/><br/>
+O magnata explicou que esta decisão "chega em um momento de reflexão" para ele: "Além de comemorar o 25º aniversário da fundação, este ano também marca outros marcos: seria o ano em que meu pai, que me ajudou a começar a fundação, completaria 100 anos; a Microsoft completaria 50 anos; e eu completaria 70 anos em outubro."
+<br/><br/>
+"Isso significa que oficialmente cheguei a uma idade em que muitas pessoas estão aposentadas. Embora eu respeite a decisão de qualquer um de passar os dias jogando pickleball, essa vida não é para mim, pelo menos não em tempo integral. Tenho sorte de acordar todos os dias com energia para ir trabalhar. E mal posso esperar para preencher meus dias com revisões estratégicas, reuniões com parceiros e jornadas de aprendizado pelo máximo de tempo possível", explicou Gates.
+<br/><br/>
+O bilionário observou que a missão da Fundação Gates "permanece enraizada na ideia de que o local onde você nasce não deve determinar suas oportunidades". "Estou animado para ver como nosso próximo capítulo continuará a aproximar o mundo de um futuro onde todos, em todos os lugares, tenham a oportunidade de viver uma vida saudável e produtiva", disse ele.
+<br/><br/>
+E assim termina nossa notícia do dia aqui no Canal de Notícias TV Mundo. Lembrem-se, ficamos sempre atentos para trazer as melhores informações sobre tudo o que acontece no mundo. Até a próxima!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Desastre Econômico: Governo Trump Atingido pela Marca dos 100 Dias Negativos</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O presidente Donald Trump enfrentou um desafio econtrário ao tentar explicar os dados econômicos fracos que marcam seu primeiro trimestre no cargo.</div>
+                <img src="https://pbs.twimg.com/media/Gp5tFvTWUAA9iOp?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+TV Mundo
+<br/><br/>
+1 de maio de 2025
+<br/><br/>
+O presidente Donald Trump enfrentou um desafio econtrário ao tentar explicar os dados econômicos fracos que marcam seu primeiro trimestre no cargo. O Departamento de Comércio dos Estados Unidos divulgou na quarta-feira os resultados preliminares do Produto Interno Bruto (PIB), mostrando o primeiro declínio trimestral em três anos.
+<br/><br/>
+O PIB apresentou um desempenho negativo, com as empresas importando uma enxurrada de produtos para evitar custos mais altos devido às tarifas pendentes de Trump. Os dados preliminares apontam que a contração econômica no primeiro trimestre foi o resultado da preparação das empresas para novas tarifas.
+<br/><br/>
+Trump e seus assessores tiveram dificuldade em chegar a um consenso sobre o número do PIB, dizendo simultaneamente que ele era ruim por causa das políticas do governo Biden, mas também bom por causa dos esforços de Trump. "Vocês provavelmente viram alguns números hoje", disse Trump aos repórteres ao referir-se a seu antecessor democrata.
+<br/><br/>
+O presidente afirmou que o número se devia a "distorções" nas importações, estoques e gastos do governo, componentes que entram no cálculo do PIB. Ele também comemorou um aumento no investimento empresarial que alguns economistas atribuem a gastos relacionados a tarifas.
+<br/><br/>
+Em uma reunião de gabinete transmitida ao vivo, Trump disse: "Tínhamos números que, apesar do que nos foi dado, nós os revertemos e estávamos realmente os revertendo". O assessor comercial de Trump, Peter Navarro, desconsiderou o número do PIB, dizendo que ele caiu porque as empresas estavam comprando produtos do exterior para se antecipar às tarifas.
+<br/><br/>
+As diferentes explicações surgiram quando Trump ultrapassou o marco simbólico de 100 dias no cargo e pesquisas mostraram crescente descontentamento público com a forma como conduz a economia. Uma pesquisa Reuters/Ipsos realizada no domingo mostrou que apenas 42% dos entrevistados aprovam o desempenho de Trump, enquanto 53% desaprovam.
+<br/><br/>
+Os temores de uma recessão aumentaram nas últimas semanas com as tarifas elevadas e políticas comerciais agressivas levando economistas a alertar sobre uma possível paralisação do comércio com alguns países. Essas medidas abalaram investidores e empresas, levando alguns economistas privados a atribuírem a crise ao atual governo de Trump.
+<br/><br/>
+Os democratas foram rápidos em aproveitar a incerteza econômica para culpar diretamente Trump pela situação atual. "Esta não é a economia de Joe Biden, Donald", disse o líder da minoria na Câmara dos Representantes, Hakeem Jeffries.
+<br/><br/>
+Enquanto isso, os assessores de Trump continuaram elogiando as políticas econômicas do presidente. O secretário do Tesouro dos EUA, Scott Bessent, afirmou que as famílias americanas estão recuperando sua estabilidade financeira e que o país está enfrentando taxas de hipotecas mais baixas.
+<br/><br/>
+TV Mundo
+<br/><br/>
+Encerramos aqui a nossa cobertura sobre os desafios econômicos do presidente Trump. Mantenha-se conectado com a TV Mundo para as últimas atualizações e análises da situação política e econômica nos Estados Unidos e no mundo.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+ <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Vale do Silício diz ter criado startup para substituir todos os trabalhadores humanos.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Hoje, mergulhamos na história de uma startup que está causando polêmica no Vale do Silício e além...
+</div>
+                <img src="https://pbs.twimg.com/media/GpFI6SmW0AAZvgM?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+21 de abril de 2025<br/><br/>
+Aqui é o TV Mundo, seu canal de notícias online trazendo informações atualizadas sobre os acontecimentos mais relevantes do mundo da tecnologia e inovação. Hoje, mergulhamos na história de uma startup que está causando polêmica no Vale do Silício e além.
+<br/><br/>
+De tempos em tempos, surge no Vale do Silício uma iniciativa tão ousada ou ambiciosa que desafia a lógica convencional. A mais recente dessas ideias pertence à Mechanize, uma nova empresa fundada por Tamay Besiroglu, um renomado pesquisador de inteligência artificial (IA). O anúncio foi feito na plataforma X e rapidamente atraiu atenção — tanto positiva quanto negativa. A proposta? Automatizar completamente todo o trabalho humano. Sim, você entendeu bem: substituir todos os trabalhadores humanos por agentes de IA capazes de realizar qualquer tarefa.
+<br/><br/>
+Segundo Besiroglu, a Mechanize tem como meta fornecer os dados, avaliações e ambientes virtuais necessários para tornar tal automação possível. Ele chegou a calcular o mercado potencial total da empresa, baseando-se nos salários globais atuais. Nos Estados Unidos, os trabalhadores recebem cerca de US18trilho~esporano,enquantoglobalmenteestenuˊmerochegaaaproximadamenteUS 60 trilhões anuais. Apesar do escopo monumental, ele afirma que o foco inicial da startup será em "trabalhos de colarinho branco", excluindo empregos manuais que exigiriam avanços significativos na robótica.
+<br/><br/>
+A resposta ao lançamento foi variada. No X, Anthony Aguirre, um usuário influente, expressou preocupação: “A automação da maior parte do trabalho humano é de fato um prêmio enorme para as empresas, mas representa uma perda colossal para a maioria dos humanos.” Outros apontaram críticas relacionadas ao instituto de pesquisa Epoch, fundado por Besiroglu, que até então era visto como uma entidade imparcial dedicada a estudar o impacto econômico da IA e criar benchmarks confiáveis para medir o desempenho de modelos avançados.
+<br/><br/>
+O envolvimento da Epoch com outras empresas já havia gerado controvérsias anteriormente. Em dezembro, revelou-se que a OpenAI ajudou na criação de um benchmark usado para lançar o modelo o3 do ChatGPT. Muitos sentiram que a organização deveria ter sido mais transparente sobre essa parceria. Quando Besiroglu anunciou a Mechanize, Oliver Habryka, outro usuário do X, comentou: "Isso parece confirmar que a pesquisa da Epoch estava diretamente alimentando avanços em capacidades de fronteira, algo que eu esperava não ver vindo de você."
+<br/><br/>
+Apesar das críticas, Besiroglu conta com o apoio de investidores de peso, incluindo Nat Friedman, Daniel Gross, Patrick Collison, Dwarkesh Patel, Jeff Dean, Sholto Douglas e Marcus Abramovitch. Este último, sócio-gerente do fundo de hedge de criptomoedas AltX, disse que investiu porque a equipe da Mechanize demonstrou uma compreensão profunda e única sobre IA.
+<br/><br/>
+Besiroglu argumenta que sua visão beneficia também os humanos, prometendo "crescimento econômico explosivo" e melhorias significativas no padrão de vida. Ele cita a possibilidade de novos bens e serviços que sequer podemos imaginar hoje. No entanto, especialistas questionam se isso seria realidade para todos. Se os humanos não tiverem empregos, como poderiam adquirir esses produtos e serviços? Besiroglu responde dizendo que os trabalhadores humanos seriam mais valiosos em funções complementares que a IA não pode desempenhar. Além disso, ele sugere que renda alternativa, como aluguéis, dividendos e assistência social, garantiria sustento em um mundo automatizado.
+<br/><br/>
+Embora a missão da Mechanize seja controversa, o problema técnico que busca resolver é legítimo. Atualmente, agentes de IA carecem de confiabilidade, têm dificuldade em reter informações e executar planos de longo prazo. Empresas como Salesforce, Microsoft e OpenAI estão investindo nessa área, assim como várias startups menores. Mesmo diante dos desafios, Besiroglu mantém-se otimista e lembra: a Mechanize está contratando.
+<br/><br/>
+E aqui encerramos nossa cobertura. Fiquem ligados no TV Mundo para mais notícias e análises sobre o universo da tecnologia. Até a próxima, leitores e espectadores!
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+
+<!--🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴--> <!-- Coluna da direita inicio --> </div>
+        <div class="right-column">
+            <!-- Post flutuante -->
+            <div class="floating-post">
+                <img src="https://via.placeholder.com/300" alt="">
+                <div class="post-title">MEU DNA É MARLEY</div>
+                <div class="post-description"><a href="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large"><img src="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large" alt="Imagem do Post 1" class="post-image"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <div class="footer-nav">
+            <a href="https://tvmundo.github.io/qwen/2025/mar/1.html">&#9664;</a><!---anterior--->
+            <a href="https://tvmundo.github.io/qwen/2025/3.html">&#9654;</a><!---proximo--->
+        </div>
+        <div class="footer-text">TV Mundo desde 2011</div>
+    </div>
+
+    <!-- Botão de rolagem -->
+    <button class="scroll-button" id="scrollButton">↑</button>
+
+    <script>
+        // Função para expandir/recolher os posts
+        document.querySelectorAll('.post-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.previousElementSibling; // Encontra o conteúdo do post
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    button.textContent = 'Continuar lendo...';
+                } else {
+                    content.style.display = 'block';
+                    button.textContent = 'Recolher';
+                }
+            });
+        });
+
+        // Função para rolar a página
+        const scrollButton = document.getElementById('scrollButton');
+        let isAtTop = true;
+
+        scrollButton.addEventListener('click', () => {
+            if (isAtTop) {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↑'; // Altera o ícone para subir
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↓'; // Altera o ícone para descer
+            }
+            isAtTop = !isAtTop; // Alterna o estado
+        });
+
+        // Atualiza o ícone do botão com base na posição da página
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                scrollButton.textContent = '↓'; // Ícone para descer
+                isAtTop = true;
+            } else if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+                scrollButton.textContent = '↑'; // Ícone para subir
+                isAtTop = false;
+            }
+        });
+    </script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://tvmundo.github.io/qwen/player.mod2/script.js"></script>	
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

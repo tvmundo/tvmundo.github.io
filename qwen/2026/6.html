@@ -1,0 +1,1526 @@
+<!--- -------------------------atualizar pagina ini---------------------------- --->
+    <style>
+        /* Estilo do botão */
+        .reload-button {
+            position: fixed; /* Permite ajustar a posição fixa na tela */
+            top: 1%; /* Ajuste a altura inicial (50% da página) */
+            bottom: 20px; /* Distância do fundo da página */
+            right: 5px; /* Distância da direita da página */
+            background-color: #6200ea; /* Cor de fundo moderna */
+            color: white; /* Cor do texto */
+            border: none; /* Sem borda */
+            border-radius: 50%; /* Formato circular */
+            width: 30px; /* Largura do botão */
+            height: 30px; /* Altura do botão 50 */
+            font-size: 15px; /* Tamanho do ícone 24 */
+            cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efeito moderno */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave */
+            z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+        }
+
+        /* Efeito ao passar o mouse */
+        .reload-button:hover {
+            transform: scale(1.1); /* Aumenta o tamanho levemente */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+        }
+
+        /* Efeito ao clicar */
+        .reload-button:active {
+            transform: scale(0.95); /* Diminui o tamanho levemente */
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão de Recarregar -->
+    <button class="reload-button" onclick="location.reload();">
+        &#x21bb; <!-- Ícone de recarregar (unicode) -->
+    </button>
+<!------------------------------estilo do player de video ini-------------------------------------------->
+  <style>
+    /* Estilo geral */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+
+    .tvmundo1 {
+      margin-bottom: 30px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Menu suspenso */
+    .dropdown-menu {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .dropdown-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-button:hover {
+      background-color: #0056b3;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 100%;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Player de vídeo */
+    .video-player {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* Proporção 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .video-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+<!------------------------------estilo do player de video FIM-------------------------------------------->
+<!------------------------------script do player de video ini-------------------------------------------->
+<script>
+    // Função para inicializar os menus suspensos e o carregamento de vídeos
+    document.addEventListener("DOMContentLoaded", function () {
+      const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+
+      dropdownMenus.forEach((menu) => {
+        const button = menu.querySelector(".dropdown-button");
+        const content = menu.querySelector(".dropdown-content");
+        const player = menu.parentElement.querySelector(".video-player iframe");
+
+        // Alternar visibilidade do menu suspenso
+        button.addEventListener("click", () => {
+          content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+
+        // Carregar vídeo ao clicar em um item do menu
+        content.addEventListener("click", (event) => {
+          if (event.target.tagName === "A") {
+            event.preventDefault();
+            const videoId = event.target.getAttribute("data-video-id");
+            player.src = `https://www.youtube.com/embed/${videoId}`;
+            content.style.display = "none"; // Esconder o menu após seleção
+          }
+        });
+      });
+    });
+  </script>
+<!------------------------------script do player de video fIM-------------------------------------------->
+</body>
+</html> 
+<!--- -------------------------atualizar pagina FiM---------------------------- --->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Mundo</title>
+    <style>
+        /* Estilo básico para o layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabeçalho */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Layout principal */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+
+        /* Coluna da esquerda (posts) */
+        .left-column {
+            flex: 2;
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Post individual */
+        .post {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .post-title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .post-description {
+            color: #555;
+        }
+
+        .post-image, .post-video {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .post-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .post-button {
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .post-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Coluna da direita */
+        .right-column {
+            flex: 1;
+            padding: 20px;
+            background-color: #e9ecef;
+            position: relative;
+        }
+
+        /* Post flutuante */
+        .floating-post {
+            position: fixed;
+            top: 20%;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10; /* Garante que o post flutuante fique acima do conteúdo */
+        }
+
+        .floating-post img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .footer-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            font-size: 1em;
+        }
+
+        /* Botão de rolagem */
+        .scroll-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 20; /* Garante que o botão fique acima do conteúdo */
+        }
+
+        .scroll-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .right-column {
+                display: none; /* Oculta a coluna direita em dispositivos móveis */
+            }
+
+            .floating-post {
+                display: none; /* Oculta o post flutuante em dispositivos móveis */
+            }
+        }
+    </style>
+</head>
+<body>
+        <!-- Cabeçalho -->
+    <div class="header">
+        <a href="https://tvmundo.github.io/"><img src="https://pbs.twimg.com/media/GkvBOZJWsAAV-Uu?format=png&name=small" alt="Logo TV Mundo" class="header-logo"><a href="https://tvmundo.github.io/"></a>
+<div class="header-title">TV Mundo</div>
+</div>
+    <!-- Conteúdo principal -->
+    <div class="main-container">
+        <!-- Coluna da esquerda -->
+             <!-- Coluna post -->
+    <div class="left-column">
+  <!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">O “príncipe deste mundo”, o templo e o verdadeiro Sumo Sacerdote</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Veio para o que era seu, e os seus não o receberam.</div>
+                <img src="https://pbs.twimg.com/media/G_6Wi-gXQAApWi6?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>   
+    <title>O Príncipe Deste Mundo – Leitura Explicativa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            
+            color: #222;
+        }
+        h1, h2, h3 {
+            color: #1a1a1a;
+        }
+        blockquote {
+            border-left: 4px solid #ccc;
+            padding-left: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            background: #f9f9f9;
+        }
+        .referencia {
+            text-align: right;
+            font-style: normal;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        hr {
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONTEÚDO ORIGINAL -->
+    <h1>Uma leitura explicativa e acessível para os leitores</h1>
+
+    <p>
+        A expressão <strong>“o príncipe deste mundo”</strong>, usada por Jesus nos Evangelhos de João,
+        pode ser compreendida, neste contexto, como uma referência ao sumo sacerdote e à liderança
+        religiosa que controlava o templo e o sistema religioso em Jerusalém.
+    </p>
+
+    <h2>O “príncipe deste mundo” e o juízo anunciado por Jesus</h2>
+
+    <p>Jesus declara:</p>
+
+    <blockquote>
+        “Agora é o juízo deste mundo; agora será expulso o príncipe deste mundo.”
+        <div class="referencia">(João 12:31)</div>
+    </blockquote>
+
+    <p>
+        Aqui, Jesus anuncia que aquele sistema religioso dominante — representado pelo sumo sacerdote,
+        o principal líder espiritual e político do povo — seria julgado e removido.
+        Esse “príncipe” exercia autoridade sobre o templo, as tradições e o povo,
+        mas sua liderança estava corrompida.
+    </p>
+
+    <p>Mais adiante, Jesus afirma:</p>
+
+    <blockquote>
+        “Já não falarei muito convosco, porque se aproxima o príncipe deste mundo, e nada tem em mim.”
+        <div class="referencia">(João 14:30)</div>
+    </blockquote>
+
+    <blockquote>
+        “O príncipe deste mundo está julgado.”
+        <div class="referencia">(João 16:11)</div>
+    </blockquote>
+
+    <p>
+        Essas palavras indicam que essa autoridade religiosa não tinha poder espiritual sobre Cristo
+        e que seu julgamento já estava determinado.
+    </p>
+
+    <h2>A liderança religiosa e a crucificação de Jesus</h2>
+
+    <p>
+        Os Evangelhos mostram claramente que foram os principais sacerdotes e fariseus,
+        liderados pelo sumo sacerdote Caifás, que conspiraram pela morte de Jesus:
+    </p>
+
+    <blockquote>
+        “Convém que um homem morra pelo povo, e não pereça toda a nação.”
+        <div class="referencia">(João 11:50)</div>
+    </blockquote>
+
+    <p>
+        João explica que Caifás, sendo sumo sacerdote, profetizou involuntariamente
+        sobre a morte de Jesus (João 11:51-52).
+    </p>
+
+    <blockquote>
+        “Nenhum dos príncipes deste mundo conheceu essa sabedoria; porque, se a conhecessem,
+        nunca crucificariam ao Senhor da glória.”
+        <div class="referencia">(1 Coríntios 2:8)</div>
+    </blockquote>
+
+    <h2>O juízo: expulsão do sistema antigo e queda do templo</h2>
+
+    <blockquote>
+        “Não ficará aqui pedra sobre pedra que não seja derrubada.”
+        <div class="referencia">(Mateus 24:2)</div>
+    </blockquote>
+
+    <blockquote>
+        “A hora vem, e agora é, em que nem neste monte nem em Jerusalém adorareis o Pai.”
+        <div class="referencia">(João 4:21)</div>
+    </blockquote>
+
+    <h2>Jesus Cristo: Rei e Sumo Sacerdote eterno</h2>
+
+    <blockquote>
+        “Deus o exaltou à sua direita como Príncipe e Salvador.”
+        <div class="referencia">(Atos 5:31)</div>
+    </blockquote>
+
+    <ul>
+        <li>Hebreus 4:14-16</li>
+        <li>Hebreus 5:10</li>
+        <li>Hebreus 6:20</li>
+        <li>Hebreus 7:11</li>
+        <li>Salmo 110:4</li>
+    </ul>
+
+    <blockquote>
+        “Jesus Cristo é a fiel testemunha, o primogênito dentre os mortos
+        e o príncipe dos reis da terra.”
+        <div class="referencia">(Apocalipse 1:5)</div>
+    </blockquote>
+
+    <h2>Conclusão clara para o leitor</h2>
+
+    <p>O príncipe deste mundo foi julgado e expulso.</p>
+    <p>O templo foi destruído.</p>
+    <p>Jesus Cristo reina agora como Rei e Sumo Sacerdote eterno.</p>
+
+    <p>
+        A antiga autoridade caiu.<br>
+        O novo e eterno sacerdócio foi estabelecido.<br>
+        <strong>Cristo reina para sempre. ✨✝️</strong>
+    </p>
+
+    <!-- NOVO CONTEÚDO ADICIONADO -->
+    <hr>
+
+    <h1>O Verdadeiro Sumo Sacerdote: Da Autoridade Temporal à Eternidade em Cristo</h1>
+
+    <p>
+        Quando Jesus anunciou: <em>"Agora é o juízo deste mundo; agora será expulso o príncipe deste mundo"</em>
+        (João 12:31), Ele se referia à liderança religiosa de sua época — o sumo sacerdote e o sistema que representava.
+        Esse "príncipe" não era uma figura espiritual invisível, mas o poder religioso terreno que dominava o povo
+        sob a aparência de autoridade divina.
+    </p>
+
+    <p>Isso fica evidente em três momentos-chave do Evangelho de João:</p>
+
+    <ul>
+        <li><strong>João 12:31</strong> — o príncipe seria expulso por ocasião da cruz.</li>
+        <li><strong>João 14:30</strong> — esse príncipe "nada tem em mim".</li>
+        <li><strong>João 16:11</strong> — esse príncipe "está julgado".</li>
+    </ul>
+
+    <p>
+        Quem era esse príncipe? O próprio texto bíblico aponta para Caifás, o sumo sacerdote
+        (João 11:49-53), líder da conspiração contra Jesus.
+        Paulo confirma esse uso ao dizer: <em>"Não dirás mal do príncipe do teu povo"</em> (Atos 23:5),
+        mostrando que "príncipe" e "sumo sacerdote" eram títulos intercambiáveis.
+    </p>
+
+    <h2>O Julgamento e a Nova Ordem</h2>
+
+    <ul>
+        <li><strong>Na cruz:</strong> Jesus foi entregue, mas ressuscitou, invalidando aquela autoridade.</li>
+        <li><strong>Na destruição do Templo (70 d.C.):</strong> o sistema levítico chegou ao fim.</li>
+        <li><strong>Na exaltação de Cristo:</strong> Ele foi constituído Sumo Sacerdote eterno.</li>
+    </ul>
+
+    <h2>Onde Adoramos Hoje?</h2>
+
+    <blockquote>
+        “Nem neste monte nem em Jerusalém adorareis o Pai.”
+        <div class="referencia">(João 4:21)</div>
+    </blockquote>
+
+    <p>
+        A adoração não depende mais de um local físico, mas de um coração transformado,
+        em espírito e em verdade (João 4:23-24).
+    </p>
+
+    <h2>Conclusão</h2>
+
+    <p>
+        O "príncipe deste mundo" foi julgado e substituído.
+        O templo de pedras caiu, mas Cristo edificou o verdadeiro santuário: Seu corpo ressurreto
+        (João 2:21).
+    </p>
+
+    <p>
+        Hoje, Jesus Cristo é Rei e Sumo Sacerdote eterno.
+        Não há mais necessidade de sacerdotes humanos como mediadores.
+        A adoração agora é espiritual, viva e verdadeira.
+    </p>
+
+    <p><em>
+        Nota: Esta interpretação apresenta uma leitura contextual das passagens joaninas.
+        Outras tradições entendem o “príncipe deste mundo” como Satanás; ambas podem coexistir,
+        pois a rejeição de Cristo operou também sob influência espiritual das trevas (João 8:44).
+    </em></p>
+
+</body>
+</html>
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴 O messias já veio Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Suprema Corte dos Estados Unidos invalida tarifas globais impostas por Trump</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+Em uma decisão arrasadora, a mais alta instância judiciária dos Estados Unidos declarou ilegais as bases sobre as quais o então presidente Donald Trump impôs tarifas globais, determinando o cancelamento imediato de sua aplicação...
+</div>
+                <img src="https://pbs.twimg.com/media/HBn-l_CWMAEXVSu?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+20 de fevereiro de 2026<br/>
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://geo.dailymotion.com/player.html?video=xa0g6sm"style="width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border:none;"allowfullscreentitle="Dailymotion Video Player"allow="web-share"></iframe></div>					
+<br/><br/>Aqui é a TV Mundo, seu canal de notícias na internet, trazendo uma análise aprofundada sobre a decisão histórica que abalou os circuitos políticos e econômicos nos Estados Unidos.
+A Suprema Corte do país entregou, nesta semana, um veredito que redefine os limites do poder presidencial e invalida uma das políticas comerciais mais agressivas da administração Trump.
+<br/><br/>
+Em uma decisão arrasadora, a mais alta instância judiciária dos Estados Unidos declarou ilegais as bases sobre as quais o então presidente Donald Trump impôs tarifas globais, determinando o cancelamento imediato de sua aplicação. O acórdão, divulgado oficialmente pelo organismo, é claro ao afirmar que o chefe do Executivo agiu além das atribuições que lhe são conferidas pela lei, invadindo competências que são exclusivas do Poder Legislativo.
+<br/><br/>
+A corte não fez distinção entre as diferentes motivações das tarifas. Foram consideradas nulas tanto as medidas que visavam, em tese, combater o narcotráfico, quanto as que ficaram conhecidas como ‘tarifas recíprocas’. Em ambos os casos, os ministros entenderam que o presidente ultrapassou os poderes legais que lhe foram delegados pelo Congresso.
+<br/><br/>
+O cerne de toda a disputa concentrou-se na interpretação de uma legislação específica: a Lei Internacional de Poderes Econômicos de Emergência de 1977, conhecida pela sigla IEEPA. Durante os processos, a equipe jurídica do governo Trump argumentou que essa lei, que concede ao presidente a autoridade para "regular" o comércio exterior durante uma emergência nacional, seria o suficiente para justificar a imposição de tarifas de forma unilateral e sem limites pré-estabelecidos.
+<br/><br/>
+A Suprema Corte, no entanto, rejeitou essa tese por uma margem interpretativa decisiva. No documento, fica estabelecido que o poder de "regulamentar" não se iguala, em hipótese alguma, ao poder de "tributar". O presidente da Suprema Corte, John Roberts, foi enfático ao redigir a opinião majoritária, lembrando os fundamentos constitucionais da nação. Roberts destacou que a autoridade para impor tarifas é "muito claramente um ramo do poder tributário". 
+<br/><br/>
+Ele invocou a Constituição dos Estados Unidos para lembrar que cabe ao Congresso, e somente a este órgão, a chave para "acesso ao bolso do povo" por meio da arrecadação de impostos e taxas. A mensagem é direta: qualquer tentativa de delegar esse poder específico ao Executivo deve ser explícita, clara e inequívoca, o que não era o caso.
+<br/><br/>
+Para contextualizar a dimensão dessa decisão, é preciso recuar até agosto do ano passado, quando o presidente Trump assinou uma ordem executiva impondo tarifas comerciais sobre múltiplos países. Os valores eram impressionantes, oscilando entre 10% e 41%, e foram justificados publicamente como "tarifas recíprocas ajustadas". 
+<br/><br/>
+Na época, o presidente defendia a medida como "a melhor ferramenta" para proteger os trabalhadores americanos e alavancar as empresas que produzem produtos feitos nos Estados Unidos.
+<br/><br/>
+A retórica em torno dessas tarifas sempre foi intensa. O presidente chegou a anunciar, em suas redes sociais, que os cofres públicos receberiam uma bolada histórica. "Nós levantamos, e em breve receberemos mais de 600 bilhões de dólares em tarifas, mas a mídia falsa se recusa a falar sobre isso porque odeia e desrespeita nosso país", escreveu Trump em sua conta na Truth Social, defendendo o legado de sua política comercial. 
+<br/><br/>
+Ele também indicou que, graças às tarifas, tanto do ponto de vista financeiro quanto de segurança nacional, os Estados Unidos haviam se tornado um país "muito mais forte e respeitado".
+<br/><br/>
+Apesar do tom de vitória que vinha do presidente, nos bastidores do governo atual e entre os analistas, a possibilidade de uma reviravolta judicial já era considerada. E, de fato, a decisão chegou. No entanto, fontes próximas à Casa Branca indicam que o governo não foi pego de surpresa. A informação que circula nos corredores do poder é que a administração sempre planejou esse tipo de cenário.
+<br/><br/>
+Existem planos de backup, verdadeiros planos reserva, para manter a essência do tarifaço de Trump. A estratégia jurídica alternativa seria invocar autoridades previstas em outras legislações já existentes, especificamente as Seções 232, 301, 122 e 338 das leis em vigor nos Estados Unidos. "Esta sempre foi uma possibilidade que eles planejaram", revelou uma fonte ligada ao processo, indicando que a batalha comercial está longe de um desfecho definitivo.
+<br/><br/>
+Enquanto o governo busca alternativas legais para sustentar a política protecionista, a reação política não demorou a aparecer. O líder democrata na Câmara, Hakeem Jeffries, classificou a decisão da Suprema Corte em termos contundentes. Para ele, trata-se de "uma grande vitória para o povo americano e outra derrota esmagadora para o aspirante a Rei". A declaração acirra ainda mais os ânimos em um ano eleitoral, transformando a decisão judicial em um combustível poderoso para a campanha.
+<br/><br/>
+A TV Mundo continuará acompanhando os desdobramentos dessa história, monitorando como a Casa Branca tentará utilizar as leis de backup e qual será o impacto real dessa decisão nas relações comerciais dos Estados Unidos com o resto do mundo. Fique ligado em nosso canal para mais atualizações. Por enquanto, é tudo. Aqui é a TV Mundo se despedindo e desejando uma ótima leitura a todos os nossos espectadores.
+        <!--Fim 🔴🔴🔴🔴🔴 Fim-->
+            <br/><br/>
+</div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Reino Unido Nega Acesso a Bases Militares para EUA em Possível Ataque ao Irã e Provoca Ira de Trump</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+A decisão aumentou as tensões entre o Reino Unido e Washington e provocou críticas do presidente Donald Trump...
+</div>
+                <img src="https://pbs.twimg.com/media/HBmwNqmWsAAMA11?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+20 de fevereiro de 2026<br/>
+					<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://geo.dailymotion.com/player.html?video=xa0foi6"style="width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border:none;"allowfullscreentitle="Dailymotion Video Player"allow="web-share"></iframe></div>
+<br/><br/>Aqui é a TV Mundo, seu canal de notícias na internet, trazendo uma análise aprofundada sobre o rompimento de uma aliança histórica e o aumento das tensões no cenário global.
+<br/><br/>
+Uma nova e significativa fissura surgiu na tradicional aliança entre o Reino Unido e os Estados Unidos. De acordo com informações publicadas pelo jornal The Times nesta quinta-feira, o governo britânico negou formalmente o pedido de Washington para utilizar suas instalações militares como plataforma de lançamento para potenciais ataques contra o Irã. 
+<br/><br/>
+
+A decisão, tomada em meio a um crescente acúmulo de forças militares norte-americanas na região do Golfo, já provocou uma reação imediata e contundente do presidente Donald Trump.
+<br/><br/>
+
+A recusa de Londres não foi um ato arbitrário, mas sim uma decisão baseada em pilares legais. Sob acordos de longa data, forças dos Estados Unidos podem operar a partir de bases como a RAF Fairford, em Gloucestershire, que abriga bombardeiros pesados norte-americanos, e a instalação conjunta em Diego Garcia, no Oceano Índico. No entanto, essas operações sempre dependeram de uma condição inegociável: a aprovação prévia do governo do Reino Unido.
+<br/><br/>
+
+Fontes do governo britânico indicam que a autorização não foi concedida para qualquer ação hipotética contra o Irã devido a sérias preocupações com o direito internacional. A avaliação interna é que participar de um ataque sem uma justificativa legal clara e robusta poderia colocar o Reino Unido em violação direta das normas que regem as relações entre os estados, transformando o país em um co-participante de uma ação considerada ilegítima por seus próprios juristas.
+<br/><br/>
+
+A negativa, no entanto, não ficou sem resposta. O presidente Donald Trump utilizou sua plataforma Truth Social para criticar abertamente a decisão do premiê Keir Starmer. Em uma publicação incisiva, Trump não apenas lamentou a recusa, mas a vinculou diretamente a outro ponto de atrito: a transferência da soberania do Território Britânico do Oceano Índico.
+<br/><br/>
+
+Trump atacou o acordo firmado pelo Reino Unido em 2025, que prevê a devolução das Ilhas Chagos, incluindo a crucial base de Diego Garcia, para as Ilhas Maurício. Em sua mensagem, o presidente norte-americano alertou sobre a instabilidade na região, referindo-se ao Irã como um "regime altamente instável e perigoso". 
+<br/><br/>
+
+Ele afirmou que "pode ser necessário que os Estados Unidos usem Diego Garcia e o Aeródromo localizado em Fairford... para erradicar um possível ataque", sugerindo que a recusa britânica poderia comprometer a segurança coletiva.
+<br/><br/>
+
+A sequência dos eventos revela um agravamento das negociações. A disputa pública veio à tona logo após Trump discutir, em conversa com o primeiro-ministro Keir Starmer, o ultimato que seu governo está preparando para o Irã em relação ao seu programa nuclear. No dia seguinte a esse diálogo, o presidente norte-americano fez a ligação direta entre o acordo de Chagos e a necessidade de ação militar, argumentando que o apoio do Reino Unido seria legal sob o direito internacional, baseando-se na alegação de que o Irã poderia representar uma ameaça iminente ao Reino Unido e às nações aliadas.
+<br/><br/>
+
+Enquanto a disputa diplomática se desenrola, múltiplos relatórios de inteligência indicam que Washington continua a se preparar para um cenário de conflito, com um grande acúmulo de ativos militares sendo posicionado nas proximidades do Irã. A recusa britânica, portanto, adiciona uma camada complexa de imprevisibilidade a uma situação já volátil, colocando em xeque a logística de uma ofensiva e expondo as fraturas em uma das parcerias geopolíticas mais duradouras do Ocidente.
+<br/><br/>
+
+A TV Mundo continuará acompanhando de perto os desdobramentos desta crise e as repercussões para a segurança global. Para nossos leitores e espectadores, fica o compromisso de trazer informações precisas e contextualizadas sobre este momento de tensão internacional. Até a próxima atualização.<br/><br/>
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Vaticano Recusa Participação no "Conselho de Paz" de Trump e Reafirma Centralidade da ONU</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+A decisão foi comunicada pelo Cardeal Pietro Parolin, a mais alta autoridade diplomática da Santa Sé, que reiterou a posição histórica da Igreja de que situações de crise e conflito internacional devem ser geridas exclusivamente no âmbito das Nações Unidas...
+</div>
+                <img src="https://pbs.twimg.com/media/HBeJDvsXcAAAR9_?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de fevereiro de 2026<br/>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/mN36-B1RKgg?si=Mchzo4z3XGFOpuXJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br/><br/>
+da TV Mundo, apresentamos uma análise detalhada dos bastidores da diplomacia internacional.
+O Vaticano anunciou oficialmente, nesta terça-feira, que não integrará o chamado "Conselho de Paz" proposto pelo presidente dos Estados Unidos, Donald Trump. A decisão foi comunicada pelo Cardeal Pietro Parolin, a mais alta autoridade diplomática da Santa Sé, que reiterou a posição histórica da Igreja de que situações de crise e conflito internacional devem ser geridas exclusivamente no âmbito das Nações Unidas.
+<br/><br/>
+
+A recusa ocorre em um momento de grande delicadeza no cenário geopolítico. O Papa Leo, primeiro pontífice natural dos Estados Unidos e conhecido por suas posições críticas em relação a diversas políticas da administração Trump, havia sido convidado para compor o conselho ainda no mês de janeiro. No entanto, a decisão de não participar reflete um alinhamento com a tradição diplomática vaticana, que prefere atuar por meio de canais multilaterais estabelecidos.
+<br/><br/>
+
+O plano original do conselho, concebido em meio ao frágil cessar-fogo na Faixa de Gaza estabelecido em outubro, previa a supervisão da governança temporária do território. Posteriormente, Trump expandiu o escopo da iniciativa, propondo que o órgão, sob sua presidência, atuasse na resolução de conflitos globais. A primeira reunião do conselho está marcada para quinta-feira, em Washington, com foco na discussão sobre a reconstrução de Gaza.
+<br/><br/>
+
+A decisão do Vaticano coloca a Santa Sé em uma posição distinta de outros atores internacionais. A Itália e a União Europeia, por exemplo, confirmaram que enviarão representantes para participar como observadores, uma postura cautelosa que indica um não-comprometimento formal com a estrutura do conselho.
+<br/><br/>
+
+"A Santa Sé não participará da Junta de Paz por causa de sua natureza particular, que evidentemente não é a de outros Estados", explicou o Cardeal Parolin. "Uma preocupação fundamental é que, em nível internacional, deve ser, acima de tudo, a Organização das Nações Unidas a gerir essas situações de crise. Este é um dos pontos em que temos insistido reiteradamente", acrescentou o diplomata.
+<br/><br/>
+
+A iniciativa de Trump tem gerado controvérsia e receio entre especialistas e governos. Muitos analistas em direitos humanos apontam que a criação de um conselho externo para supervisionar os assuntos de um território estrangeiro carrega semelhanças com estruturas coloniais. Além disso, o conselho, lançado no mês passado, enfrentou críticas significativas por não incluir representantes palestinos em sua composição.
+<br/><br/>
+
+A reação internacional ao convite de Trump tem sido marcada pela cautela. Enquanto alguns aliados dos Estados Unidos no Oriente Médio aderiram à proposta, as nações ocidentais mantiveram distância, com a preocupação latente de que o conselho possa minar a autoridade e os mecanismos da ONU.
+<br/><br/>
+
+O contexto que cerca a criação do conselho é o da guerra na Faixa de Gaza. A trégua estabelecida em outubro tem sido repetidamente violada, com relatos de centenas de palestinos e quatro soldados israelenses mortos desde o início do cessar-fogo. A ofensiva israelense já matou mais de 72 mil pessoas no enclave, provocou uma crise humanitária com níveis alarmantes de fome e deslocou internamente a totalidade da população de Gaza.
+<br/><br/>
+
+A gravidade da situação levou múltiplos peritos em direitos humanos, acadêmicos e uma comissão de inquérito da ONU a classificarem as ações como genocídio. Israel, por sua vez, rejeita a acusação e afirma que suas operações militares são medidas de autodefesa, em resposta ao ataque liderado pelo Hamas no final de 2023, que resultou na morte de 1.200 pessoas e na tomada de mais de 250 reféns.
+<br/><br/>
+
+O Papa Leo tem denunciado repetidamente as condições desumanas em Gaza. No entanto, sua decisão de não se juntar ao conselho está alinhada com a postura habitual do líder dos 1,4 bilhão de católicos no mundo, que raramente participa de diretorias internacionais. 
+<br/><br/>
+
+O Vaticano, por meio de seu extenso serviço diplomático e na qualidade de observador permanente nas Nações Unidas, prefere atuar nos fóruns tradicionais da diplomacia multilateral, reforçando a mensagem do Cardeal Parolin: a gestão de crises deve permanecer sob a égide da ONU.
+<br/><br/>
+
+A TV Mundo permanece atenta aos desdobramentos dessa e de outras questões que moldam o cenário internacional. Agradecemos a atenção de nossos leitores e espectadores e reforçamos nosso compromisso com a informação de qualidade. Até a próxima.
+<br/><br/>
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->					
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Trump é acusado por Hillary Clinton de 'encobrir' os arquivos de Epstein</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+Hillary Clinton tem acusado o Administração Trump de um encobrimento de “” sobre os arquivos de Epstein, enquanto afirma que ela e seu marido estão sendo forçados a testemunhar perante o Congresso para desviar o escrutínio de Donald Trump...
+</div>
+                <img src="https://pbs.twimg.com/media/HBcsWKEWwAAso7L?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de fevereiro de 2026<br/>
+Em uma entrevista na conferência de segurança de Munique, Clinton pediu ao governo Trump que ‘tirasse os arquivos’
+<br/><br/>
+
+Hillary Clinton tem acusado o Administração Trump de um encobrimento de “” sobre os arquivos de Epstein, enquanto afirma que ela e seu marido estão sendo forçados a testemunhar perante o Congresso para desviar o escrutínio de Donald Trump.
+<br/><br/>
+
+Em um entrevista à BBCClinton disse que o Departamento de Justiça dos EUA foi “slow-walking” a liberação de documentos relativos ao catálogo de crimes de Jeffrey Epstein e pediu à administração que “tirasse os arquivos”. Apesar dos despejos periódicos de documentos dos arquivos desde que o Congresso determinou sua liberação no final do ano passado, o departamento de justiça ainda está retendo cerca de 3 milhões de arquivos.
+<br/><br/>
+
+Os comentários de Clinton, ao Conferência de segurança de Muniqueela e seu marido, Bill Clinton, o ex-presidente, se preparam para dar depoimentos juramentados sobre o caso perante o comitê de supervisão da Câmara.
+<br/><br/>
+
+Hillary Clinton deve testemunhar em 26 de fevereiro, enquanto Bill aparecerá no dia seguinte. Será a primeira aparição de um ex-presidente diante de um painel do Congresso em mais de 40 anos.
+<br/><br/>
+
+Clinton, ex-secretária de Estado, disse que ela e seu marido estavam sendo tratados injustamente em comparação com outras testemunhas e estavam sendo apontados.
+<br/><br/>
+
+“Acho que todo mundo deveria testemunhar quem foi convidado a testemunhar,”, disse ela em resposta se achava que Andrew Mountbatten-Windsor, o ex-príncipe Andrew, deveria aparecer.
+<br/><br/>
+
+“Só quero que seja justo. quero que todos sejam tratados da mesma forma. Isso não é verdade para mim e meu marido, porque [quando] pediram que outras testemunhas prestassem depoimentos por escrito sob juramento.
+<br/><br/>
+
+“Oferecemos que [mas] eles querem nos puxar [em]. Por que querem nos puxar para isso? Para desviar a atenção do presidente Trump. Isso não é complicado.”
+<br/><br/>
+
+Trump, que é citado milhares de vezes nos arquivos divulgados até agora, disse a repórteres em resposta aos comentários de Clinton que havia sido absolvido.
+<br/><br/>
+
+““Fui totalmente inocentado,”, disse ele, falando no Air Force One. “Estão sendo puxados, problema deles, teremos que ver no que vai dar. Eu a assisti em Munique, e ela está seriamente com a síndrome do desarranjo de Trump.”
+<br/><br/>
+
+Bill Clinton também é destaque nos arquivos, mas diz que cortou contato com o financiador desonrado depois que surgiram informações de seus crimes sexuais contra menores. Os arquivos liberados incluem fotos que mostram o ex-presidente em uma piscina quente com Epstein junto com uma pessoa que o departamento de justiça descreveu como vítima.
+<br/><br/>
+
+Bill Clinton negou irregularidades e também pediu que todos os arquivos fossem liberados.
+
+<br/><br/>
+
+Os Clinton concordou em dar depoimentos filmados a portas fechadas em 3 de fevereiro, depois que os membros do Comitê sinalizaram que estavam prontos para detê-los em desacato ao Congresso por desafiar uma intimação apresentada por James Comer, presidente republicano do Comitê.
+<br/><br/>
+Comer rejeitou a oferta da dupla de prestar depoimento por escrito sob juramento.
+<br/><br/>
+
+Hillary Clinton, que perdeu a eleição presidencial dos EUA em 2016 para Trump, disse à BBC que nunca conheceu Epstein, mas conheceu sua associada Ghislaine Maxwell, que cumpre pena de prisão como co-conspiradora condenada em seus crimes de tráfico sexual, “em algumas ocasiões”.
+<br/><br/>
+
+“Temos um registro muito claro de que estamos dispostos a conversar, sobre o qual meu marido disse que fez algumas viagens no avião [de Epstein] para seu trabalho de caridade,”, disse ela.
+<br/><br/>
+
+“Não me lembro de tê-lo conhecido. Eu [conheci Maxwell] em algumas ocasiões, e milhares de pessoas vão para a Clinton Global Initiative (um programa envolvendo líderes empresariais e governamentais estabelecido pela Fundação Clinton do ex-presidente) Então não é não é algo que realmente está no cerne do que se trata esse assunto. Eles são acusados, e em ambos os casos, foram condenados, por crimes horríveis contra meninas e mulheres. Esse deve ser o foco.
+<br/><br/>
+
+“Não temos nada a esconder,”, acrescentou ela. “Pedimos a liberação completa desses arquivos repetidamente. Achamos que a luz solar é o melhor desinfetante.”
+<br/><br/>
+
+Os Clinton pediram que suas audiências sejam realizadas em público. Comer disse que está feliz em realizar audiências públicas, além do depoimento a portas fechadas.
+<br/><br/>
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->			
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Assim como os republicanos, democratas norte-americanos também fazem uso da fé cristã em suas campanhas</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+como um grupo de democratas norte‑americanos está usando a fé cristã em suas campanhas para tentar conquistar eleitores cristãos que historicamente votam nos republicanos...
+</div>
+                <img src="https://pbs.twimg.com/media/HBYpSZuXcAAmuPl?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+17 de fevereiro de 2026<br/>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/BnR0EQkc-A0?si=5u2UHqFMWDZxRfZE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br/>como um grupo de democratas norte‑americanos está usando a fé cristã em suas campanhas para tentar conquistar eleitores cristãos que historicamente votam nos republicanos.
+<br/><br/>
+
+O cenário político e religioso:
+há décadas, os eleitores cristãos – especialmente brancos evangélicos – tendem a se alinhar ao Partido Republicano, que se apresenta como defensor de valores conservadores. Ao mesmo tempo, a base do Partido Democrata tem ficado cada vez mais secular, com muitos simpatizantes que se declaram sem religião ou pouco confortáveis com discursos religiosos na política. Esse contraste cria um campo de tensão: os democratas querem alcançar cristãos moderados, mas sem afastar seus eleitores não religiosos, tornando o caminho “bastante complicado de navegar”.
+<br/><br/>
+
+Dentro desse contexto, o texto destaca que o presidente Donald Trump, em seu segundo mandato, manteve políticas duras contra a imigração ilegal, o que abriu espaço para críticas religiosas vindas da esquerda. Alguns grupos de fé passaram a questionar se essas medidas combinam com os princípios cristãos de acolher o estrangeiro, cuidar dos vulneráveis e defender os pobres. Em 2024, Trump obteve cerca de 83% do voto dos brancos evangélicos, e ainda venceu entre a maioria dos protestantes e católicos de linha principal, o que mostra a força desse vínculo entre direita política e religiosidade conservadora.
+<br/><br/>
+
+Os democratas religiosos em destaque:
+democratas que são, ao mesmo tempo, políticos e líderes religiosos ou estudantes de teologia. Sarah Trone Garriott, senadora estadual de Iowa e ministra luterana, é apresentada como alguém que nunca se esquivou de colocar sua fé no centro da campanha, unindo igreja e política em sua biografia pública. Ela é apenas um exemplo de um contingente “excepcionalmente alto” de democratas concorrendo ao Congresso que fazem apelos explícitos à doutrina religiosa, algo visto pelos estrategistas nacionais do partido como uma tentativa de deslocar alguns eleitores cristãos da “coluna republicana” nas eleições de meio de mandato.
+<br/><br/>
+
+Outros nomes surgem, como Matt Schultz, candidato ao Congresso no Alasca e pastor presbiteriano, e James Talarico, candidato ao Senado do Texas e seminarista presbiteriano. Eles fazem parte de um grupo mais amplo que inclui “mais de uma dúzia” de líderes religiosos concorrendo como democratas a cargos federais e estaduais, número bem maior que em ciclos eleitorais anteriores, segundo Doug Pagitt, pastor que comanda o grupo político cristão progressista Vote Bem Comum. A reportagem ressalta que, ao contrário de figuras como Raphael Warnock, senador da Geórgia e pastor negro – inserido na tradicional comunidade de igreja negra que sempre foi parte da base democrata –, muitos desses novos candidatos não vêm desse universo, mas sim do clero branco, retomando uma presença que praticamente não existia havia décadas.
+<br/><br/>
+
+A estratégia de usar linguagem religiosa:
+Especialistas citados na reportagem explicam que, quando os eleitores ouvem que um candidato é “religioso”, a suposição automática costuma ser de que se trata de um republicano conservador. O que está surgindo agora, porém, é um grupo de democratas que utiliza linguagem religiosa para tratar de pautas situadas à esquerda, como justiça social, imigração mais humana, defesa dos pobres e ampliação de direitos. Eles não falam apenas de fé como experiência pessoal, mas conectam explicitamente textos bíblicos e valores cristãos a propostas sobre economia, saúde e imigração, tentando resgatar uma tradição de “cristianismo social”.
+<br/><br/>
+
+Essa escolha tem riscos claros. De um lado, existe o medo de afastar o eleitorado secular democrata, que muitas vezes rejeita a mistura de religião e política. De outro, há a aposta de que muitos eleitores moderados, que ainda valorizam a linguagem religiosa, podem se sentir mais confortáveis com democratas que falam “a sua língua” de fé. Schultz, por exemplo, afirma não temer afastar eleitores não religiosos, argumentando que as pessoas têm uma visão mais sofisticada da religião do que se costuma supor e que são capazes de distinguir entre fé como imposição moral e fé como inspiração ética.
+<br/><br/>
+
+Reação republicana e disputa pela fé:
+O texto também mostra a resposta republicana a esse movimento. Mike Marinella, porta‑voz do braço nacional de campanha da Câmara do Partido Republicano, desdenha a ideia de que figuras como Trone Garriott e Schultz possam abalar a popularidade republicana entre eleitores cristãos. Ele afirma que os republicanos “dominaram” o voto de fiéis ciclo após ciclo porque estariam cumprindo o que considera “senso comum”, enquanto acusa os democratas de perseguirem uma “lista de desejos liberal radical” supostamente fora de sintonia com a própria fé de muitos cristãos.
+<br/><br/>
+
+Dessa forma, a narrativa evidencia uma disputa simbólica intensa: quem fala em nome do cristianismo na política americana? De um lado, republicanos tentam manter o monopólio da identidade cristã, associando-a a conservadorismo cultural e dureza em temas como imigração e segurança. Do outro, esses novos democratas religiosos reivindicam que seguir o Evangelho significa justamente acolher o imigrante, proteger vulneráveis, ampliar acesso à saúde, combater a pobreza e revisar políticas que consideram cruéis.
+<br/><br/>
+
+Fé, aborto e questões morais difíceis:
+Um dos pontos mais delicados em que esses democratas aplicam sua fé é o debate sobre aborto. A reportagem lembra que, por muitos anos, o aborto foi usado pelos republicanos como linha de ataque contra os democratas, mas que, desde que a Suprema Corte derrubou o direito nacional ao aborto em 2022, o tema também se tornou uma bandeira mobilizadora para o lado democrata. Alguns desses candidatos religiosos defendem o direito de escolha apoiados justamente em sua compreensão do cristianismo, rompendo com o estereótipo de que todo cristão seria automaticamente contra o aborto em qualquer circunstância.
+<br/><br/>
+
+Schultz ilustra esse reposicionamento ao dizer que as escrituras cristãs não esclarecem com precisão em que momento a vida começa, deixando espaço para debate e discernimento. Ele argumenta que muitos republicanos se opõem a medidas que, na prática, reduziriam abortos, como melhor acesso à saúde, contraceptivos e cuidados infantis ampliados, e conclui: “Sou pró‑escolha, não apesar da minha fé cristã, mas por causa dela”. Outros candidatos, como Rob Sand, auditor estadual de Iowa e luterano praticante, afirmam que a fé cristã sempre os levou a “cuidar do carinha”, isto é, a olhar para os mais frágeis e oprimidos, o que para eles se traduz em políticas sociais robustas.
+<br/><br/>
+
+Violência, imigração e “frutos” da administração:
+A narrativa ganha um tom mais dramático quando traz um episódio específico: a morte de Alex Pretti, enfermeira de 37 anos, baleada por agentes federais em Minneapolis. Dias após esse acontecimento, Schultz sobe ao púlpito de sua igreja em Anchorage e chama o episódio de “assassinato”, diretamente do altar, rompendo a barreira entre sermão religioso e denúncia política. Em entrevista, ele associa o caso a uma lista de consequências que atribui à administração Trump: assassinato, lágrimas, perda e dor, uma sequência que remete à ideia bíblica de que os “frutos” de uma árvore revelam sua verdadeira natureza.
+<br/><br/>
+
+as táticas de imigração de Trump vêm sofrendo crescente escrutínio de grupos de fé, sobretudo depois de Pretti e outra cidadã americana, Renee Good, serem mortas em ações federais. Em contraste com a linguagem oficial que rapidamente rotulou as duas como “terroristas domésticas”, apesar de haver evidências em vídeo que contrariavam essa narrativa, líderes religiosos como Trone Garriott insistem em um discurso de compaixão: lembram que Jesus acolheu o estranho, alimentou famintos, defendeu vulneráveis e cuidou dos pobres, e que esse deveria ser o chamado dos cristãos hoje. Diante disso, eles denunciam comunidades imigrantes aterrorizadas e pessoas tratadas com grande crueldade sob uma política de repressão.
+<br/><br/>
+
+Justiça econômica e visão moral do cotidiano:
+Para além de temas quentes como aborto e imigração, as campanhas desses democratas religiosos se concentram também em justiça econômica. Eles interpretam o chamado bíblico a cuidar dos pobres e aflitos como fundamento para políticas de acessibilidade em áreas como alimentação, saúde, moradia e direitos trabalhistas. O texto explica que isso dialoga com uma estratégia mais ampla do Partido Democrata, que tenta fazer da “acessibilidade” – o custo de vida e o acesso a serviços básicos – o centro da disputa nas eleições de meio de mandato.
+<br/><br/>
+
+O deputado Morgan McGarvey, democrata de Kentucky envolvido no recrutamento de candidatos, afirma que uma pessoa de fé já carrega “lentes e estrutura” para enfrentar os grandes problemas morais do dia. Ele traduz essas preocupações em perguntas concretas: temos comida? Temos saúde? Temos moradia? Temos uma agência de imigração (ICE) que respeite os direitos das pessoas? A implicação é que, para esses políticos, fé não é apenas crença interior, mas uma forma de olhar para o cotidiano e para as políticas públicas como arenas onde se decide se o mandamento de cuidar dos mais frágeis será cumprido ou não.
+<br/><br/>
+
+A tensão central da narrativa:
+tensão e tentativa de reinvenção. De um lado, um Partido Democrata cuja base se torna mais laica e que precisa tomar cuidado para não parecer teocrático ou moralista demais aos olhos de seus eleitores seculares. De outro, um grupo de candidatos que se recusa a esconder sua identidade religiosa e acredita que o cristianismo, longe de pertencer apenas aos conservadores, pode inspirar políticas mais humanas em temas como imigração, aborto, justiça econômica e direitos civis.
+<br/><br/>
+
+ainda não está claro se essa estratégia é “vencedora”; alguns candidatos, como Rob Sand, admitem que não sabem se falar tanto de fé ajuda eleitoralmente, apenas sabem que não conseguem agir de outra forma sem trair quem são. O texto termina enfatizando que, para esses democratas, religião e política se entrelaçam porque ambas tratam de como as pessoas vivem em comunidade, de quem é incluído e quem é deixado para trás, e de como a sociedade decide cuidar – ou não – dos mais vulneráveis.
+<br/><br/>
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Justiça dos Estados Unidos divulga mais 300 nomes na lista Epstein</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+Entre eles:
+Donald Trump
+Barack Obama
+Príncipe Harry
+Bill Gates
+Woody Allen
+Mark Zucker berg...
+</div>
+                <img src="https://pbs.twimg.com/media/HBYA0BpXgAAA1LR?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+17 de fevereiro de 2026<br/>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/WhqSvo155x0?si=bx5iziETYy5vtEkn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br/>Aqui é o canal de notícias TV Mundo, trazendo diretamente para nossos leitores e espectadores as informações mais recentes e relevantes sobre o caso que tem dominado as atenções internacionais. Anunciam a publicação de todos os arquivos de Epstein com uma lista de mais de 300 nomes, marcando um momento significativo na transparência dos documentos relacionados ao criminoso sexual Jeffrey Epstein e sua cúmplice Ghislaine Maxwell.
+<br/><br/>
+
+A procuradora-geral dos Estados Unidos, Pam Bondi, anunciou neste sábado que todos os arquivos relacionados ao caso foram publicados, conforme informem Fox Notícias. Em declaração contundente sobre a integridade do processo, a procuradora-geral Pam Bondi afirmou: "Nenhum documento foi escondido ou censurado por motivos de vergonha, dano à reputação ou sensibilidade política, nem mesmo com relação a funcionários do governo, figuras públicas ou dignitários estrangeiros".
+<br/><br/>
+
+De acordo com o texto de uma carta dirigida às comissões judiciárias das duas casas do Congresso, o Departamento de Justiça publicou "todos os registros, documentos, comunicações e materiais de investigação em poder do Departamento" que tenham relação com nove categorias diferentes, conforme exigido por lei. Para garantir a compreensão completa de nossos leitores e espectadores sobre o escopo desta divulgação, detalhamos abaixo as nove categorias abrangidas por esta publicação massiva de documentos.
+<br/><br/>
+
+A primeira categoria inclui Jeffrey Epstein, abrangendo todas as investigações, processos judiciais ou assuntos relacionados com a custódia. A segunda categoria foca especificamente em Ghislaine Maxwell. A terceira categoria trata dos registros de voo ou registros de viagem para qualquer aeronave, embarcação ou veículo de propriedade, operado ou usado por Jeffrey Epstein ou qualquer entidade relacionada. A quarta categoria lista pessoas, incluindo funcionários governamentais, nomeado ou mencionado em conexão com atividades criminais, acordos civis e resoluções legais relacionadas a Epstein.
+<br/><br/>
+
+Continuando a detalhar as categorias, a quinta abrange entidades com ligações conhecidas ou suspeitas com o tráfico ou redes financeiras de Epstein. A sexta categoria inclui acordos imunidade, não acusação, confissão de culpa ou selos envolvendo Epstein ou seus associados. A sétima categoria compreende comunicações internas do Departamento de Justiça, relativas a decisões relacionadas a Epstein ou seus associados. A oitava categoria cobre todas as comunicações, memorandos, diretivas, registros ou metadados relativos ao destruição, eliminação, alteração, perda ou ocultação de documentos, gravações ou dados eletrônicos relacionados a Epstein, seus associados, sua prisão e morte, ou qualquer arquivo investigativo. Por fim, a nona categoria consiste na documentação sobre prisão ou morte de Epstein, incluindo relatórios de incidentes, entrevistas com testemunhas, registros de médicos legistas, relatórios de autópsias e registros escritos detalhando as circunstâncias e a causa da morte.
+<br/><br/>
+
+Além das categorias documentais, a carta também inclui uma lista de mais de 300 nomes de "alto perfil". Entre os nomes destacados na divulgação estão o presidente Donald Trump, Barack e Michelle Obama, Príncipe Harry, Bill Gates, Woody Allen, Kim Kardashian, Kurt Cobain e Mark Zucker berg, entre outros. É importante esclarecer aos nossos leitores e espectadores os critérios utilizados para esta inclusão. Nomes foram incluídos na lista se foram funcionários públicos ou pessoas "politicamente expostas" e apareceram pelo menos uma vez nos autos divulgados, conforme explicitado.
+<br/><br/>
+
+A carta afirma que aparecem "em uma grande variedade de contextos". Isso pode significar, por exemplo, seu extenso contato direto por e-mail com Epstein ou Maxwell, ou se eles são mencionados apenas em uma parte de um documento que, à primeira vista, não tem relação com os assuntos desses dois. Reforçando o compromisso com a transparência total, a carta diz novamente: "Nenhum documento foi escondido ou censurado por motivos de vergonha, dano à reputação ou sensibilidade política, nem mesmo com relação a funcionários do governo, figuras públicas ou dignitários estrangeiros".
+<br/><br/>
+
+Esta foi a atualização completa sobre a liberação dos arquivos. Encerramos aqui a nossa cobertura, agradecemos a sua atenção e lembre-se de acompanhar sempre o canal de notícias TV Mundo para mais informações precisas e diretas.
+
+<br/><br/>
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Presidente Lula viaja à Ásia com delegação do agronegócio</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O itinerário de Lula inclui Nova Délhi, Índia (18 a 21 de fevereiro) e Seul, Coreia do Sul (22 a 24 de fevereiro). Ele se reunirá com...</div>
+                <img src="https://pbs.twimg.com/media/HBXtnHXasAAvl33?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+17 de fevereiro de 2026<br/>
+
+Presidente Lula viaja à Ásia com delegação do agronegócio
+A viagem, iniciada em 17 de fevereiro de 2026, tem como objetivo abrir novos mercados para produtos agrícolas brasileiros na Índia e na Coreia do Sul.
+
+
+<br/><br/>
+
+📋 Detalhes da Viagem
+O itinerário de Lula inclui Nova Délhi, Índia (18 a 21 de fevereiro) e Seul, Coreia do Sul (22 a 24 de fevereiro). Ele se reunirá com o primeiro-ministro indiano Narendra Modi, participará da Cúpula de Inteligência Artificial e estará presente em fóruns empresariais organizados pela ApexBrasil.
+
+A delegação conta com cerca de 150 empresários para a Índia e 100 para a Coreia do Sul, sendo quase 25% do agronegócio — totalizando 77 dos 315 participantes confirmados.
+
+
+<br/><br/>
+
+🌾 Objetivos do Agronegócio
+<br/>
+Na Índia:
+• Prioridade para aprovação sanitária da exportação de feijão-guandu;
+• Redução de tarifas de ~100% sobre cortes de frango brasileiro, por meio de cotas;
+• Cooperação em grãos, aves e segurança alimentar;
+• Importação de produtos como romãs indianas.
+
+<br/><br/>
+
+Na Coreia do Sul:
+◇ Foco na reabertura do mercado para a carne bovina brasileira, competindo com Austrália e Nova Zelândia;
+◇ Oportunidades em matérias-primas para cosméticos e investimentos em tecnologia;
+◇ Diversificação das exportações em meio a desafios como as salvaguardas impostas pela China às importações de carne em 2026.
+
+<br/><br/>
+
+
+
+🎯 Objetivos Mais Amplos
+A missão busca ampliar o comércio bilateral de ~US$ 12 bilhões anuais para US$ 20 bilhões até o final da década, abrangendo setores como:
+◇ Farmacêutico;
+◇ Minerais críticos;
+◇ Biocombustíveis;
+◇ Preferências tarifárias entre Mercosul e Índia.
+<br/><br/>
+
+A iniciativa dá continuidade a visitas anteriores do vice-presidente Geraldo Alckmin e do primeiro-ministro Narendra Modi, fortalecendo laços diplomáticos e comerciais.
+<br/><br/>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Argentina em Crise: A Luta Diária por Alimentos e o Ciclo da Dívida</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Na Argentina, os locais estão tomando empréstimos para comprar comida.
+Os argentinos estão tomando empréstimos, vendendo seus pertences e vivendo com cartões de crédito para pagar pelo básico, incluindo comida...</div>
+                <img src="https://pbs.twimg.com/media/HBW7sLEbMAAmsp8?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+17 de fevereiro de 2026<br/>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/1wVIsPG4dJ0?si=QLT2Z87Aj36YhL0K" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br/>Aqui é o canal de noticias tv mundo. Para nossos leitores e espectadores, trazemos um panorama detalhado sobre a situação econômica que assola a Argentina.
+<br/><br/>
+Na Argentina, os locais estão tomando empréstimos para comprar comida. Os argentinos estão tomando empréstimos, vendendo seus pertences e vivendo com cartões de crédito para pagar pelo básico, incluindo comida. A dívida tem sido um problema sério na Argentina e agora se tornou uma crise, com o residente médio recorrendo a empréstimos para pagar as necessidades diárias.
+<br/><br/>
+
+Em Buenos Aires, Argentina, Diego Nacasio, de 43 anos, trabalha em tempo integral como vendedor em uma grande loja de ferragens em Florencio Varela, cidade da região da grande Buenos Aires. Diz que não precisa de calendário para saber que dia do mês é. Quando o salário dele e de sua esposa, que também trabalha em tempo integral em uma loja, acaba, é por volta do dia 15. A partir daí, eles procuram empregos extras, encontram coisas para vender, usam seus cartões de crédito, e conseguem pequenos empréstimos para pagar o básico, inclusive a alimentação, até que cheguem os próximos contracheques.
+<br/><br/>
+
+"Eu nunca experimentei nada assim," disse Nacasio. "Nos últimos 25 anos, temos trabalhado duro, e nossos empregos nos permitiram construir uma casa do zero, comprar um carro e dar ao nosso filho de 17 anos uma vida decente. Agora, temos empregos melhores do que tínhamos naquela época, e ainda não podemos nem pagar comida pelo mês inteiro."
+<br/><br/>
+
+"Viver a crédito coloca você em um ciclo muito perigoso. É muito fácil ficar para trás com os pagamentos, e depois é uma questão de correr atrás do próprio rabo. A maioria das pessoas que conheço estão na mesma situação. Estamos vivendo em um estado constante de estresse e ansiedade, e parece que não há saída."
+<br/><br/>
+
+A história de Nacasio tem se tornado cada vez mais comum na Argentina, onde quase metade das pessoas diz que está usando economias, vendendo pertences ou pegando dinheiro emprestado de bancos ou parentes para cobrir o básico, de acordo com um relatório da Argentina Grande baseado nos últimos números oficiais disponíveis. Outro relatório, da Fundacion Pensar, descobriu que 63% dos argentinos reduziram as atividades ou serviços para sobreviver.
+<br/><br/>
+
+"A situação atual na Argentina é extremamente preocupante. É particularmente preocupante ver que mesmo as pessoas que têm um ou vários empregos estão recebendo empréstimos não para comprar uma casa, um carro ou linha branca [eletrodomésticos], mas para comprar comida," Violeta Carrera Pereyra, socióloga e pesquisadora do Instituto Argentina Grande e uma das autoras do relatório, disse.
+<br/><br/>
+
+O presidente da Argentina, Javier Milei, que assumiu o cargo em dezembro de 2023, diz que seu plano econômico de austeridade, baseado na obtenção do equilíbrio fiscal enquanto constrói reservas de moeda dos Estados unidos por meio de cortes drásticos nos gastos públicos, revitalizou a economia e tirou milhões de pessoas da pobreza. Ele é apoiado pelo Fundo Monetário Internacional, que, apesar dos níveis recordes de empréstimos estrangeiros na Argentina, projeta um crescimento econômico de quatro por cento em 2026 e 2027.
+<br/><br/>
+
+Mas um olhar mais atento às figuras mostra um quadro diferente, mais sombrio. Embora a atividade econômica na Argentina tenha aumentado em geral, o crescimento tem sido desigual. Em novembro de 2025, o mês mais recente para o qual há dados disponíveis, setores como bancos e agricultura tiveram crescimento, mas a manufatura e o comércio sofreram fortes quedas, com muitas fábricas e lojas fechando devido à queda da demanda. O consumo, particularmente de alimentos, vem caindo, com uma queda de 12,5% relatada pelos varejistas independentes de alimentos.
+<br/><br/>
+
+Depois tem a inflação, uma variável chave que na Argentina precisa ser mantida à distância para acessar o crédito estrangeiro essencial. Embora o plano econômico chocante de Milei tenha conseguido reduzir significativamente a inflação em relação aos números recordes quando ele assumiu o cargo no final de 2023, os especialistas dizem que seu governo tomou algumas medidas polêmicas para mantê-lo baixo. Isso inclui forçar os salários a permanecerem estagnados e sob a taxa de inflação, e abrir o país para importações mais baratas. Essas políticas deixaram muitos sem dinheiro para gastar e forçaram milhares de fábricas e pequenas empresas a fechar.
+<br/><br/>
+
+Os críticos também dizem que os números da inflação não são representativos das flutuações reais dos preços. A ferramenta usada para medir a inflação na Argentina, uma cesta de amostras de bens que as pessoas consomem, foi desenvolvida em 2004 e não reflete os padrões de consumo atuais, incluindo a porcentagem que itens como eletricidade e combustível – duas áreas que tiveram aumentos de preços consideravelmente maiores do que a inflação – representam nos hábitos reais de gastos das pessoas.
+<br/><br/>
+
+Carrera Pereyra diz que os números também mostram que as rápidas mudanças na economia da Argentina ampliaram as desigualdades. "Por um lado, vemos que alguns setores conseguem consumir mais, então vemos um aumento nas vendas de imóveis, carros, motos, alguns como resultado da abertura das importações," disse ela. "Mas, por outro lado, itens como alimentos e medicamentos estão diminuindo. Então, algumas pessoas podem comprar mais coisas do que antes, enquanto outras estão lutando para colocar comida na mesa."
+<br/><br/>
+
+Muitos argentinos que conversaram com imprensa disseram que fazer face às despesas tornou-se nada menos que uma corrida de obstáculos. Fazer malabarismo com vários empregos exigentes, vender itens usados, como roupas, pedir emprestado a parentes, buscar empréstimos para tubarões e caçar pechinchas, tornaram-se parte regular da vida diária.
+<br/><br/>
+
+"Comprar comida tornou-se um trabalho em si," disse Veronica Malfitano, 43 anos, professora e sindicalista, cujo salário foi reduzido em um quarto quando Milei cortou os gastos públicos. "Eu me junto com parentes ou pessoas com quem trabalho, e compramos a granel. Uso meu cartão de crédito ou faço pequenos empréstimos. Neste mês, pela primeira vez, pago apenas o mínimo do cartão de crédito, coisa que nunca havia feito antes. É tudo muito estressante. Todo mundo que conheço está na mesma situação."
+<br/><br/>
+
+Pesquisa confirma que Malfitano não está sozinho. Quase metade das compras em supermercados na Argentina é paga com cartões de crédito, um recorde, de acordo com dados oficiais recentes. Tanto os empréstimos quanto a inadimplência aumentaram. Estima-se que cerca de 11 por cento dos empréstimos pessoais não sejam pagos, a maior taxa desde que o Banco Central da Argentina começou a manter registros em 2010, segundo dados do Banco Central.
+<br/><br/>
+
+Griselda Quipildor, de 49 anos, que mora com o marido, duas filhas e dois netos, conta que mesmo várias pessoas da família trabalhando, normalmente o dinheiro acaba até o dia 18 de cada mês e eles têm que começar a tomar empréstimos. "No início do mês, pagamos dívidas, as contas e então o dinheiro acaba e temos que começar a pedir emprestado novamente. É um círculo vicioso sem fim, daqueles bem difíceis de fugir. Tomamos emprestado de pessoas conhecidas e de pessoas que não conhecemos. Antes não era assim."
+<br/><br/>
+
+Lucia Cavallero, analista, especialista em economia e membro do Movida Ciudad, disse que, embora os problemas econômicos da Argentina sejam antigos, seu impacto nas casas das pessoas está piorando. "A dívida tem sido um problema sério na Argentina há muito tempo e agora se tornou uma crise," disse ela. "A proliferação de credores informais criou uma situação perigosa, deixando muitas pessoas sem outras opções."
+<br/><br/>
+
+Em resposta, um partido político propôs um projeto de lei que ajudaria as pessoas em setores de baixa renda a unificar seus empréstimos e solicitar um plano de pagamento de longo prazo a taxas mais baixas. Cavallero diz que há alguns aspectos positivos na iniciativa, mas que ela perde em grande parte o ponto central. "É bom ver a classe política reconhecendo que as dívidas são um problema sério para as pessoas," disse ela. "No entanto, essa abordagem segue a lógica de tomar empréstimos para pagar dívidas. Embora possa fornecer alívio temporário, são necessárias mudanças estruturais mais profundas."
+<br/><br/>
+
+"Assim como os bancos são resgatados, estamos pedindo que as famílias sejam apoiadas. Uma solução mais sustentável é que os salários acompanhem o ritmo do custo da cesta básica, para que as pessoas não tenham que se endividar apenas para comprar comida," Cavallero disse.
+<br/><br/>
+
+Apesar de todos os desafios que ele e sua família enfrentam, Nacasio diz que muitas pessoas como ele ainda se consideram sortudas. "Pelo menos somos donos da nossa casa," disse ele. "Se não o fizéssemos e tivéssemos que pagar aluguel, não sei o que faríamos. Só preciso que as coisas mudem, para nós e para toda a gente. As coisas não podem continuar assim."
+<br/><br/>
+
+Este foi o canal de noticias tv mundo.
+<br/><br/>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->		
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">NYT Expõe Vínculos Entre Bannon e Epstein: Mensagens Revelam Estratégia para Reabilitar Imagem</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Bannon, podcaster MAGA, manteve contato frequente via mensagens em 2019, prometendo ajudar a reabilitar a imagem de Epstein como filantropo e contrapor narrativas de pedofilia...
+...</div>
+                <img src="https://pbs.twimg.com/media/HBTqFVeagAAyVyL?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+17 de fevereiro de 2026<br/><br/>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/05s7T2qNrWY?si=qGlZv0wMwObmaLf8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>					
+<br/><br/>
+O The New York Times publicou um artigo detalhando a relação próxima entre Steve Bannon e Jeffrey Epstein, apesar da notoriedade tóxica de Epstein por acusações de tráfico sexual. Nele, Bannon, podcaster MAGA, manteve contato frequente via mensagens em 2019, prometendo ajudar a reabilitar a imagem de Epstein como filantropo e contrapor narrativas de pedofilia. Bannon justificou isso como parte de um projeto jornalístico para obter entrevistas exclusivas, enquanto Epstein consultava-o sobre estratégias de defesa legal.​
+<br/><br/>
+Detalhes das Mensagens
+Em junho de 2019, Bannon enviou mensagens entusiasmadas a Epstein sobre uma notícia favorável de vítimas, e meses antes da prisão de Epstein, alertou: "Precisamos combater o 'estuprador que trafica crianças para os homens mais poderosos' — isso não pode ser resgatado". Os documentos, liberados pelo Departamento de Justiça em janeiro de 2026, mostram Bannon orientando Epstein desde 2017, após saída da Casa Branca.
+<br/><br/>
+Contexto Histórico
+A associação começou pós-eleição de Trump em 2016, com Epstein buscando Bannon, que só aceitou encontro após demissão em 2017. Bannon ajudou em simulações de entrevistas e defesas contra reportagens do Miami Herald<br/><br/>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->		
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Trump publica vídeo racista  que retrata Obamas como macacos</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Por meus meus frutos me conhecereis.
+...</div>
+                <img src="https://pbs.twimg.com/media/HAguufkWEAA2BNm?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+31 de janeiro de 2026<br/><br/>
+<br/><br/>
+Um vídeo publicado pelo presidente dos Estados Unidos, Donald Trump, gerou forte repercussão mundial e abriu uma nova crise política e diplomática. Nas imagens, o ex-presidente Barack Obama e a ex-primeira-dama Michelle Obama aparecem retratados como macacos, em um conteúdo amplamente criticado e classificado como ofensivo e racista
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+		<iframe width="100%" height="415" src="https://www.youtube.com/embed/ULQO86AdpKc?si=oz5HhK_ctLSLEwmE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>	
+				</p>
+<br/><br/>
+<iframe width="100%" height="415" src="https://www.youtube.com/embed/WhXtI2c8a_4?si=8VItS-hifelE0iUB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Israel mata 31, incluindo várias crianças, em bombardeio implacável de Gaza.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Pelo menos 31 Palestinos‚incluindo pelo menos seis crianças, foram mortos em ataques israelenses à cidade de Gaza e Khan Younis na Faixa de Gaza desde o amanhecer, de acordo com fontes médicas que falaram com a Al Jazeera...</div>
+                <img src="https://pbs.twimg.com/media/HAALGNWXEAAXIq5?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+31 de janeiro de 2026<br/><br/>
+<br/><br/>
+Pelo menos 31 Palestinos‚incluindo pelo menos seis crianças, foram mortos em ataques israelenses à cidade de Gaza e Khan Younis na Faixa de Gaza desde o amanhecer, de acordo com fontes médicas que falaram com a Al Jazeera.
+<br/><br/>
+A violência acontece um dia antes de Israel ser devido a reabertura a passagem Rafah, que liga Gaza ao Egito, no domingo, pela primeira vez desde maio de 2024.
+O Escritório de Mídia do Governo de Gaza diz que mais de 500 palestinos foram mortos por forças israelenses desde que um cessar-fogo mediado pelos Estados Unidos em Gaza entrou em vigor em 10 de outubro.
+<br/><br/>
+de Israel guerra genocida em Gaza já matou pelo menos 71.769 pessoas e feriu 171.483 desde que começou, em outubro de 2023. Estima-se que 1.139 pessoas foram mortas em Israel durante os ataques liderados pelo Hamas em 7 de outubro de 2023, com cerca de 250 levadas cativas.
+<br/><br/>
+Até 31 de janeiro de 2026, o número total de mortos na guerra em Gaza, desde o início em 7 de outubro de 2023, é de aproximadamente 71.667 palestinos, de acordo com o Ministério da Saúde de Gaza.
+<br/><br/>
+Entre as vítimas identificadas até julho de 2025 (60.199 casos), 18.430 eram crianças (cerca de 30,6%) e 9.735 mulheres (cerca de 16,2%), totalizando quase 47% mulheres e crianças. Esses percentuais iniciais de quase 70% para mulheres e crianças em fases anteriores do conflito foram reportados pela ONU.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Manifestações se espalham pelos Estados Unidos contra ações do ICE em Minnesota.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">TV Mundo — Seu canal de notícias digital traz uma cobertura especial sobre os protestos históricos que tomaram conta das ruas americanas nesta sexta-feira...</div>
+                <img src="https://pbs.twimg.com/media/G__8d87XwAACNXb?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+31 de janeiro de 2026<br/><br/>
+<br/><br/>
+TV Mundo — Seu canal de notícias digital traz uma cobertura especial sobre os protestos históricos que tomaram conta das ruas americanas nesta sexta-feira. Milhares de manifestantes saíram às ruas de Minneapolis, em Minnesota, enquanto estudantes de costa a costa nos Estados Unidos aderiram a uma greve nacional para exigir a retirada imediata dos agentes federais de imigração do estado. A mobilização surge após o tiroteio fatal que vitimou dois cidadãos norte-americanos por agentes da Imigração e Alfândega.
+<br/><br/>
+Do litoral da Califórnia até as ruas movimentadas de Nova Iorque, estudantes e professores abandonaram salas de aula em um dia coordenado de resistência. O movimento ganhou força em meio a mensagens contraditórias emitidas pela administração Trump sobre a possível desescalada da Operação Metro Surge, operação federal que intensificou a presença de forças de segurança em áreas urbanas.
+<br/><br/>
+Sob uma repressão nacional sem precedentes na política de imigração, o presidente Donald Trump despachou três mil agentes federais para a região metropolitana de Minneapolis. Esses agentes patrulham as vias públicas com equipamento tático de combate, formando uma força cinco vezes maior que o efetivo total do Departamento de Polícia de Minneapolis. Diante desse cenário, vários milhares de pessoas reuniram-se no centro da cidade em temperaturas congelantes, abaixo de zero grau, desafiando o frio extremo. Entre os manifestantes, famílias com crianças pequenas, casais idosos e jovens ativistas formaram uma frente diversa e determinada contra o aumento das operações e as táticas consideradas excessivas utilizadas pela Imigração e Alfândega dos Estados Unidos.
+<br/><br/>
+Kim, uma treinadora de meditação de 65 anos que solicitou anonimato quanto ao sobrenome, classificou a ofensiva federal como um "ataque fascista total do nosso governo federal aos cidadãos".
+<br/><br/>
+Em um bairro específico de Minneapolis, próximo aos locais onde Alex Pretti e Renee Good — dois cidadãos norte-americanos — foram mortos a tiros neste mês por agentes federais de imigração, cerca de cinquenta professores e funcionários de escolas locais realizaram uma marcha silenciosa de protesto. A causa também ganhou apoio de figuras públicas de peso: o astro do rock Bruce Springsteen subiu ao palco durante uma arrecadação de fundos em homenagem às vítimas no centro de Minneapolis, interpretando sua nova composição "Streets of Minneapolis" em solidariedade aos manifestantes.
+<br/><br/>
+Os protestos, contudo, não se limitaram a Minnesota. Organizadores estimaram a realização de 250 manifestações em 46 estados, incluindo grandes centros urbanos como Nova Iorque, Los Angeles, Chicago e Washington. O lema unificador ecoou em praças e avenidas: "Sem trabalho. Sem escola. Sem compras. Pare de financiar o ICE".
+<br/><br/>
+Enquanto as ruas fervilhavam de indignação, os corredores do poder federal também sentiram os impactos. O chefe interino do escritório de campo do FBI em Minneapolis, Jarrad Smith, foi removido de suas funções, segundo duas fontes familiarizadas com a decisão. Smith foi transferido para a sede do FBI em Washington, em um movimento que ocorre após o envolvimento do escritório local tanto no reforço federal quanto nas investigações sobre o tiroteio que matou Pretti e sobre um protesto ocorrido em uma igreja que resultou em acusações contra o ex-âncora da CNN, Dom Limão.
+<br/><br/>
+Na sexta-feira, o FBI prendeu Limão e o Departamento de Justiça o acusou formalmente de violar leis federais durante um protesto dentro de uma igreja em St. Paul, Minnesota, no início do mês — episódio que seu advogado classificou como um ataque direto à liberdade de imprensa. Após se declarar inocente perante a justiça, Limão afirmou aos repórteres: "Não serei silenciado. Aguardo com expectativa o meu dia no tribunal".
+<br/><br/>
+O New York Times, citando um memorando interno do ICE ao qual teve acesso, revelou que agentes federais receberam orientação esta semana para exercerem poderes ampliados de prisão sem mandado judicial. A medida expande significativamente a capacidade de agentes de nível operacional realizarem varreduras indiscriminadas, prendendo suspeitos de serem imigrantes indocumentados encontrados casualmente durante patrulhamentos.
+<br/><br/>
+A reação contra a política migratória da atual administração ameaça ainda provocar uma paralisação do governo dos Estados Unidos, já que democratas no Congresso se recusam a aprovar o financiamento do Departamento de Segurança Interna, órgão responsável pela supervisão do ICE.
+<br/><br/>
+Semanas de vídeos virais exibindo táticas agressivas de agentes fortemente armados e mascarados nas ruas de Minneapolis provocaram uma queda acentuada na aprovação pública da política de imigração de Trump — atingindo o nível mais baixo registrado em seu segundo mandato, conforme apontou uma pesquisa recente da Reuters/Ipsos. Diante da pressão crescente, o czar da fronteira de Trump, Tom Homan, foi enviado a Minneapolis com a promessa de que os oficiais retornariam a operações mais direcionadas, abandonando as varreduras amplas nas ruas que geraram confrontos com manifestantes.
+<br/><br/>
+Ecoando o sentimento das ruas, o governador democrata de Minnesota, Tim Walz, expressou ceticismo quanto à efetividade dessas mudanças. Em publicação na rede social X, afirmou: "A única maneira de garantir a segurança do povo de Minnesota é o governo federal retirar suas forças e acabar com esta campanha de brutalidade". Trump, por sua vez, oscilou nas declarações: na segunda-feira afirmou desejar "desescalar um pouco", mas na quinta-feira, ao ser questionado por repórteres se estava recuando, respondeu categoricamente: "De jeito nenhum".
+<br/><br/>
+O impacto dos protestos também se fez sentir no sistema educacional. Em Aurora, Colorado, as escolas públicas cancelaram as aulas da sexta-feira devido às ausências em massa previstas de professores e alunos — o subúrbio de Denver já havia sofrido intensas operações de imigração no ano passado, após Trump classificá-lo publicamente como uma "zona de guerra" supostamente invadida por gangues venezuelanas. Em Tucson, Arizona, pelo menos vinte escolas suspenderam as atividades letivas antecipando a adesão maciça à greve.
+<br/><br/>
+Na Universidade DePaul, em Chicago, cartazes colados pelos campi proclamavam "campus santuário" e "fascistas não são bem-vindos aqui". Estudantes do ensino médio em Long Beach, Califórnia, realizaram greve com cartazes anti-ICE nas mãos. No Brooklyn, um longo cortejo de manifestantes em idade escolar marchou pelas ruas entoando palavras de ordem contra a agência federal.
+<br/><br/>
+TV Mundo — Informação que conecta, contexto que transforma. Acompanhe nossa cobertura contínua em todas as plataformas digitais. Para nossos leitores e espectadores, até a próxima edição.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Trump e Elon Musk são citados em novos arquivos do caso Jeffrey Epstein divulgados pelo Departamento de Justiça.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Nesta publicação, apresentamos de forma organizada e fluida as informações tornadas públicas pelo Departamento de Justiça dos Estados Unidos, que voltam a lançar luz sobre o caso Jeffrey Epstein e suas conexões com figuras centrais da política, dos negócios e do entretenimento...</div>
+                <img src="https://pbs.twimg.com/media/G__gl3FWcAA_pQk?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+31 de janeiro de 2026<br/><br/>
+TV Mundo traz aos seus leitores e espectadores uma análise aprofundada da mais recente onda de transparência judicial envolvendo o caso Jeffrey Epstein, após o Departamento de Justiça dos Estados Unidos tornar públicos, nesta sexta-feira, milhões de novos arquivos que reconfiguram a compreensão sobre as conexões do criminoso sexual condenado com figuras de projeção internacional. Entre as centenas de documentos disponibilizados, destacam-se trocas de e-mails que revelam interações surpreendentes, como a aparente visita de Howard Lutnick, atual secretário de comércio do presidente Donald Trump, à ilha caribenha particular de Epstein, Little Saint James, para um almoço em 23 de dezembro de 2012 — episódio ocorrido anos depois de Lutnick afirmar publicamente ter rompido qualquer tipo de relação com o financista. Na manhã do encontro, a esposa de Lutnick escreveu diretamente à secretária de Epstein confirmando a partida de St. 
+<br/><br/>
+Thomas e consultando sobre o local de ancoragem da embarcação. No dia seguinte, o assistente de Epstein encaminhou a Lutnick uma nota pessoal do próprio Epstein com os dizeres: "Prazer em vê-lo". Anos mais tarde, em novembro de 2015, os e-mails mostram que o mesmo assistente recebeu um convite de Lutnick para uma arrecadação de fundos em sua empresa financeira destinada à candidata democrata Hillary Clinton, com registros oficiais indicando uma doação de US$ 2.700, valor máximo permitido pela legislação da época. Tais registros contradizem declarações feitas por Lutnick em podcast do ano passado, quando relatou ter jurado "nunca mais estar em uma sala" com Epstein após um suposto comentário sexualmente sugestivo feito pelo financista sobre uma mesa de massagem durante um encontro por volta de 2005. Um porta-voz do Departamento de Comércio, contudo, esclareceu que Lutnick manteve "interações limitadas com o Sr. Epstein na presença de sua esposa e nunca foi acusado de delito".
+<br/><br/>
+Paralelamente, outra série de correspondências eletrônicas trouxe à tona o nome do bilionário Elon Musk, ex-conselheiro informal de Trump, que em troca de mensagens com Epstein no Natal de 2012 recusou educadamente o convite para visitar a ilha. "O convite é muito apreciado, mas uma experiência pacífica na ilha é o oposto do que procuro", escreveu Musk, acrescentando estar "trabalhando até o limite da sanidade" e questionando se Epstein tinha "alguma festa planejada". Epstein respondeu compreendendo a recusa e observando que "a proporção na minha ilha" poderia causar desconforto à companheira de Musk, sem especificar detalhes. Poucos dias depois, Musk retribuiu o gesto convidando Epstein para se juntar a ele e a outros em um encontro para beber em St. Bart's, provavelmente referindo-se à ilha caribenha de São Bartolomeu, embora não haja confirmação de que o encontro de fato ocorreu. Musk, que não respondeu imediatamente a novos pedidos de comentário, havia se manifestado anteriormente em uma postagem na plataforma X afirmando: "Epstein tentou me fazer ir para sua ilha e eu recusei".
+<br/><br/>
+Os documentos recém-divulgados refletem com precisão os círculos de elite frequentados por Epstein, com menções recorrentes a personalidades de destaque na política, nos negócios e no entretenimento. O próprio Trump é citado repetidamente, reforçando relatos de que manteve amizade com Epstein anos antes de os crimes do financista virem à luz pública. Um exemplo emblemático é a inclusão de Kevin Warsh, nomeado por Trump nesta sexta-feira como próximo presidente do Federal Reserve, em um e-mail enviado por um publicitário a Epstein listando 43 indivíduos — entre eles celebridades como Martha Stewart — que supostamente se dirigiriam a uma reunião de Natal. Até o momento, não ficou claro se Warsh conhecia Epstein pessoalmente ou por que seu nome constava na lista, e ele não emitiu comentários imediatos sobre o assunto. Divulgações anteriores de arquivos já haviam renovado o escrutínio sobre relações de Epstein com outras figuras proeminentes, incluindo o ex-presidente Bill Clinton e o ex-secretário do Tesouro Larry Summers, ambos tendo negado qualquer irregularidade e expressado arrependimento por sua associação com o falecido financista.
+<br/><br/>
+Todd Blanche, vice-procurador-geral dos Estados Unidos, confirmou em entrevista coletiva que o conjunto de documentos divulgado nesta sexta-feira representa o encerramento das divulgações planejadas pela atual administração sob os termos de uma lei bipartidária aprovada pelo Congresso, que determina a publicidade integral de todos os arquivos relacionados a Epstein.
+<br/><br/>
+O novo acervo inclui mais de 3 milhões de páginas digitalizadas, 2.000 vídeos e 180.000 imagens, embora muitos materiais tenham sofrido redações substanciais — medida justificada por Blanche como necessária para proteger vítimas ou preservar investigações em andamento, conforme exceções permitidas pela legislação. Um documento exemplar de 82 páginas teve todas as folhas exceto uma completamente apagadas. A divulgação ocorre semanas após o prazo final de 19 de dezembro estabelecido pelo Congresso, apesar de meses de esforços da administração Trump para retardar o processo. Diante disso, parlamentares democratas manifestaram ceticismo imediato sobre a integralidade do material fornecido, ressaltando que o Departamento de Justiça havia identificado inicialmente 6 milhões de páginas potencialmente relevantes, mas divulgou apenas 3,5 milhões.
+<br/><br/>
+O escândalo envolvendo Epstein continua a perseguir politicamente Donald Trump, que nega ter tido qualquer conhecimento prévio dos crimes cometidos pelo financista. A controvérsia ganhou nova dimensão porque Trump prometeu durante sua campanha presidencial de 2024 tornar públicos todos os arquivos sobre Epstein, mas não cumpriu integralmente o compromisso após assumir o cargo.
+<br/><br/>
+Os documentos agora revelados incluem centenas de menções ao presidente, muitas delas constituídas por compilações de reportagens da mídia. Um arquivo em particular detalha o que parecem ser e-mails internos de investigadores federais datados de agosto de 2025, analisando alegações de natureza obscura envolvendo Trump e Epstein. Nenhuma das mensagens indica que tais acusações tenham sido corroboradas por evidências, com os próprios investigadores observando que diversos acusadores não foram considerados credíveis. Em comunicado oficial, o Departamento de Justiça alertou que parte dos documentos contém alegações falsas e sensacionalistas contra Trump. Outra mensagem, cujos remetente e destinatário foram redigidos, menciona: "O que JE acha de ir para Mar-a-Lago depois do Natal, em vez de ir para sua ilha?", referindo-se ao clube privado de Trump na Flórida. A troca data de 2012, vários anos após Trump declarar publicamente que cessara qualquer tipo de convivência social com Epstein.
+<br/><br/>
+Os arquivos também trouxeram à tona uma correspondência de 2002 atribuída a Melania Trump, então companheira do presidente, endereçada a Ghislaine Maxwell, parceira e co-conspiradora de Epstein. No e-mail, Melania escreve: "Bela história sobre JE na revista de NY. Você ficou ótimo na foto. Ligue-me quando voltar a NY." Maxwell foi condenada em 2021 por tráfico sexual de menores e outras acusações, recebendo uma sentença de 20 anos de prisão. Epstein, por sua vez, morreu em 2019 enquanto aguardava julgamento em uma cela federal, com sua morte oficialmente classificada como suicídio, embora tenha gerado anos de teorias conspiratórias — algumas delas amplificadas pelo próprio Trump junto a seus apoiadores durante a campanha eleitoral de 2024.
+<br/><br/>
+Reportagem de Brad Heath e Andrew Goudsward em Washington e Julia Harte em Nova York; reportagem adicional de Jason Lange, Richard Cowan, Jonathan Stempel, Bhargav Acharya, Susan Heavey, Ryan Jones e Katharine Jackson; escrita por Joseph Axe; edição de Andy Sullivan, Alistair Bell e Cynthia Osterman.
+<br/><br/>
+TV Mundo agradece a atenção dedicada por seus leitores e espectadores a esta cobertura especial.
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">TESTEMUNHAMOS O FIM DOS ESTADOS UNIDOS.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">José Kobori.</div>
+                <img src="https://pbs.twimg.com/media/G--zUX5WEAAkO6s?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de janeiro de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/tl-o79BBfLE?si=YMQeWktM8FNZ1HNX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+
+
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">O Brasil está QUEBRADO?</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O Brasil vai virar a Venezuela?</div>
+                <img src="https://pbs.twimg.com/media/G--tgf0WwAEqd9u?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de janeiro de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/2SWvWROoKLs?si=Fsgxauzjnm7ysjMg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">MERITOCRACIA</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O Sucesso Só Depende de Você?</div>
+                <img src="https://pbs.twimg.com/media/G--o6DmXIAITi5B?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de janeiro de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/A8BFcsd2laI?si=94cJhlVYbOWEEmAr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">A MERITOCRACIA É UM DELÍRIO CAPITALISTA? JOSÉ KOBORI.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Não existe Meritocracia!.</div>
+                <img src="https://pbs.twimg.com/media/G--kv3WWgAMsEau?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de janeiro de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/SLyHQbhlGbM?si=A6wEscO0zBVoCRwT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">A Lógica Empresarial Por Trás do Lucro.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">E assim que as empresas pensam.</div>
+                <img src="https://pbs.twimg.com/media/G--fwloXoAAkmHj?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de janeiro de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/zLJAoQGRYTE?si=lv04pCDmXw7R7GfX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">A Lógica Insustentável do Modelo Capitalista.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">As contradições do capitalismo.</div>
+                <img src="https://pbs.twimg.com/media/G--ZgpQWAAA4tQ7?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de janeiro de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/Q_iRpMPYtro?si=DcchN0rgYYENTAlY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Capitalismo x socialismo</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">O Capitalismo é o Melhor Modelo?</div>
+                <img src="https://pbs.twimg.com/media/G--PA3JWIAAB-J0?format=jpg&name=large" alt="Imagem do Post 1" class="post-image">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de janeiro de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/Q_iRpMPYtro?si=DcchN0rgYYENTAlY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-
+
+ <!--🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴--> <!-- Coluna da direita inicio --> </div>
+        <div class="right-column">
+            <!-- Post flutuante -->
+            <div class="floating-post">
+                <img src="https://via.placeholder.com/300" alt="">
+                <div class="post-title">MEU DNA É MARLEY</div>
+                <div class="post-description"><a href="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large"><img src="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large" alt="Imagem do Post 1" class="post-image"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <div class="footer-nav">
+            <a href="https://tvmundo.github.io/">&#9664;</a><!---anterior--->
+            <a href="https://tvmundo.github.io/qwen/2025/4.html">&#9654;</a><!---proximo--->
+        </div>
+        <div class="footer-text">TV Mundo desde 2011</div>
+    </div>
+
+    <!-- Botão de rolagem -->
+    <button class="scroll-button" id="scrollButton">↑</button>
+
+    <script>
+        // Função para expandir/recolher os posts
+        document.querySelectorAll('.post-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.previousElementSibling; // Encontra o conteúdo do post
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    button.textContent = 'Continuar lendo...';
+                } else {
+                    content.style.display = 'block';
+                    button.textContent = 'Recolher';
+                }
+            });
+        });
+
+        // Função para rolar a página
+        const scrollButton = document.getElementById('scrollButton');
+        let isAtTop = true;
+
+        scrollButton.addEventListener('click', () => {
+            if (isAtTop) {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↑'; // Altera o ícone para subir
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↓'; // Altera o ícone para descer
+            }
+            isAtTop = !isAtTop; // Alterna o estado
+        });
+
+        // Atualiza o ícone do botão com base na posição da página
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                scrollButton.textContent = '↓'; // Ícone para descer
+                isAtTop = true;
+            } else if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+                scrollButton.textContent = '↑'; // Ícone para subir
+                isAtTop = false;
+            }
+        });
+    </script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://tvmundo.github.io/qwen/player.mod2/script.js"></script>	
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

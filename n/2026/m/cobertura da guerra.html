@@ -1,0 +1,2049 @@
+
+<!--- -------------------------atualizar pagina ini---------------------------- --->
+    <style>
+        /* Estilo do botão */
+        .reload-button {
+            position: fixed; /* Permite ajustar a posição fixa na tela */
+            top: 1%; /* Ajuste a altura inicial (50% da página) */
+            bottom: 20px; /* Distância do fundo da página */
+            right: 5px; /* Distância da direita da página */
+            background-color: #6200ea; /* Cor de fundo moderna */
+            color: white; /* Cor do texto */
+            border: none; /* Sem borda */
+            border-radius: 50%; /* Formato circular */
+            width: 30px; /* Largura do botão */
+            height: 30px; /* Altura do botão 50 */
+            font-size: 15px; /* Tamanho do ícone 24 */
+            cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efeito moderno */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave */
+            z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+        }
+
+        /* Efeito ao passar o mouse */
+        .reload-button:hover {
+            transform: scale(1.1); /* Aumenta o tamanho levemente */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+        }
+
+        /* Efeito ao clicar */
+        .reload-button:active {
+            transform: scale(0.95); /* Diminui o tamanho levemente */
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão de Recarregar -->
+    <button class="reload-button" onclick="location.reload();">
+        &#x21bb; <!-- Ícone de recarregar (unicode) -->
+    </button>
+<!------------------------------estilo do player de video ini-------------------------------------------->
+  <style>
+    /* Estilo geral */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+
+    .tvmundo1 {
+      margin-bottom: 30px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Menu suspenso */
+    .dropdown-menu {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .dropdown-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-button:hover {
+      background-color: #0056b3;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 100%;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Player de vídeo */
+    .video-player {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* Proporção 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .video-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+<!------------------------------estilo do player de video FIM-------------------------------------------->
+<!------------------------------script do player de video ini-------------------------------------------->
+<script>
+    // Função para inicializar os menus suspensos e o carregamento de vídeos
+    document.addEventListener("DOMContentLoaded", function () {
+      const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+
+      dropdownMenus.forEach((menu) => {
+        const button = menu.querySelector(".dropdown-button");
+        const content = menu.querySelector(".dropdown-content");
+        const player = menu.parentElement.querySelector(".video-player iframe");
+
+        // Alternar visibilidade do menu suspenso
+        button.addEventListener("click", () => {
+          content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+
+        // Carregar vídeo ao clicar em um item do menu
+        content.addEventListener("click", (event) => {
+          if (event.target.tagName === "A") {
+            event.preventDefault();
+            const videoId = event.target.getAttribute("data-video-id");
+            player.src = `https://www.youtube.com/embed/${videoId}`;
+            content.style.display = "none"; // Esconder o menu após seleção
+          }
+        });
+      });
+    });
+  </script>
+<!------------------------------script do player de video fIM-------------------------------------------->
+</body>
+</html> 
+<!--- -------------------------atualizar pagina FiM---------------------------- --->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Mundo</title>
+    <style>
+        /* Estilo básico para o layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabeçalho */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Layout principal */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+
+        /* Coluna da esquerda (posts) */
+        .left-column {
+            flex: 2;
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Post individual */
+        .post {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .post-title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .post-description {
+            color: #555;
+        }
+
+        .post-image, .post-video {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .post-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .post-button {
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .post-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Coluna da direita */
+        .right-column {
+            flex: 1;
+            padding: 20px;
+            background-color: #e9ecef;
+            position: relative;
+        }
+
+        /* Post flutuante */
+        .floating-post {
+            position: fixed;
+            top: 20%;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10; /* Garante que o post flutuante fique acima do conteúdo */
+        }
+
+        .floating-post img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .footer-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            font-size: 1em;
+        }
+
+        /* Botão de rolagem */
+        .scroll-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 20; /* Garante que o botão fique acima do conteúdo */
+        }
+
+        .scroll-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .right-column {
+                display: none; /* Oculta a coluna direita em dispositivos móveis */
+            }
+
+            .floating-post {
+                display: none; /* Oculta o post flutuante em dispositivos móveis */
+            }
+        }
+    </style>
+</head>
+<body>
+        <!-- Cabeçalho -->
+    <div class="header">
+        <a href="https://tvmundo.github.io/"><img src="https://pbs.twimg.com/media/GkvBOZJWsAAV-Uu?format=png&name=small" alt="Logo TV Mundo" class="header-logo"><a href="https://tvmundo.github.io/"></a>
+<div class="header-title">TV Mundo</div>
+</div>
+    <!-- Conteúdo principal -->
+    <div class="main-container">
+        <!-- Coluna da esquerda -->
+             <!-- Coluna post -->
+    <div class="left-column">
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Israel mata dezenas no Líbano após missão fracassada para encontrar restos mortais de piloto
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Uma operação israelense no leste do Líbano para localizar os restos mortais de um famoso piloto das FDI terminou em fracasso durante a noite, quando os comandos foram pegos em um tiroteio com Hezbolá e residentes locais, liderando jatos israelenses para atacar a área com ataques aéreos que mataram dezenas de pessoas.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>7 de março de 2026
+<img src="https://pbs.twimg.com/media/HC0qqjZWoAAXeTp?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+A GUERRA NO IRA E OS DOMINADORES DESTE MUNDO [ CAIO FÁBIO REFLETE https://youtu.be/VZcou8U72Ng?si=GPKoTc4LHm_K91PE via 
+@YouTube
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>7 de março de 2026
+<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1616143462750466%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+O Irã continua a disparar mísseis contra Israel
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Sirenes soaram no centro de Israel e em outras áreas neste sábado, após lançamentos de mísseis do Irã, IDF disse que atingiu alvos em Teerã durante a noite.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>7 de março de 2026
+<img src="https://pbs.twimg.com/media/HC0dkE3W0AAV1Ii?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+"Bloomberg confirma:
+ Irã destrói radar THAAD de US$ 300 mi na Jordânia"
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+🚨 CONFIRMADO:
+ EUA PERDEM RADAR ESTRATÉGICO NA JORDÂNIA
+A Bloomberg, citando oficiais americanos, confirmou que o Irã destruiu o radar AN/TPY-2 (US$ 300 milhões) na base Muwaffaq Salti
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>7 de março de 2026
+<img src="https://pbs.twimg.com/media/HC0WojRWYAAXQ0e?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+o Irã esgota os sistemas de defesa EUA-Israel
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+EUA aprovam venda “emergencial” de 12 mil cápsulas de bombas para Israel no valor de US$ 151 milhões
+EUA ignoram revisão do Congresso para aprovar venda de munições a Israel
+Coreia do Sul e Washington estão discutindo a possível redistribuição de alguns sistemas de defesa antimísseis Patriot dos EUA estacionados na Coreia do Sul, após relatos de que os sistemas poderiam ser movidos para apoiar operações no Oriente Médio
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>7 de março de 2026
+<img src="https://pbs.twimg.com/media/HCz3yz_WwAAeifo?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Irã atinge radar estratégico dos EUA no Catar e expõe contradição de Doha.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Míssil balístico iraniano danificou o radar AN/FPS-132 (US$ 1,1 bi) na maior base americana no Oriente Médio. Equipamento crucial para defesa contra ataques.
+As perdas totais de equipamento dos EUA na região desde a intensificação do conflito são agora estimadas em 1,9–2,4 mil milhões de dólares, sendo o radar do Qatar o golpe mais caro. 
+O Ministério da Defesa do Catar confirmou o ataque: dois mísseis foram lançados em direção ao território do Catar, um interceptado e o outro atingindo a base.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>7 de março de 2026
+<img src="https://pbs.twimg.com/media/HCzyUVdXUAA8oyO?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Irã desafiam Trump a fazer com que a Marinha dos EUA escolte petroleiros no Estreito de Ormuz
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>7 de março de 2026
+<img src="https://pbs.twimg.com/media/HCzoc52XsAA3KeC?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Matador de criancinhas
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>7 de março de 2026
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="tr" dir="ltr">Pedofolik çocuk düşmanı katil! <a href="https://t.co/eZUvU0yxPv">pic.twitter.com/eZUvU0yxPv</a></p>&mdash; Said Ercan 🇹🇷 🌍 (@saidercan) <a href="https://twitter.com/saidercan/status/2030133675019436468?ref_src=twsrc%5Etfw">March 7, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Tucker Carlson criticou o ataque militar conjunto EUA-Israel ao Irã, chamando-o de "absolutamente repugnante e maligno" 
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+em entrevista ao jornalista Jon Karl. Em um episódio seu, ele afirmou: "um espírito foi libertado. Isso é influência demoníaca, claramente", referindo-se à guerra e ao "sangue nas veias" de apoiadores da ação.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<img src="https://pbs.twimg.com/media/HCw43tBX0AAMUxn?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Arábia Saudita intensifica canal direto com o irã num esforço para conter o conflito regional.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+A Arábia Saudita intensificou o seu envolvimento direto com o Irão numa tentativa de tentar conter a guerra no Médio Oriente.
+as autoridades sauditas implantaram nos últimos dias o seu canal diplomático para o irã com maior urgência para diminuir as tensões e evitar o agravamento do conflito.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<img src="https://pbs.twimg.com/media/HCwvmuZXQAAcID9?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+As ações dos EUA fecham em queda enquanto o petróleo dispara 12% e o mercado de trabalho enfraquece.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+6 Março - Os três principais índices de Wall Street fecharam em baixa nesta sexta-feira em meio a um revés repentino no mercado de trabalho dos EUA e a um aumento de 12% nos preços do petróleo nos EUA devido à conflito crescente no Oriente Médio.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<img src="https://pbs.twimg.com/media/HCwgoWhWgAABmIs?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+A mídia iraniana publicou imagens de câmeras de segurança do brutal ataque com mísseis durante a agressão EUA-Israel, perto da escola infantil Qazvin.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="pt" dir="ltr">A mídia iraniana publicou imagens de câmeras de segurança do brutal ataque com mísseis durante a agressão EUA-Israel, perto da escola infantil Qazvin. <a href="https://t.co/Haqq7bjJ4B">pic.twitter.com/Haqq7bjJ4B</a></p>&mdash; tvmundo (@soanatareportag) <a href="https://twitter.com/soanatareportag/status/2029978976374927554?ref_src=twsrc%5Etfw">March 6, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Falta de interceptadores? Coreia do Sul e EUA discutem possível realocação de mísseis Patriot para o Oriente Médio.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+O ministro das Relações Exteriores da Coreia do Sul, Cho Hyun, disse que Seul e Washington estão discutindo a possível redistribuição de alguns sistemas de defesa antimísseis Patriot dos EUA estacionados na Coreia do Sul, após relatos de que os sistemas poderiam ser movidos para apoiar operações no Oriente Médio em meio à escalada de tensões com o Irã.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<img src="https://pbs.twimg.com/media/HCvW-7wXsAAoLuo?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Washington Post: A Rússia está fornecendo informações ao Irã para atacar as forças dos EUA, dizem autoridades.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Segundo o relatório, desde o início da guerra, no sábado, a Rússia passou informações ao Irão sobre a localização de alvos militares dos EUA, incluindo navios de guerra e aeronaves.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<img src="https://pbs.twimg.com/media/HCu6jFwXwAAlkTr?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Irã bombardeia alvos militares dos EUA e de Israel e promete intensificar ataques retaliatórios.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Irã ataca bases dos EUA e Israel no Iraque e Kuwait, diz Teerã. Alvos: base de Ramat David, radar Miron, Camp Al Adiri e Erbil. Comando promete intensificar ofensiva; IRGC afirma +2 mil drones e +600 mísseis lançados.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<img src="https://pbs.twimg.com/media/HCux25EWkAAOm-P?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+✈️ Aviões de guerra israelenses atacam Teerã e Beirute enquanto os EUA prometem aumentar seus ataques ao Irã.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+✈️ Aviões israelenses atacaram Beirute e Teerã nesta sexta; Irã retaliou contra Israel e países do Golfo. Sem sinais de trégua no 7º dia de guerra, EUA alertam que campanha aérea contra o Irã vai "aumentar dramaticamente". Milhares fogem do Líbano após alertas de evacuação.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<img src="https://pbs.twimg.com/media/HCuqiErWMAM5ocH?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+A fragata iraniana Iris Dena – que foi torpedeada e afundada por um submarino nuclear dos EUA 
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<img src="https://pbs.twimg.com/media/HCn4jEsWIAAA2ai?format=jpg&name=900x900" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ <br/>
+A fragata iraniana Iris Dena – que foi torpedeada e afundada por um submarino nuclear dos EUA – ao largo de Sri Lanka, havia sido convidada pela Marinha indiana para atividades conjuntas no país. 
+<p>
+A embarcação não estava em zona de guerra e retornava de uma missão pacífica na Índia.  
+<p>
+Após o lançamento do torpedo, aparentemente, os náufragos iranianos foram abandonados à própria sorte, o que viola o direito de Genebra. 
+<p>
+Segundo a imprensa, “The ship sent a distress signal requesting assistance about 6am (12 pm AEDT), Sri Lanka’s Foreign Minister Vijitha Herath told parliament. Ships and planes were dispatched on a rescue mission and found an oil patch and life rafts, along with 32 survivors and 87 bodies”.
+<p>
+O resgate foi feito por embarcações e aeronaves cingalesas (ou srilanquesas, para ser mais preciso). 
+<p>
+O direito dos conflitos armados no mar impõe a obrigação de proteger e socorrer náufragos, independentemente de sua nacionalidade ou de estarem do lado inimigo.
+<p>
+Essa regra aparece na Segunda Convenção de Genebra de 1949, no Protocolo Adicional I às Convenções de Genebra de 1977 e no direito internacional consuetudinário.
+<p>
+Após um engajamento naval, as partes devem tomar todas as medidas possíveis para procurar e recolher os náufragos e protegê-los.
+<p>
+Portanto, deixar deliberadamente pessoas no mar, se for possível o resgate, viola o direito internacional humanitário.
+<p>
+A conduta se torna um crime de guerra, tendo como vítimas as pessoas que já estão fora de combate (“hors de combat”), quando há um ataque direto a elas. 
+<p>
+Na 2ª Guerra Mundial, ficou muito conhecido o massacre do SS Peleus (Caso Heinz-Wilhelm Eck).
+<p>
+O submarino alemão U-852 torpedeou o cargueiro grego SS Peleus no Atlântico em 1944.
+<p>
+Depois do torpedeamento, o comandante Heinz‑Wilhelm Eck ordenou metralhar os destroços e os sobreviventes no mar. 
+<p>
+Após a guerra, um tribunal militar britânico em Hamburgo concluiu que as vítimas do SS Peleus estavam “hors de combat” e que as atacar fora um inequívoco crime de guerra.
+<p>
+Eck, August Hoffman, Walter Weispfennig foram condenados à morte e executados em 1945. Dois outros oficiais alemães, Hans Lenz e Wolfgang Schwender, foram sentenciados a prisão. 
+<p>
+Conforme a regra costumeira 109 do DIH, “Sempre que as circunstâncias o permitirem, e particularmente após um combate, cada parte em conflito deve, sem demora, tomar todas as medidas possíveis para procurar, recolher e evacuar os feridos, doentes e náufragos, sem distinção adversa.”
+<p>
+O artigo 10 do Protocolo I de 1977 diz:
+<p>
+“Artigo 10 — Proteção e cuidados
+1. Todos os feridos, enfermos e náufragos, seja qual for a Parte a que
+pertençam, devem ser respeitados e protegidos.
+<p>
+2. Devem em todas as circunstâncias ser tratados com humanidade e
+receber na medida do possível, e sem demora, a atenção e os cuidados
+médicos que seu estado exigir. Não deverá ser feita entre eles qualquer
+distinção fundada em critérios que não sejam médicos.”
+<p>
+A postura de 
+@PeteHegseth
+ em situações de engajamento naval já provocou controvérsias em 2025 quando diversas lanchas de pequeno porte foram bombardeadas por embarcações americanas no Caribe, supostamente por envolvimento em tráfico de drogas por via marítima, partindo da Venezuela e da Colômbia.
+<p>
+Mais de 140 pessoas morreram nesses ataques. Ninguém foi preso. Nenhuma carga de drogas foi apreendida. Não houve devido processo legal. Não se sabe se eram traficantes; ignora-se se era cocaína. Nestes casos, o direito aplicável é formado pela Convenção de Montego Bay, de 1982; pela Convenção de Viena, de 1988; e pela jurisprudência do 
+@ITLOS_TIDM
+ , sobretudo o precedente M/V Saiga.
+<p>
+No caso da fragata Iris Dena, as normas aplicáveis são de outra natureza: as do direito internacional dos conflitos armados.
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+O afundamento traiçoeiro da fragata iraniana IRIS Dena em águas internacionais constitui mais um crime de guerra dos EUA.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+ O navio estava desarmado e acabara de retornar de um exercício na Índia. Trump e Modi terão que responder.
+O direito internacional está morto.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>6 de março de 2026
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="es" dir="ltr">El hundimiento a traición de la fragata iraní IRIS Dena en aguas internacionales constituye otro crimen de guerra de EEUU.<br>El buque estaba desarmado y venía de un ejercicio en India. Trump y Modi deberán responder por esta aberración.<br>El derecho internacional está muerto. <a href="https://t.co/8U38YFkQGb">pic.twitter.com/8U38YFkQGb</a></p>&mdash; César Biondini (@BiondiniCesar) <a href="https://twitter.com/BiondiniCesar/status/2029625020058583378?ref_src=twsrc%5Etfw">March 5, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Teerã sofre pesados bombardeios no sétimo dia de conflito entre EUA/Israel e Irã.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Um correspondente da Al Jazeera na capital iraniana relatou que os ataques estão mais intensos do que em qualquer momento anterior. Segundo ele, alvos civis — como prédios residenciais, estacionamentos e postos de combustível — estão entre os locais atingidos pelos bombardeios.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCumlm0XAAAsd3P?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Refinarias indianas compram petróleo russo imediatamente enquanto a guerra no Irã atinge a oferta
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCrxKqKaUAAYOHp?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Depois do Iraque, Kuwait e Emirados Árabes Unidos podem ser os próximos a cortar a produção de petróleo devido à crise do Irã
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCrqV4VXcAA1Omq?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Mais uma saraivada de mísseis lançada do Irã contra o centro de Israel e Jerusalém.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="pt" dir="ltr">5 de março de 2026 22:51 em jerusalém. Mais uma saraivada de mísseis lançada do Irã contra o centro de Israel e Jerusalém. <a href="https://t.co/3dDFLR667t">pic.twitter.com/3dDFLR667t</a></p>&mdash; tvmundo (@soanatareportag) <a href="https://twitter.com/soanatareportag/status/2029685933809733942?ref_src=twsrc%5Etfw">March 5, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Houthi do Iêmen alerta que suas forças estão prontas para agir se o conflito aumentar
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCrfxs8boAAq-Hu?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Mais uma saraivada de mísseis lançada do Irã contra o centro de Israel e Jerusalém.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCrZvMjXEAEr7_m?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+China negocia com o Irã para permitir a passagem segura de petróleo e gás através de Ormuz
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCrWitmXwAAv61z?format=png&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+DUBAI (Reuters) - Com seu líder supremo morto e sua máquina de guerra sob pressão implacável dos EUA
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+o irã está agora em grande parte sozinho.
+os seus parceiros de longa data, a Rússia e a China, não oferecem nada mais do que condenações diplomáticas e expressões de preocupação
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCrMwL6XAAAruV9?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Trump: próximo líder do Irã deve ser escolhido com minha participação, assim como fiz na Venezuela
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>
+<img src="https://pbs.twimg.com/media/HCqq5l4W0AAlg6H?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Reuters:
+Exclusivo: combatentes de elite do Hezbollah retornam ao sul do Líbano para combater as tropas israelenses.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCqM7snWMAAQEYV?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+
+<!----------------------- Título do Post Ini---------------------->
+Mais navios-tanque são atacados à medida que o conflito EUA-Irã se espalha na região.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Um petroleiro com bandeira das Bahamas foi alvo de um barco iraniano controlado remotamente carregado com explosivos enquanto estava ancorado perto do porto de Khor al Zubair.UM segundo petroleiro ancorado ao largo do Kuwait estava recebendo água e derramando óleo após uma grande explosão a bombordo.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<img src="https://pbs.twimg.com/media/HCqGyMiXwAAY90v?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+
+<!----------------------- Título do Post Ini---------------------->
+Veterano da Marinha americana protesta contra a guerra: “não vou morrer por Israel”.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>5 de março de 2026
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="pt" dir="ltr">Veterano da Marinha americana protesta contra a guerra: “não vou morrer por Israel”. <a href="https://t.co/jPQVasbpGG">pic.twitter.com/jPQVasbpGG</a></p>&mdash; GugaNoblat (@GugaNoblat) <a href="https://twitter.com/GugaNoblat/status/2029461883003056287?ref_src=twsrc%5Etfw">March 5, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Bombardeios dos EUA e de Israel contra Teerã se intensificam quando a guerra entra no sexto dia
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HCqEqWgWsAARmNm?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Alemanha e Bélgica recusam-se a juntar-se aos ataques EUA-Israel no Irão.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Berlim e Bruxelas excluem a participação militar, pressionam pela diplomacia e alertam que a força por si só não pode resolver o crescente conflito no Médio Oriente.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HCl4CzoXYAAQ1pe?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Dois navios europeus atacados no estreito de Ormuz.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Um porta-contentores de bandeira maltesa, o Safeen Prestige, foi atingido por um projétil desconhecido acima da linha de água, causando incêndio na casa de máquinas, mas o fogo foi controlado. O petroleiro Hercules Star, de empresa espanhola (embora não sob bandeira espanhola), foi atacado no dia anterior, sem vítimas reportadas.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>
+4 de março de 2026<img src="https://pbs.twimg.com/media/HClaeFlXgAAuY0O?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 4 de março de 2026
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Emirados Árabes Unidos apelam aos EUA, Israel e Irão para que regressem à mesa das negociações.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Os Emirados Árabes Unidos (EAU) apelaram aos Estados Unidos, a Israel e ao Irão para que regressem à mesa das negociações, numa altura em que o conflito no Médio Oriente, que eclodiu no fim de semana, entra no seu quinto dia.
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HClHSYaawAAbbJ8?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 8 de abril de 2026<br/>
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header">
+<div class="post-title">
+<!----------------------- Título do Post Ini---------------------->
+Sánchez diz não à guerra ‘desastrosa’ depois de Trump ameaçar Espanha.
+<!----------------------- Título do Post Fim---------------------->
+</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+<!------------------------ Descrição Ini------------------------>
+Sánchez da Espanha a Trump: 'Não se pode jogar roleta russa com o destino de milhões'
+<!----------------------Fim Descrição Fim----------------------->
+</div>
+<!------------------------ IMG ------------------------>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HCkuL3XbAAAw1nf?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+<!------------------------ IMG ------------------------>
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1-->
+<!--🔴🔴🔴🔴🔴-->
+                <p>
+<!-----------------------Post Ini------------------------>
+ 4 de março de 2026
+cccccccc
+<!-----------------------Post Fim------------------------>
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header"> <!-- Título do Post 1 -->
+<div class="post-title">Guarda Revolucionária: O Estreito de Ormuz está sob controle total do Irã.</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+<div class="post-description">
+10 navios que não atenderam ao aviso foram atacados.
+Neste contexto, lembrou que o Irão enviou uma mensagem à rede marítima global informando que todo o Estreito de Ormuz está em condições de guerra e que existe a possibilidade de navios serem danificados por mísseis ou drones errantes.
+</div>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HCkob-ZawAUCcIO?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+</div>
+<div class="post-content">
+<!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+<p>
+
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<br/><br/>
+</div>
+<button class="post-button">Continuar lendo...</button>
+</div>
+<!--Fim 🔴🔴🔴🔴🔴 Fim-->					
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+<div class="post">
+<div class="post-header"> <!-- Título do Post 1 -->
+<div class="post-title">Sirenes soam no centro de Israel enquanto Irã e Hezbollah lançam ataque coordenado.</div>
+<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+O Irã e o Hezbollah enviaram ondas de projéteis ao centro e norte de Israel em um ataque coordenado.
+</div>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HCkfR5QWIAAa4QU?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+
+        <!--Fim 🔴🔴🔴🔴🔴 Fim-->
+            <br/><br/>
+</div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->			
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Tropas dos EUA disseram que a guerra no Irã é um “plano de Deus” para desencadear o Armagedom, diz órgão de vigilância.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+Mais de 200 queixas alegam que os comandantes militares enquadraram os ataques dos EUA ao Irão como parte de uma profecia bíblica, invocando o Livro do Apocalipse e descrevendo Trump como divinamente “ungido”, de acordo com a Fundação para a Liberdade Religiosa Militar.
+</div>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HCkYjUPawAQRdYE?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+
+        <!--Fim 🔴🔴🔴🔴🔴 Fim-->
+            <br/><br/>
+</div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Israel afirma que um de seus aviões abateu um caça iraniano sobre Teerã.
+</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+
+</div>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HCkRsFyWkAAD2y8?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Mais de 100 desaparecidos após ataque de submarino a navio iraniano na costa do Sri Lanka.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+A marinha do Sri Lanka enviou uma missão de resgate após um pedido de socorro do navio iraniano.
+Os militares do Sri Lanka resgataram pelo menos 30 pessoas a bordo de um navio iraniano que naufragou perto das águas do Sri Lanka.
+os feridos foram internados em um hospital em Galle.
+</div>
+<img src="https://pbs.twimg.com/media/HCkJldfXoAAT3Hz?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de fevereiro de 2026
+
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->					
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Colocando a França em rota de colisão com Donald Trump.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+Numa declaração televisiva na terça-feira, o presidente francês disse que embora o Irão “tenha a responsabilidade primária” pela guerra, os ataques estavam “fora dos limites do direito internacional”.
+</div>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HChlQYnXgAAs70C?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 20266
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->			
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Filho de Ali Khamenei escolhido como sucessor.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+A Assembleia de Peritos do Irão escolhe Mojtaba Khamenei, filho de Ali Khamenei, como o próximo Líder Supremo do Irão.
+</div>4 de março de 2026
+<img src="https://pbs.twimg.com/media/HChXMnBWAAAdRwe?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">o Irão lançou mísseis e drones não só contra Israel, mas também contra os estados do Golfo.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+A evacuação atraiu críticas em Israel por parte daqueles que argumentaram que ela criou uma disparidade moral, deixando os civis para trás numa área sob ataque, sem acesso a abrigos ou sirenes de alerta.
+<img src="https://pbs.twimg.com/media/HCg6O-yWMAAL7ri?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+             </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">EUA fecham suas embaixadas na Arábia Saudita e Kuwait após serem atingidos por ataques iranianos</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">4 de março de 2026</div>
+<img src="https://pbs.twimg.com/media/HCgvhp3XoAEXu9r?format=png&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->	
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Irã diz que está preparado para resistir e enfrentar Israel e EUA em uma guerra longa</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description"></div>
+ 4 de março de 2026
+<img src="https://pbs.twimg.com/media/HCgrJUYawAEt62n?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->		
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Rubio sugere que os ataques dos EUA ao Irã foram influenciados pelos planos israelenses.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">‘Israel não forçou os EUA à guerra, eu poderia ter forçado a mão deles’… Ver mais</div>4 de março de 2026
+ <img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/646568696_1597555775706765_615077572329833344_n.jpg?stp=dst-jpg_p843x403_tt6&_nc_cat=109&ccb=1-7&_nc_sid=13d280&_nc_ohc=68TWSfvd7N8Q7kNvwEfcOuw&_nc_oc=AdpQzLi_a-obfJ6m5_HD2RiX2lBV6w9NNmVaJsK3sr7KpoxztZBX5bTYF0uXblNmZeQ&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=bcE5qAoaRqcWhtdSwg2_mw&_nc_ss=7a3a8&oh=00_Af2HgsEM0r5xS9nyN3VShw3AVwQBzc7bM0PLZ3KKm0kWUA&oe=69DC6D80" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+ 4 de março de 2026
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->		
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Ataque planejado de Israel levou os EUA a lançar a guerra contra o Irã, revela Rubio.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description"> 4 de março
+
+...</div>
+              Ex-embaixador critica falsa narrativa que Israel 'arrastou' os EUA para a guerra.
+<img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/646851312_1597555072373502_5631066941752665386_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=aArDw0Ky4fwQ7kNvwER44v8&_nc_oc=Adr3pYTrtYwyLj5MUwVG-0XZ6GX2p87OCThBgxPujPT1573UdEYV2R_pSuqPv-_WHLI&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=qVd7ZaI3EIjvMKuaGDWj5w&_nc_ss=7a3a8&oh=00_Af165umeRrq7Uxf2-XKYrNxW1nfw50ZmvAltx96KwNka4g&oe=69DC6217" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+ 4 de março
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+<br/><br/>
+
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Um dos maiores depósitos de petróleo do mundo queima nos Emirados Árabes Unidos</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description"></div>3 de março
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="es" dir="ltr">🚨Se eleva humo desde la terminal petrolera de Fujairah, en Emiratos Árabes Unidos, tras el ataque de un dron iraní <a href="https://t.co/caSrkkUwjA">https://t.co/caSrkkUwjA</a> <a href="https://t.co/G12HPXUIjM">pic.twitter.com/G12HPXUIjM</a></p>&mdash; RT en Español (@ActualidadRT) <a href="https://twitter.com/ActualidadRT/status/2028801551024652687?ref_src=twsrc%5Etfw">March 3, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+ 3 de março<br/><br/>
+<br/><br/>
+---
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Israel hackeou as câmeras de trânsito de Teerã e usou IA para planejar o assassinato de Khameneiações do ICE em Minnesota.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description"> 4 de março
+</div>
+<img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/646738252_1597554395706903_8316357389878480544_n.jpg?stp=dst-jpg_s720x720_tt6&_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_ohc=ydKk1IxDbVsQ7kNvwGLdefH&_nc_oc=AdrcNENRhjHlbrDk4nbcZtP6wgpzlG7rS8kBPT57nInl2yna-IxVRwUY-ZC_N5o6__Y&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=qVd7ZaI3EIjvMKuaGDWj5w&_nc_ss=7a3a8&oh=00_Af2xeGsYyG421B3Vjw9Ch2cJmCWZyn77rua4QZV3ExhnvQ&oe=69DC6358" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+31 de janeiro de 2026<br/><br/>
+<br/><br/>
+---
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Irã diz que Estreito de Ormuz está fechado e alerta que atacará navios que tentarem passar</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+4 de março de 2026
+</div>
+ <img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/647197529_1597553339040342_6034060995024194380_n.jpg?stp=dst-jpg_p180x540_tt6&_nc_cat=106&ccb=1-7&_nc_sid=13d280&_nc_ohc=SEbwF-YpBaoQ7kNvwH3fUvb&_nc_oc=AdosQr-dCV0Xw5CSnB_RajUhzwlqwJ7aiLRM4ySvxexEObhIY7n_i1n5Dsss4wr95SI&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=O7oOK9vhvkdBMn-V_wzMAQ&_nc_ss=7a3a8&oh=00_Af0gxB1OhzwJhgExWwAG5JUpQLFTL2IfJD9TqPBivMgUsg&oe=69DC52AB" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+ 4 de março de 2026<br/><br/>
+---
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+			
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Estoques de mísseis dos EUA se esgotam em meio à ofensiva contra o Irã</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description"></div>3 de março de 2026
+
+<img src="https://pbs.twimg.com/media/HCffivCWEAAibIh?format=jpg&name=small" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+18 de março de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+---	
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+
+
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">As bombas caem, o número de vítimas aumenta e as ameaças de retaliação aumentam.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Milhares de milhões de dólares dos contribuintes estão a ser gastos numa estratégia militar que deverá continuar durante semanas, sem qualquer objectivo ou desfecho claramente definido.</div>
+<img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/646281542_1597552595707083_5529488696581401150_n.jpg?stp=dst-jpg_p180x540_tt6&_nc_cat=109&ccb=1-7&_nc_sid=13d280&_nc_ohc=QcUnsgliV68Q7kNvwFQhDaz&_nc_oc=AdrOp1CIVgTusy4mVTI42VZbqKuNEUJ3ClIR5PNzzCrJlVgWZLm5k7QU8kHMqW5V3_8&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=4GG-wS5kH-yOmnX07BaEog&_nc_ss=7a3a8&oh=00_Af3k7IryNbjbwNsvMPCCEIweau95F8OsJlLOMrcUWqWXnw&oe=69DC7E3F" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	---		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Ivanka Trump vista caminhando com seus filhos até a sinagoga para ouvir... </div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">
+4 de março de 2026 <p>youtu.be/d8ACPKzMcc0?... via 
+@YouTube  </div>
+<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1705442180615884%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+4 de março de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/A8BFcsd2laI?si=94cJhlVYbOWEEmAr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">olha a propaganda! o salvador de israel.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">  4 de março de 2026
+<p>Este tipo de conteúdo faz parte de campanhas publicitárias pró-Trump.</div>
+<img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/644741214_1596006942528315_5369580070146006288_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=6atIWuxuLhQQ7kNvwG4p0lS&_nc_oc=AdpMh9DFuEZFAXoMUGT8q9tI0DmM9n-LffMJwV1lWREjvwU7IC-eFLkmu65gJSHpDdQ&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=4GG-wS5kH-yOmnX07BaEog&_nc_ss=7a3a8&oh=00_Af2j-0MEK5jOw9KJADWRbUsHC21PfYHroKZUoco7lPqU2Q&oe=69DC5252" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+ 4 de março de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+	<iframe width="100%" height="415" src="https://www.youtube.com/embed/SLyHQbhlGbM?si=A6wEscO0zBVoCRwT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">Muitos são os planos no coração do homem; mas o desígnio do Senhor, esse prevalecerá.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+1 de março de 2026
+<img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/644825267_1594967762632233_7709640072824805863_n.jpg?stp=dst-jpg_p843x403_tt6&_nc_cat=102&ccb=1-7&_nc_sid=13d280&_nc_ohc=IdWjxb3kmdsQ7kNvwFUJatn&_nc_oc=AdoWIz-EM-v0jxcTBg_I97sk-pPzphTJueiaj7AJiA515tn-lmje-sBy5zxxnMasMRw&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=CmuJ9HXk6REup58KR-mzYw&_nc_ss=7a3a8&oh=00_Af24irZxIokGVGF6JWC_4YWc8V5zqz60kn9usoKi6wsV4w&oe=69DC538D" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+                <div class="post-description">A última palavra é a que vale, e é a palavra do Senhor.</div>
+
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+ 1 de março de 2026
+
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+		
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">EUA e Israel atacam o Irã; Teerã revida com onda de retaliações em toda a região.</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">Operação conjunta "Fúria Épica" atinge múltiplas cidades iranianas; Guarda Revolucionária promete resposta...
+</div>
+<img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/644043800_1594165299379146_8921964658061071625_n.jpg?stp=dst-jpg_p180x540_tt6&_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=DNGW9kp3njYQ7kNvwHhwGH7&_nc_oc=AdpxSuUEhutakFmqdUwN-1pypnRe0karJPVkVW2pzFpebrq6aD9W_G3X0cj85SGpHX0&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=CmuJ9HXk6REup58KR-mzYw&_nc_ss=7a3a8&oh=00_Af0_QN9OHAKg8eiz9aPV1NX6_jTQXwDP4Is_vbr07TlY6g&oe=69DC64E0" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+28 de Fevereiro de 2026
+Operação conjunta "Fúria Épica" atinge múltiplas cidades iranianas; Guarda Revolucionária promete resposta "implacável" enquanto países do Golfo entram em alerta máximo...
+continue lendo 🔗 tvmundo.github.io
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+Operação conjunta "Fúria Épica" atinge múltiplas cidades iranianas; Guarda Revolucionária promete resposta "implacável" 
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+<!-- Inicio 🔴🔴🔴🔴🔴 Inicio -->
+        <div class="post">
+        <div class="post-header"> <!-- Título do Post 1 -->
+	<div class="post-title">O dia do Senhor dos Exércitos</div>
+		<!-- Descrição curta do post 1. --><!--🔴🔴🔴🔴🔴-->
+                <div class="post-description">25 de Fevereiro de 2026 <p>Porque o dia do Senhor dos Exércitos será contra todo o soberbo e altivo, e contra todo o que se exalta, para que seja abatido; 
+E contra todos os navios de Társis, e contra todas as pinturas desejáveis.
+E a arrogância do homem será humilhada, e a sua altivez se abaterá, e só o Senhor será exaltado naquele dia....
+</div>
+<img src="https://scontent.fnat16-1.fna.fbcdn.net/v/t39.30808-6/622136121_1561373622658314_1981024013041860534_n.jpg?stp=dst-jpg_p180x540_tt6&_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=ga4hgjpviggQ7kNvwGKu5S9&_nc_oc=AdpFfOAO7L1d2WO4Pz1bH3-3zGTzOkB3Mjg9SK1TC1Ou3hU0mD1EjQu1viyYQWlvHYc&_nc_zt=23&_nc_ht=scontent.fnat16-1.fna&_nc_gid=fDyha6H7kEXqx1Sxle-yrA&_nc_ss=7a3a8&oh=00_Af0o8VoJkSvfnW8wiiyMMJFkBNuFnMGiyclww6fols4qjg&oe=69DC6CEC" alt="imagem" style="max-width:100%;height:auto;border-radius:8px;">
+            </div>
+            <div class="post-content">
+                <!-- Conteúdo completo do post 1--><!--🔴🔴🔴🔴🔴-->
+                <p>
+25 de Fevereiro de 2026
+Operação conjunta "Fúria Épica" atinge múltiplas cidades iranianas; Guarda Revolucionária promete resposta "implacável" enquanto países do Golfo entram em alerta máximo...
+continue lendo 🔗 tvmundo.github.io
+<br/><br/> <!--embed 🔴🔴🔴🔴🔴 Aqui-->
+---- 
+				</p>
+            </div>
+            <button class="post-button">Continuar lendo...</button>
+        </div>
+	<!--Fim 🔴🔴🔴🔴🔴 Fim-->
+
+ <!--🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴--> <!-- Coluna da direita inicio --> </div>
+        <div class="right-column">
+            <!-- Post flutuante -->
+            <div class="floating-post">
+                <img src="https://via.placeholder.com/300" alt="">
+                <div class="post-title">MEU DNA É MARLEY</div>
+                <div class="post-description"><a href="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large"><img src="https://pbs.twimg.com/media/GlZEhscXYAAALDV?format=jpg&name=large" alt="Imagem do Post 1" class="post-image"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <div class="footer-nav">
+            <a href="https://tvmundo.github.io/">&#9664;</a><!---anterior--->
+            <a href="https://tvmundo.github.io/qwen/2026/6.html">&#9654;</a><!---proximo--->
+        </div>
+        <div class="footer-text">TV Mundo desde 2011</div>
+    </div>
+
+    <!-- Botão de rolagem -->
+    <button class="scroll-button" id="scrollButton">↑</button>
+
+    <script>
+        // Função para expandir/recolher os posts
+        document.querySelectorAll('.post-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.previousElementSibling; // Encontra o conteúdo do post
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    button.textContent = 'Continuar lendo...';
+                } else {
+                    content.style.display = 'block';
+                    button.textContent = 'Recolher';
+                }
+            });
+        });
+
+        // Função para rolar a página
+        const scrollButton = document.getElementById('scrollButton');
+        let isAtTop = true;
+
+        scrollButton.addEventListener('click', () => {
+            if (isAtTop) {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↑'; // Altera o ícone para subir
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                scrollButton.textContent = '↓'; // Altera o ícone para descer
+            }
+            isAtTop = !isAtTop; // Alterna o estado
+        });
+
+        // Atualiza o ícone do botão com base na posição da página
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                scrollButton.textContent = '↓'; // Ícone para descer
+                isAtTop = true;
+            } else if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+                scrollButton.textContent = '↑'; // Ícone para subir
+                isAtTop = false;
+            }
+        });
+    </script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://tvmundo.github.io/qwen/player.mod2/script.js"></script>	
+	
+</body>
+</html>

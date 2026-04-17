@@ -403,7 +403,19 @@
 </div>
 
 <!------------------------ IMG ------------------------>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2fJCvBgLIKk?si=TZJPcj32kd88r8SU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<style>
+  .video-responsivo {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Mantém a proporção 16:9 */
+    height: auto;
+    border: none;
+  }
+</style>
+
+<!-- YouTube -->
+<iframe class="video-responsivo" 
+        src="https://www.youtube.com/embed/2fJCvBgLIKk?si=TZJPcj32kd88r8SU" 
+        allowfullscreen></iframe>
 <!------------------------ IMG ------------------------>
 
 </div>
